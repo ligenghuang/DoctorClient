@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/iv_item_drug"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="15dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_item_drug_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="京都念慈菴"
+            android:textSize="@dimen/text_size20"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/iv_item_drug"/>
+
+
+        <TextView
+            android:id="@+id/tv_item_drug_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_item_drug"
+            android:layout_below="@id/tv_item_drug_name"
+            android:textSize="@dimen/text_size17"
+            android:textColor="@color/color_9"
+            android:layout_marginTop="5dp"
+            android:text="惠氏制药有限公司"/>
+
+        <TextView
+            android:id="@+id/tv_item_drug_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_item_drug"
+            android:layout_below="@id/tv_item_drug_company"
+            android:textSize="@dimen/text_size17"
+            android:textColor="@color/color_9"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:text="60片/瓶 30片/瓶 80片/瓶 120片/瓶 365片/瓶"/>
+
+        <TextView
+            android:id="@+id/tv_item_drug_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_item_drug"
+            android:layout_below="@id/tv_item_drug_spec"
+            android:textSize="@dimen/text_size16"
+            android:textColor="@color/color_e64949"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="80dp"
+            android:text="￥49.5"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_item_drug_price"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_marginRight="@dimen/dp_10">
+
+
+            <TextView
+                android:id="@+id/tv_item_add"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_round_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size22"
+                android:gravity="center"
+                android:text="+"/>
+
+
+            <LinearLayout
+                android:id="@+id/ll_item_drug_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_drug_subtract"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:text="-"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size22"
+                    android:background="@drawable/shape_tv_grey_bg"/>
+
+                <TextView
+                    android:id="@+id/tv_item_drug_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:textSize="@dimen/text_size16"
+                    android:text="1"/>
+
+
+                <TextView
+                    android:id="@+id/tv_item_drug_add"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textSize="@dimen/text_size22"
+                    android:background="@drawable/shape_tv_grey_bg"/>
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

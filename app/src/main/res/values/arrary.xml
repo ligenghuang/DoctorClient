@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+  <string-array name="hospital_list">
+      <item>广州广大整形美容医院</item>
+      <item>广州中医院大学附属医院</item>
+      <item>暨南大学附属医院</item>
+      <item>中山大学附属医院</item>
+  </string-array>
+
+    <string-array name="inquiry_type_list">
+        <item>全部</item>
+        <item>待接诊</item>
+        <item>问诊中</item>
+        <item>已完成</item>
+        <item>已退回</item>
+    </string-array>
+
+    <string-array name="prescription_list">
+        <item>全部</item>
+        <item>待支付</item>
+        <item>待发货</item>
+        <item>已发货</item>
+        <item>已退款</item>
+    </string-array>
+
+</resources>

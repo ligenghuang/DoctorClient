@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_depart_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height60"
+        android:text="皮肤科"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:textSize="@dimen/text_size17"
+        android:textColor="@color/tab_text_green_selector"
+        android:background="@drawable/selector_item_green"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_item_depart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

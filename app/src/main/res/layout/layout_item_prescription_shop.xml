@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingTop="@dimen/dp_10"
+       android:paddingBottom="@dimen/dp_10">
+
+       <ImageView
+           android:id="@+id/iv_item_shop"
+           android:layout_width="@dimen/item_height60"
+           android:layout_height="@dimen/item_height60" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:layout_marginLeft="15dp"
+           android:orientation="vertical">
+
+           <TextView
+               android:id="@+id/tv_item_name"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="@dimen/text_size17"
+               android:textColor="@color/black"
+               android:text="复方丹参滴丸"
+               android:layout_marginBottom="8dp"
+               />
+
+           <TextView
+               android:id="@+id/tv_item_spec"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="每丸重27mg"
+               android:textSize="@dimen/text_size15"
+               android:textColor="@color/color_9"
+               android:layout_marginBottom="8dp"/>
+
+           <TextView
+               android:id="@+id/tv_item_price"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=" ￥ 49.5"
+               android:textSize="@dimen/text_size15"
+               android:textColor="@color/color_e64949"/>
+
+       </LinearLayout>
+
+       <TextView
+           android:id="@+id/tv_item_num"
+           android:layout_marginLeft="@dimen/dp_10"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/text_size17"
+           android:textColor="@color/black"/>
+
+   </LinearLayout>
+
+</LinearLayout>

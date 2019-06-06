@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="message_tip_1">已读</string>
+    <string name="message_tip_2">[图片]</string>
+    <string name="message_tip_3">距离本次会话结束还有%0$s</string>
+    <string name="message_tip_4">结束会话</string>
+    <string name="message_tip_5">病情描述：</string>
+    <string name="message_tip_6">开处方</string>
+    <string name="message_tip_7">拍照开方</string>
+    <string name="message_tip_8">发送</string>
+    <string name="message_tip_9">相册</string>
+    <string name="message_tip_10">常用语</string>
+    <string name="message_tip_11">新增</string>
+    <string name="message_tip_12">完成</string>
+    <string name="message_tip_13">内容不能为空</string>
+    <string name="message_tip_14">编辑</string>
+    <string name="message_tip_15">服务器已结束</string>
+
+    <string name="photograph_prescription_tip_1">请上传拍照处方</string>
+    <string name="photograph_prescription_tip_2">编辑</string>
+    <string name="photograph_prescription_tip_3">处方备注：</string>
+    <string name="photograph_prescription_tip_4">第%0$s次处方药品</string>
+    <string name="photograph_prescription_tip_5">已完成</string>
+</resources>

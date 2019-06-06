@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mine_tip_1">邀请用户</string>
+    <string name="mine_tip_2">我的收入</string>
+    <string name="mine_tip_3">我的问诊单</string>
+    <string name="mine_tip_4">我开的处方</string>
+    <string name="mine_tip_5">处方模板</string>
+    <string name="mine_tip_6">我的评价</string>
+    <string name="mine_tip_7">问诊费设置</string>
+    <string name="mine_tip_8">系统设置</string>
+    <string name="mine_tip_9">意见反馈</string>
+    <string name="mine_tip_10">请输入问诊费</string>
+
+
+    <string name="user_info_tip_title">个人认证资料</string>
+    <string name="user_info_tip_1">工作头像</string>
+    <string name="user_info_tip_2">姓名</string>
+    <string name="user_info_tip_3">性别</string>
+    <string name="user_info_tip_4">从业时间</string>
+    <string name="user_info_tip_5">职称</string>
+    <string name="user_info_tip_6">特长</string>
+    <string name="user_info_tip_7">科室</string>
+    <string name="user_info_tip_8">所属医院</string>
+    <string name="user_info_tip_9">开处方</string>
+    <string name="user_info_tip_10">手机号码</string>
+    <string name="user_info_tip_11">执业证书</string>
+    <string name="user_info_tip_12">保存信息</string>
+    <string name="user_info_tip_13">不可开处方药</string>
+    <string name="user_info_tip_14">可开处方药</string>
+    <string name="user_info_tip_15">未上传</string>
+    <string name="user_info_tip_16">已上传</string>
+    <string name="user_info_tip_17">请输入姓名</string>
+    <string name="user_info_tip_18">请输入职称</string>
+    <string name="user_info_tip_19">请输入手机号码</string>
+    <string name="user_info_tip_20">请输入验证码</string>
+    <string name="user_info_tip_21">立即获取</string>
+    <string name="user_info_tip_22">确定绑定</string>
+    <string name="user_info_tip_23">绑定手机</string>
+    <string name="user_info_tip_24">已填写</string>
+    <string name="user_info_tip_25">未填写</string>
+    <string name="user_info_tip_26">请填写你的特长</string>
+    <string name="user_info_tip_27">内容不能为空</string>
+    <string name="user_info_tip_28">选择所属医院</string>
+
+    <string name="income_tip_1">收入金额(元)</string>
+    <string name="income_tip_2">提现</string>
+    <string name="income_tip_3">明细</string>
+
+    <string name="inquity_tip_1">全部</string>
+    <string name="inquity_tip_2">待接诊</string>
+    <string name="inquity_tip_3">问诊中</string>
+    <string name="inquity_tip_4">已完成</string>
+    <string name="inquity_tip_5">已退回</string>
+    <string name="inquity_tip_6">确认接诊</string>
+    <string name="inquity_tip_7">回访</string>
+    <string name="inquity_tip_8">开处方</string>
+    <string name="inquity_tip_9">历史记录</string>
+    <string name="inquity_tip_10">展开</string>
+    <string name="inquity_tip_11">收起</string>
+    <string name="inquity_tip_12">用户支付：￥%0$s</string>
+    <string name="inquity_tip_13">预计收入：￥%0$s</string>
+    <string name="inquity_tip_14">(已开处方)</string>
+    <string name="inquity_tip_15">问诊详情</string>
+    <string name="inquity_tip_16">问诊人信息</string>
+    <string name="inquity_tip_17">姓名</string>
+    <string name="inquity_tip_18">性别</string>
+    <string name="inquity_tip_19">年龄</string>
+    <string name="inquity_tip_20">体重</string>
+    <string name="inquity_tip_21">过敏史:</string>
+    <string name="inquity_tip_22">家族史:</string>
+    <string name="inquity_tip_23">过往病史:</string>
+    <string name="inquity_tip_24">病情描述:</string>
+    <string name="inquity_tip_25">你为患者开的处方</string>
+    <string name="inquity_tip_26">处方备注:</string>
+    <string name="inquity_tip_27">查看聊天记录</string>
+    <string name="inquity_tip_28">%0$s岁</string>
+    <string name="inquity_tip_29">诊断</string>
+    <string name="inquity_tip_30">请填写诊断信息</string>
+    <string name="inquity_tip_31">请选择处方</string>
+    <string name="inquity_tip_32">确定提交</string>
+    <string name="inquity_tip_33">选择处方</string>
+    <string name="inquity_tip_34">新增处方</string>
+    <string name="inquity_tip_35">共%0$s种药</string>
+
+    <string name="select_drugs_title">选择药品</string>
+    <string name="select_drugs_tip_1">根据医院、疾病搜索医生</string>
+    <string name="select_drugs_tip_2">已选择%0$s种药</string>
+    <string name="select_drugs_tip_3">(共%0$s件)</string>
+    <string name="select_drugs_tip_4">下一步</string>
+    <string name="select_drugs_tip_5">医生会根据病情修改药品数量</string>
+    <string name="select_drugs_tip_6">成分</string>
+    <string name="select_drugs_tip_7">确定添加</string>
+    <string name="select_drugs_tip_8">形状</string>
+
+
+    <string name="edit_prescription_tip_1">处方名称</string>
+    <string name="edit_prescription_tip_2">所属项目</string>
+    <string name="edit_prescription_tip_3">处方备注：</string>
+    <string name="edit_prescription_tip_4">请填写处方备注</string>
+    <string name="edit_prescription_tip_5">药品清单</string>
+    <string name="edit_prescription_tip_6">添加药品</string>
+    <string name="edit_prescription_tip_7">确定添加</string>
+    <string name="edit_prescription_tip_8">请填写用法用量</string>
+    <string name="edit_prescription_tip_9">选择项目</string>
+    <string name="edit_prescription_tip_10">请输入处方名称</string>
+    <string name="edit_prescription_tip_11">处方照片</string>
+    <string name="edit_prescription_tip_12">处方备注</string>
+    <string name="edit_prescription_tip_13">请填写处方备注</string>
+    <string name="edit_prescription_tip_14">选择处方详情</string>
+    <string name="edit_prescription_tip_15">药品数量不能为0!</string>
+    <string name="edit_prescription_tip_16">请选择药品!</string>
+    <string name="edit_prescription_tip_17">图片链接为空!</string>
+
+    <string name="prescription_tip_title">我的处方</string>
+    <string name="prescription_tip_1">(预收入:￥%0$s)</string>
+    <string name="prescription_tip_2">药品小计 :￥%0$s</string>
+    <string name="prescription_tip_3">待支付</string>
+    <string name="prescription_tip_4">待发货</string>
+    <string name="prescription_tip_5">已完成</string>
+    <string name="prescription_tip_6">已退款</string>
+    <string name="prescription_tip_7">展开</string>
+    <string name="prescription_tip_8">收起</string>
+    <string name="prescription_tip_9">编辑</string>
+    <string name="prescription_tip_10">开方时间：</string>
+    <string name="prescription_tip_11">下单时间：</string>
+    <string name="prescription_tip_12">支付方式：</string>
+    <string name="prescription_tip_13">合计：</string>
+    <string name="prescription_tip_14">实付：</string>
+    <string name="prescription_tip_15">处方详情</string>
+    <string name="prescription_tip_16">收入：￥%0$s</string>
+    <string name="prescription_tip_17">处方编号：%0$s</string>
+    <string name="prescription_tip_18">规格：%0$s</string>
+    <string name="prescription_tip_19">用法：%0$s</string>
+
+
+    <string name="setting_tip_1">新消息提醒</string>
+    <string name="setting_tip_2">声音提醒</string>
+    <string name="setting_tip_3">震动提醒</string>
+    <string name="setting_tip_4">消除咨询记录</string>
+    <string name="setting_tip_5">检查更新</string>
+    <string name="setting_tip_6">服务条款</string>
+    <string name="setting_tip_7">关于我们</string>
+    <string name="setting_tip_8">退出登录</string>
+    <string name="setting_tip_9">系统设置</string>
+
+    <string name="feedback_tip_1">请描述退回的理由</string>
+    <string name="feedback_tip_2">手机号码（选填）</string>
+    <string name="feedback_tip_3">提交</string>
+    <string name="feedback_tip_4">意见反馈</string>
+
+    <string name="withdrawal_tip_1">我的收入</string>
+    <string name="withdrawal_tip_2">提现金额</string>
+    <string name="withdrawal_tip_3">选择提现方式</string>
+    <string name="withdrawal_tip_4">微信支付</string>
+    <string name="withdrawal_tip_5">支付宝</string>
+    <string name="withdrawal_tip_6">温馨提示</string>
+    <string name="withdrawal_tip_7">1、在会员中心查看您的账户余额，根据需要进行余额提现操作。提现时，请务必核对您的支付宝账号及用户名是否有误，以免账号输入错误等问题，影响您提现。</string>
+    <string name="withdrawal_tip_8">2、由于和第三方支付平台的合约规定，在本站流动的资金（充值和提现）均需向第三方交纳一定金额的手续费。</string>
+    <string name="withdrawal_tip_9">立即提现</string>
+    <string name="withdrawal_tip_10">请输入提现金额</string>
+
+    <string name="evaluation_tip_1">用户评价</string>
+    <string name="evaluation_tip_2">好评率：</string>
+
+    <string name="invitatiom_tip_1">(长按二维码保存图片)</string>
+    <string name="invitatiom_tip_2">邀请码：</string>
+    <string name="invitatiom_tip_3">邀请链接：</string>
+    <string name="invitatiom_tip_4">复制邀请码</string>
+    <string name="invitatiom_tip_5">复制邀请链接</string>
+
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/iv_item_portrait"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="12333"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size17"/>
+
+        <RatingBar
+            android:id="@+id/item_star_rb"
+            style="@style/roomRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:numStars="5"
+            android:rating="0" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_item_star_num"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="5"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:layout_marginLeft="@dimen/dp_10"-->
+            <!--android:textSize="@dimen/text_size17"/>-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size17"
+        android:text="医术精湛 态度良好 dsfdsafsdf "/>
+
+    <TextView
+        android:id="@+id/tv_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_9"
+        android:textSize="@dimen/text_size17"
+        android:text="2019-05-30 09:36:00"
+        android:padding="@dimen/dp_10"/>
+
+
+</LinearLayout>

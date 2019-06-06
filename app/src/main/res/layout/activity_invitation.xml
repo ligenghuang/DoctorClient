@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_38a234"
+    android:orientation="vertical"
+    tools:context=".ui.mine.InvitationActivity">
+
+    <include layout="@layout/layout_title_transparent_bar" />
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:paddingTop="20dp">
+
+
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_40"
+                android:paddingBottom="@dimen/dp_10"
+                android:background="@drawable/shape_invitation_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_height70"
+                    android:layout_marginBottom="30dp"
+                    android:gravity="center"
+                    android:text="@string/invitatiom_tip_1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp">
+
+
+                    <RelativeLayout
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/invite_users2"/>
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:rotation="90"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/invite_users2"/>
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:rotation="270"
+                            android:src="@drawable/invite_users2"/>
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:rotation="180"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/invite_users2"/>
+
+
+                        <ImageView
+                            android:id="@+id/iv_qrcode"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"/>
+
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="@dimen/item_height40"
+                        android:src="@drawable/shape_ball_right"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height40"
+                        android:background="@drawable/shape_line"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="@dimen/item_height40"
+                        android:src="@drawable/shape_ball_left"/>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="@dimen/dp_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invitatiom_tip_2"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_invite_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"
+                    android:padding="@dimen/dp_10"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invitatiom_tip_3"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_invite_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/item_height70"
+                android:layout_height="@dimen/item_height70"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/invite_users1" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/item_height40"
+                    android:layout_marginRight="@dimen/item_height40"
+                    android:layout_below="@id/linearlayout">
+                    
+                    
+                    <TextView
+                        android:id="@+id/tv_copy_invite_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height50"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_invitation_btn_bg"
+                        android:text="@string/invitatiom_tip_4"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:textColor="@color/color_38a234"/>
+
+                    <TextView
+                        android:id="@+id/tv_copy_invite_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height50"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:background="@drawable/shape_invitation_btn_bg_2"
+                        android:text="@string/invitatiom_tip_5"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                    
+                    
+                </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

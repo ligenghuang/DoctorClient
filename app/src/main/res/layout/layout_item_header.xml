@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10"
+    android:background="@color/white"
+    android:padding="@dimen/dp_10"
+    android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="小李"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+            <TextView
+                android:id="@+id/tv_info_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="男  0岁"
+                android:textColor="@color/color_9"
+                android:textSize="@dimen/text_size17" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_more_right" />
+
+        </LinearLayout>
+
+
+        <View style="@style/user_line_2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/message_tip_5"
+            android:textColor="@color/color_9"
+            android:textSize="@dimen/text_size18" />
+
+        <TextView
+            android:id="@+id/tv_illness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size16" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_img_illness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/ll_prescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View style="@style/user_line_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_prescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/message_tip_6"
+                    android:textColor="@color/color_38a234"
+                    android:textSize="@dimen/text_size17" />
+
+                <TextView
+                    android:id="@+id/tv_photograph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/message_tip_7"
+                    android:textColor="@color/color_38a234"
+                    android:textSize="@dimen/text_size17" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+</LinearLayout>

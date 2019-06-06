@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.doctorclient">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序录制音频 -->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+
+    <!-- 可选-->
+    <uses-permission android:name="android.permission.READ_LOGS" /> <!-- 获取logcat日志 -->
+
+    <application
+        android:name=".util.config.MyApp"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/QUI_AppTheme">
+        <activity android:name=".ui.mine.InvitationActivity"></activity>
+        <activity android:name=".ui.mine.income.IncomeDetailsActivity" />
+        <activity android:name=".ui.mine.EvaluationActivity" />
+        <activity android:name=".ui.message.PhotographPrescriptionActivity" />
+        <activity android:name=".ui.message.MessageDetailActivity" />
+        <activity android:name=".ui.mine.FeedbackActivity" />
+        <activity android:name=".ui.mine.SettingActivity" />
+        <activity android:name=".ui.mine.prescription.PrescriptionDetailsActivity" />
+        <activity android:name=".ui.mine.inquiry.SelectProjectActivity" />
+        <activity android:name=".ui.mine.inquiry.EditPrescriptionActivity2" />
+        <activity android:name=".ui.mine.inquiry.EditPrescriptionActivity" />
+        <activity android:name=".ui.mine.inquiry.SelectDrugsActivity" />
+        <activity android:name=".ui.mine.inquiry.SelectPrescriptionDetailsActivity2" />
+        <activity android:name=".ui.mine.inquiry.SelectPrescriptionDetailsActivity" />
+        <activity android:name=".ui.mine.inquiry.SelectPrescriptionActivity" />
+        <activity android:name=".ui.mine.inquiry.PrescriptionActivity" />
+        <activity android:name=".ui.mine.inquiry.InquiryDetailsActivity" />
+        <activity android:name=".ui.mine.inquiry.InquiryDetailsActivity2" />
+        <activity android:name=".ui.mine.prescription.MyPrescriptionActivity" />
+        <activity android:name=".ui.mine.inquiry.MyInquiryActivity" />
+        <activity android:name=".ui.mine.income.WithdrawalActivity" />
+        <activity android:name=".ui.mine.income.IncomeActivity" />
+        <activity android:name=".ui.mine.SpecialtyActivity" />
+        <activity android:name=".ui.mine.BindMobileActivity" /> <!-- 启动页 -->
+        <activity
+            android:name=".ui.StartPageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- 首页 -->
+        <activity android:name=".ui.MainActivity" /> <!-- 登录 -->
+        <activity android:name=".ui.login.LoginActivity" /> <!-- 注册 -->
+        <activity android:name=".ui.login.RegisteredActivity" /> <!-- 找回密码 校验身份 -->
+        <activity android:name=".ui.login.FindPwdCheckActivity" /> <!-- 找回密码 -->
+        <activity android:name=".ui.login.FindPwdActivity" /> <!-- 个人信息 -->
+        <activity android:name=".ui.mine.UserInfoActivity" />
+
+        <!-- 必选-->
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="b992d09cc6d6dc9c66ca03fbe68f9901" >
+        </meta-data>
+    </application>
+
+</manifest>

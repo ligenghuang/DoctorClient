@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--登录-->
+    <string name="login_tip_1">请输入账号/手机号</string>
+    <string name="login_tip_2">请输入密码</string>
+    <string name="login_tip_3">注册账号</string>
+    <string name="login_tip_4">找回密码</string>
+    <string name="login_tip_5">登录</string>
+    <string name="login_tip_6">其他方式登录</string>
+    <string name="login_tip_7">正在登录</string>
+
+    <!--注册-->
+    <string name="registered_tip_1">请输入医生名字</string>
+    <string name="registered_tip_2">请输入手机号码</string>
+    <string name="registered_tip_3">请输入验证码</string>
+    <string name="registered_tip_4">请输入密码</string>
+    <string name="registered_tip_5">请再次输入密码</string>
+    <string name="registered_tip_6">获取验证码</string>
+    <string name="registered_tip_7">男</string>
+    <string name="registered_tip_8">女</string>
+    <string name="registered_tip_9">已有账号?返回登录</string>
+    <string name="registered_tip_10">注册</string>
+    <string name="registered_tip_11">我已阅读并同意</string>
+    <string name="registered_tip_12">《皮科小天使协议》</string>
+    <string name="registered_tip_13">00:%0$s</string>
+    <string name="registered_tip_14">重新获取</string>
+    <string name="registered_tip_15">两次密码输入不一致</string>
+    <string name="registered_tip_16">正在注册</string>
+    <string name="registered_tip_17">正在处理</string>
+    <string name="registered_tip_18">验证码已发送</string>
+
+    <!--找回密码-->
+    <string name="find_pwd_tip_1">忘记密码</string>
+    <string name="find_pwd_tip_2">验证身份</string>
+    <string name="find_pwd_tip_3">请输入手机号</string>
+    <string name="find_pwd_tip_4">请输入验证码</string>
+    <string name="find_pwd_tip_5">下一步</string>
+    <string name="find_pwd_tip_6">重设密码</string>
+    <string name="find_pwd_tip_7">请输入新密码</string>
+    <string name="find_pwd_tip_8">请确认新密码</string>
+    <string name="find_pwd_tip_9">请输入登录验证码</string>
+    <string name="find_pwd_tip_10">发送验证码</string>
+    <string name="find_pwd_tip_11">修改</string>
+    <string name="find_pwd_tip_12">00:%0$s</string>
+    <string name="find_pwd_tip_13">两次密码输入不一致</string>
+
+</resources>

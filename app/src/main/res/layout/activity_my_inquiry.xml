@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mine.inquiry.MyInquiryActivity">
+
+    <include layout="@layout/layout_title_black_bar"/>
+
+    <com.qmuiteam.qmui.widget.QMUITabSegment
+        android:id="@+id/tabSegment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height50"></com.qmuiteam.qmui.widget.QMUITabSegment>
+
+    <com.lgh.huanglib.util.cusview.CustomViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.lgh.huanglib.util.cusview.CustomViewPager>
+
+</LinearLayout>

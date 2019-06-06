@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mine.prescription.PrescriptionDetailsActivity">
+
+
+    <include layout="@layout/layout_title_black_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f5f6f8"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="@dimen/dp_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="小李"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size17" />
+
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(男 0岁)"
+                    android:textColor="@color/color_9"
+                    android:textSize="@dimen/text_size17" />
+
+                <TextView
+                    android:id="@+id/tv_unwind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/prescription_tip_7"
+                    android:textColor="@color/selector_drtails_right"
+                    android:drawableRight="@drawable/selector_drtails_right"
+                    android:textSize="@dimen/text_size17"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10"
+                android:visibility="gone"
+                android:background="@color/white">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height50"
+                        android:text="@string/inquity_tip_21"
+                        android:textColor="@color/color_9"
+                        android:layout_marginRight="15dp"
+                        android:textSize="@dimen/text_size16"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/tv_allergy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height50"
+                        android:text="@string/inquity_tip_22"
+                        android:textColor="@color/color_9"
+                        android:layout_marginRight="15dp"
+                        android:textSize="@dimen/text_size16"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/tv_family"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height50"
+                        android:text="@string/inquity_tip_23"
+                        android:textColor="@color/color_9"
+                        android:layout_marginRight="15dp"
+                        android:textSize="@dimen/text_size16"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/tv_medical_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height50"
+                        android:text="@string/inquity_tip_24"
+                        android:textColor="@color/color_9"
+                        android:layout_marginRight="15dp"
+                        android:textSize="@dimen/text_size16"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/tv_illness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/black"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_img_illness"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_prescription_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:text="处方编号: 20190520102810289"/>
+
+                    <TextView
+                        android:id="@+id/tv_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_38a234"
+                        android:background="@drawable/shape_tv_auth_code_bg"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingTop="3dp"
+                        android:paddingRight="@dimen/dp_10"
+                        android:paddingBottom="3dp"
+                        android:text="@string/prescription_tip_9"/>
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_prescription_detail"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/dp_10"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
+                android:background="@color/white">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_9"
+                        android:textSize="@dimen/text_size17"
+                        android:text="@string/prescription_tip_10"/>
+
+                    <TextView
+                        android:id="@+id/tv_prescription_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_9"
+                        android:textSize="@dimen/text_size17"
+                        android:text="@string/prescription_tip_11"/>
+
+                    <TextView
+                        android:id="@+id/tv_order_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_9"
+                        android:textSize="@dimen/text_size17"
+                        android:text="@string/prescription_tip_12"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_9"
+                        android:textSize="@dimen/text_size17"
+                        android:text="@string/prescription_tip_13"/>
+
+                    <TextView
+                        android:id="@+id/tv_order_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_9"
+                        android:textSize="@dimen/text_size17"
+                        android:text="@string/prescription_tip_14"/>
+
+                    <TextView
+                        android:id="@+id/tv_real_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="收入：122"
+                    android:gravity="right"
+                    android:paddingTop="@dimen/dp_10"
+                    android:textColor="@color/color_e64949"
+                    android:textSize="@dimen/text_size17"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

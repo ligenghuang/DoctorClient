@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.login.FindPwdActivity">
+
+    <include
+        layout="@layout/layout_title_black_bar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/find_pwd_tip_6"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginBottom="20dp"/>
+
+
+            <!--新密码-->
+            <EditText
+                android:id="@+id/et_find_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height50"
+                android:background="@drawable/shape_tv_grey_bg"
+                android:hint="@string/find_pwd_tip_7"
+                android:paddingLeft="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_c"/>
+
+            <!--确认新密码-->
+            <EditText
+                android:id="@+id/et_find_pwd_again"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="@dimen/item_height50"
+                android:background="@drawable/shape_tv_grey_bg"
+                android:hint="@string/find_pwd_tip_8"
+                android:paddingLeft="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_c"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height50"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_find_pwd_code"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.5"
+                    android:layout_height="@dimen/item_height50"
+                    android:background="@drawable/shape_tv_grey_bg"
+                    android:hint="@string/find_pwd_tip_9"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_c"/>
+
+
+                <TextView
+                    android:id="@+id/tv_find_pwd_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:textColor="@color/color_5c72f4"
+                    android:text="@string/find_pwd_tip_10"
+                    android:gravity="center"
+                    android:background="@drawable/shape_tv_bule_bg"/>
+            </LinearLayout>
+
+
+            <!--修改-->
+            <TextView
+                android:id="@+id/tv_find_pwd_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height50"
+                android:layout_marginTop="30dp"
+                android:text="@string/find_pwd_tip_11"
+                android:gravity="center"
+                android:background="@drawable/selector_btn_find_pwd_bg"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"/>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/white"
+    android:padding="@dimen/dp_10"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_item_type"
+        android:layout_width="@dimen/item_height50"
+        android:layout_height="@dimen/item_height50"
+        android:src="@drawable/icon_income_1"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/dp_10">
+
+
+
+        <TextView
+            android:id="@+id/tv_item_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回答患者XXX的问诊"
+            android:textSize="@dimen/text_size16"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/color_9"
+            android:layout_marginTop="@dimen/dp_4"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+2.00元"
+        android:textSize="@dimen/text_size16"
+        android:textColor="@color/color_ff0000"/>
+
+</LinearLayout>

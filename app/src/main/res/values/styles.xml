@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="user_line_1">
+        <!-- Customize your theme here. -->
+        <item name="android:background">#cccccc</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.8dp</item>
+    </style>
+
+    <style name="user_line_2">
+        <!-- Customize your theme here. -->
+        <item name="android:background">#eeeeee</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.8dp</item>
+    </style>
+
+    <style name="user_line_3">
+        <!-- Customize your theme here. -->
+        <item name="android:background">#eeeeee</item>
+        <item name="android:layout_width">0.8dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <declare-styleable name="CodeView">
+        <attr name="count" format="integer"/>----验证码数字个数
+        <attr name="line" format="integer"/>-----干扰线数目
+        <attr name="font_color" format="color|reference"/>------数字颜色
+        <attr name="font_size" format="dimension|reference"/>---数字字体大小
+    </declare-styleable>
+
+    <style mce_bogus="1" name="cus_picker_view_slide_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+
+    <style name="MY_AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="roomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar_ful</item>
+        <item name="android:minHeight">21dip</item>
+        <item name="android:maxHeight">51dip</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+</resources>

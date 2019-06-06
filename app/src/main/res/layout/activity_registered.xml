@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.login.RegisteredActivity">
+
+    <include layout="@layout/layout_title_black_bar" />
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_40">
+
+                <!--医生名字-->
+                <EditText
+                    android:id="@+id/et_registered_doctor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@color/transparent"
+                    android:hint="@string/registered_tip_1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_9"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+                <View style="@style/user_line_1" />
+
+                <!--医生手机号-->
+                <EditText
+                    android:id="@+id/et_registered_doctor_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/registered_tip_2"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_9"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+                <View style="@style/user_line_1" />
+
+                <!--验证码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/dp_10">
+                    <EditText
+                        android:id="@+id/et_registered_auth_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:hint="@string/registered_tip_3"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_9"
+                        android:textSize="@dimen/sp_16"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_registered_get_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/registered_tip_6"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/color_38a234"
+                        android:background="@drawable/shape_tv_auth_code_bg"
+                        android:padding="8dp"/>
+
+                </LinearLayout>
+
+                <View style="@style/user_line_1" />
+
+                <!--密码-->
+                <EditText
+                    android:id="@+id/et_registered_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/registered_tip_4"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_9"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+                <View style="@style/user_line_1" />
+
+                <!--再次输入密码-->
+                <EditText
+                    android:id="@+id/et_registered_again_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/registered_tip_5"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_9"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+                <View style="@style/user_line_1" />
+
+               <!--性别-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_10">
+
+                    <TextView
+                        android:id="@+id/tv_man"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height50"
+                        android:layout_weight="1"
+                        android:textColor="@color/tv_txet_selector"
+                        android:background="@drawable/selector_tv_bg"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:text="@string/registered_tip_7"/>
+
+                    <TextView
+                        android:id="@+id/tv_woman"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height50"
+                        android:layout_weight="1"
+                        android:textColor="@color/tv_txet_selector"
+                        android:background="@drawable/selector_tv_bg"
+                        android:gravity="center"
+                        android:text="@string/registered_tip_8"/>
+
+                </LinearLayout>
+
+                <!--返回登录-->
+                <TextView
+                    android:id="@+id/tv_registered_to_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/color_9"
+                    android:textSize="@dimen/text_size16"
+                    android:text="@string/registered_tip_9"/>
+
+
+                <!--注册-->
+                <TextView
+                    android:id="@+id/tv_registered_btn_registered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_login_btn_bg"
+                    android:gravity="center"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/registered_tip_10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size17"
+                    android:layout_marginTop="35dp"/>
+
+                <!--协议-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_registered_agreement"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/registered_tip_11"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textSize="@dimen/text_size16"
+                        android:textColor="@color/color_4"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_registered_agreement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/registered_tip_12"
+                        android:textColor="@color/color_2aaef9"
+                        android:textSize="@dimen/text_size16"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

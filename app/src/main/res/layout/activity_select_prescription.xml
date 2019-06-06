@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mine.inquiry.SelectPrescriptionActivity">
+
+    <include layout="@layout/layout_title_black_right_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/color_f5f6f8"
+        android:paddingTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_depart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/white" />
+
+        <View style="@style/user_line_3" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_drug"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_new_prescription"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="@dimen/item_height50"
+        android:background="@color/color_38a234"
+        android:text="@string/inquity_tip_34"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size17"/>
+
+</LinearLayout>

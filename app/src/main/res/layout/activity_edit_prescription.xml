@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mine.inquiry.EditPrescriptionActivity">
+
+    <include layout="@layout/layout_title_black_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f5f6f8"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height45"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/edit_prescription_tip_1"/>
+
+                    <TextView
+                        android:id="@+id/tv_prescription_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:textColor="@color/black"
+                        android:gravity="right|center_vertical"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:textSize="@dimen/text_size17"/>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height45"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/edit_prescription_tip_2"/>
+
+                    <TextView
+                        android:id="@+id/tv_prescription_project"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:drawableRight="@drawable/icon_more_right"/>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/user_line_2"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/text_size17"
+                        android:textColor="@color/black"
+                        android:text="@string/edit_prescription_tip_3"/>
+
+
+                    <EditText
+                        android:id="@+id/et_item_drug_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/edit_prescription_tip_4"
+                        android:gravity="top"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size17"
+                        android:maxLength="200"
+                        android:background="@color/transparent"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_note_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0/200"
+                    android:textSize="@dimen/text_size16"
+                    android:textColor="@color/black"
+                    android:gravity="right"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10"
+                android:background="@color/white"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/edit_prescription_tip_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size18"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_add_drug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_prescription_tip_6"
+                        android:textSize="@dimen/text_size18"
+                        android:textColor="@color/color_38a234"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingTop="5dp"
+                        android:paddingRight="@dimen/dp_10"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/shape_tv_auth_code_bg"/>
+
+
+
+                </LinearLayout>
+
+
+                <View
+                    style="@style/user_line_2"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_drug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/edit_prescription_tip_7"
+                android:background="@drawable/shape_login_btn_bg"
+                android:layout_margin="@dimen/dp_10"
+
+                />
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

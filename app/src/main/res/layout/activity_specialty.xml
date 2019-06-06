@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.mine.SpecialtyActivity">
+
+    <include layout="@layout/layout_title_black_bar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f5f6f8"
+        android:fillViewport="true">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_10">
+
+
+            <EditText
+                android:id="@+id/et_specialty"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/white"
+                android:gravity="top"
+                android:hint="@string/user_info_tip_26"
+                android:padding="@dimen/dp_10"
+                android:textSize="@dimen/text_size17"
+                android:textColor="@color/black"/>
+
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height50"
+                android:background="@drawable/shape_login_btn_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size17"
+                android:text="@string/confirm"
+                android:gravity="center"
+                android:layout_margin="@dimen/dp_10"/>
+
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

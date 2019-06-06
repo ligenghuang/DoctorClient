@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mine.FeedbackActivity">
+
+    <include layout="@layout/layout_title_black_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f5f6f8"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:id="@+id/et_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/white"
+                    android:gravity="top"
+                    android:hint="@string/feedback_tip_1"
+                    android:maxLength="200"
+                    android:padding="@dimen/dp_10"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_9"
+                    android:textSize="@dimen/text_size16" />
+
+
+                <TextView
+                    android:id="@+id/tv_feedback_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="@dimen/dp_10"
+                    android:text="0/200"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size18" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/tv_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:hint="@string/feedback_tip_2"
+                android:inputType="phone"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_9"
+                android:textSize="@dimen/text_size16" />
+
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height50"
+                android:background="@drawable/shape_login_btn_bg"
+                android:layout_margin="@dimen/dp_10"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size17"
+                android:text="@string/feedback_tip_3"
+                />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height60"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_item_portrait"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@id/iv_item_portrait"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size17" />
+
+        <TextView
+            android:id="@+id/tv_item_prescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_item_name"
+            android:textColor="@color/color_9"
+            android:textSize="@dimen/text_size17"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_item_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/inquity_tip_2"
+            android:textColor="@color/color_38a234"
+            android:textSize="@dimen/text_size17" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/user_line_2" />
+
+    <cn.carbs.android.expandabletextview.library.ExpandableTextView
+        android:id="@+id/etv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:etv_EllipsisHint="..."
+        app:etv_MaxLinesOnShrink="2"
+        app:etv_ToExpandHint="@string/inquity_tip_10"
+        app:etv_ToExpandHintColor="@color/color_38a234"
+        app:etv_ToShrinkHint="@string/inquity_tip_11"
+        app:etv_ToShrinkHintColor="@color/color_38a234" />
+
+    <LinearLayout
+        android:id="@+id/ll_pay_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_item_user_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户支付:￥5.00"
+                android:textColor="@color/color_9"
+                android:textSize="@dimen/text_size17" />
+
+
+            <TextView
+                android:id="@+id/tv_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2月23日 18:02"
+                android:textColor="@color/color_9"
+                android:textSize="@dimen/text_size17" />
+
+
+        </RelativeLayout>
+
+        <View style="@style/user_line_2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_item_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="预计收入:￥3.00"
+                android:textColor="@color/color_e64949"
+                android:textSize="@dimen/text_size16" />
+
+            <!--确认接诊-->
+            <TextView
+                android:id="@+id/tv_item_confirm_accepts"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_tv_auth_code_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="@string/inquity_tip_6"
+                android:textColor="@color/color_38a234"
+                android:visibility="gone" />
+
+            <!--历史记录-->
+            <TextView
+                android:id="@+id/tv_item_history"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_tv_auth_code_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="@string/inquity_tip_9"
+                android:textColor="@color/color_38a234"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_in_the_interrogation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_pay_return_visit"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/shape_tv_auth_code_bg"
+                    android:gravity="center"
+                    android:text="@string/inquity_tip_7"
+                    android:textColor="@color/color_38a234" />
+
+                <TextView
+                    android:id="@+id/tv_item_prescribe"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/shape_tv_orange_bg"
+                    android:gravity="center"
+                    android:text="@string/inquity_tip_8"
+                    android:textColor="@color/color_ff7d00" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/tv_item_time_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="2月23日 18:02"
+            android:textColor="@color/color_9"
+            android:textSize="@dimen/text_size17" />
+
+        <View style="@style/user_line_2" />
+
+    </LinearLayout>
+
+</LinearLayout>

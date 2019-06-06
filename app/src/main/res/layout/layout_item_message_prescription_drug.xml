@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_4"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_item_drug"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_item_drug_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小儿多维元素片(小儿善存片)"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size17"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/dp_4"/>
+
+        <TextView
+            android:id="@+id/tv_item_drug_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="惠氏制药有限公司"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/color_9"
+            android:textSize="@dimen/text_size17"
+            android:layout_marginBottom="@dimen/dp_4"/>
+
+        <TextView
+            android:id="@+id/tv_item_drug_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="60片/瓶 30片/瓶 80片/瓶 120片/瓶 365片/瓶"
+            android:textColor="@color/color_9"
+            android:textSize="@dimen/text_size17"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size17"/>
+
+</LinearLayout>

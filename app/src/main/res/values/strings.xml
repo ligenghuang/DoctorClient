@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">一指通(医生端)</string>
+
+    <string name="tab_message">消息</string>
+    <string name="tab_physicianvisits">问诊单</string>
+    <string name="tab_mine">我的</string>
+
+    <string name="prompt">提示</string>
+    <string name="confirm">确定</string>
+
+    <string name="main_select_phone_error">图片异常</string>
+
+    <string name="camera">拍照</string>
+    <string name="photo_album">从相册选择</string>
+    <string name="cancel">取消</string>
+</resources>

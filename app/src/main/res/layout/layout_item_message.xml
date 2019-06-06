@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:padding="15dp"
+    android:background="@drawable/shape_user_info_bg"
+    android:orientation="horizontal">
+
+    <!--头像-->
+    <ImageView
+        android:id="@+id/iv_message_portrait"
+        android:layout_width="@dimen/item_height60"
+        android:layout_height="@dimen/item_height60"
+        android:layout_marginRight="15dp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_message_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size18"
+            android:textStyle="bold"
+            android:textColor="@color/color_3"
+            android:layout_marginBottom="13dp"
+            android:text="泰勒.斯威夫特"/>
+
+        <TextView
+            android:id="@+id/tv_message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_a3"
+            android:layout_below="@id/tv_message_name"
+            android:textSize="@dimen/text_size17"
+            android:layout_marginRight="90dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="我发布了一张新专辑呜呜呜呜呜呜"/>
+
+        <TextView
+            android:id="@+id/tv_message_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shape_round_bg"
+            android:textColor="@color/white"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:text="2"/>
+
+        <TextView
+            android:id="@+id/tv_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017/01/20"
+            android:textSize="@dimen/text_size15"
+            android:textColor="@color/color_3"
+            android:layout_alignBaseline="@id/tv_message_content"
+            android:layout_alignParentRight="true"
+            />
+
+
+    </RelativeLayout>
+
+    
+</LinearLayout>
