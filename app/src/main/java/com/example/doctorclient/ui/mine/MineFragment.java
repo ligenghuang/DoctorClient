@@ -221,7 +221,6 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
         if (CheckNetwork.checkNetwork2(mContext)) {
 //            loadDialog(ResUtil.getString(R.string.registered_tip_17));
             baseAction.isLogin();
-
         }
     }
 
