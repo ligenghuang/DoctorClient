@@ -300,10 +300,12 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
             }
         });
 
+        /**
+         * 加载更多聊天记录
+         */
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
                 getAskChatMore();
                 L.e("lgh", "onRefresh");
             }

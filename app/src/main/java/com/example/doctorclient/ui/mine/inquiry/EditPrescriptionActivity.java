@@ -174,9 +174,11 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_submit:
+                //TODO 提交数据
                 submit();
                 break;
             case R.id.tv_add_drug:
+                //TODO 添加药品
                 EditPrescriptionDto editPrescriptionDto = new EditPrescriptionDto();
                 editPrescriptionDto.setDepart(depart);
                 editPrescriptionDto.setDepartName(prescriptionProjectTv.getText().toString());
@@ -186,11 +188,12 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
                finish();
                 break;
             case R.id.tv_prescription_project:
+                //TODO 选择科室
                 Intent intent = new Intent(mContext, SelectProjectActivity.class);
                 startActivityForResult(intent, 201);
                 break;
             case R.id.tv_prescription_name:
-
+                //TODO 填写处方名称
                 ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10));
                 modifyDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override
@@ -231,9 +234,6 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
                 showNormalToast(ResUtil.getString(R.string.edit_prescription_tip_15));
                 return;
             }
-            L.e("lgh_drug","Drugid  = "+dataBean.getAskDrugId());
-            L.e("lgh_drug","IUID  = "+dataBean.getIUID());
-            L.e("lgh_drug","dataBean  = "+dataBean.toString());
             drugBean.setDrugid(dataBean.getIUID());
             drugBean.setDrug_num(dataBean.getDrug_num() + "");
             drugBean.setUse_note(dataBean.getNum_note());

@@ -159,11 +159,12 @@ public class EditPrescriptionActivity2 extends UserBaseActivity<EditPrescription
                 startActivityForResult(intent1,200);
                 break;
             case R.id.tv_prescription_project:
+                //TODO 选择科室
                 Intent intent = new Intent(mContext, SelectProjectActivity.class);
                 startActivityForResult(intent, 201);
                 break;
             case R.id.tv_prescription_name:
-
+                //TODO 填写处方名称
                 ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10));
                 modifyDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override

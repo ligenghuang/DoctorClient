@@ -89,6 +89,7 @@ public class MyInquiryActivity extends UserBaseActivity {
         tabSegment.addOnTabSelectedListener(new QMUITabSegment.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int index) {
+                //TODO 获取点击的tab下标
                 Position = index;
                 L.e("lgh","onTabSelected"+index);
             }

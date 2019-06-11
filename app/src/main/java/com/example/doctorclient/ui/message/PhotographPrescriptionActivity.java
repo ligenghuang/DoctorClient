@@ -205,9 +205,11 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
     void OnClick(View view){
         switch (view.getId()){
             case R.id.tv_submit:
+                //TODO 提交数据
                 submit();
                 break;
             case R.id.tv_prescription:
+                //TODO 选择图片
                 showSelectDiaLog();
                 break;
         }

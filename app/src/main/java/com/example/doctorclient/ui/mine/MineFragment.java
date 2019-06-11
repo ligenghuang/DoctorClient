@@ -116,6 +116,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_user_info:
                 //todo 个人信息
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -124,6 +125,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_income:
                 //todo 我的收入
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -134,6 +136,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_my_inquiry:
                 //todo 我的问诊单
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -142,6 +145,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_my_prescription:
                 //todo 我的处方药
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -149,6 +153,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                 break;
             case R.id.ll_setting:
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -158,6 +163,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_feedback:
                 //todo 意见反馈
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -167,6 +173,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_prescription_template:
                 //todo 处方模板
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -177,6 +184,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_ask_doctors:
                 //todo 设置问诊费
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -198,6 +206,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_evaluation:
                 //todo 我的评价
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
@@ -207,6 +216,7 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
             case R.id.ll_invitation:
                 //todo 邀请用户
                 if (!MySp.iSLoginLive(mContext)) {
+                    //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }

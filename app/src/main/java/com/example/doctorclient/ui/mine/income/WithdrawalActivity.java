@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 提现
+ * 提现（未实现）
  *
  * @author lgh
  * created at 2019/5/17 0017 14:23
@@ -97,6 +97,7 @@ public class WithdrawalActivity extends UserBaseActivity<WithdrawalAction> imple
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_withdrawal_amount:
+                //todo 输入提现金额
                 UpdateFactPriceDialog modifyDialog = new UpdateFactPriceDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.withdrawal_tip_10));
                 modifyDialog.setOnClickListener(new UpdateFactPriceDialog.OnClickListener() {
                     @Override
@@ -114,12 +115,14 @@ public class WithdrawalActivity extends UserBaseActivity<WithdrawalAction> imple
                 break;
             case R.id.ll_wechat:
             case R.id.rb_wechat:
+                //TODO 提现方式 微信
                 type = 0;
                 weChatRb.setChecked(true);
                 aliRb.setChecked(false);
                 break;
             case R.id.ll_ali:
             case R.id.rb_ali:
+                //TODO 提现方式 支付宝
                 type =1;
                 weChatRb.setChecked(false);
                 aliRb.setChecked(true);

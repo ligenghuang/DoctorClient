@@ -159,9 +159,11 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
     void OnClick(View view){
         switch (view.getId()){
             case R.id.tv_submit:
+                //TODO  提交数据
                 submit();
                 break;
             case R.id.tv_add_drug:
+                //TODO  添加药品
                 Intent intent = new Intent(mContext,SelectDrugsActivity.class);
                 intent.putExtra("isSelect",true);
                 startActivityForResult(intent,200);

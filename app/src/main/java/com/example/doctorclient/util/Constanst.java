@@ -19,6 +19,6 @@ public class Constanst {
     /**
      * 包名
      */
-    public static String PROVIDER = "com.feijin.smarttraining.android7.fileprovider";
+    public static String PROVIDER = "com.example.doctorclient.android7.fileprovider";
 
 }

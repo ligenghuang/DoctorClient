@@ -138,4 +138,10 @@ public class MyPrescriptionActivity extends UserBaseActivity {
         tabSegment.setMode(QMUITabSegment.MODE_FIXED);
         tabSegment.setupWithViewPager(viewPager, false);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Position = 0;
+    }
 }

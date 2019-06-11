@@ -130,6 +130,7 @@ public class PrescriptionActivity extends UserBaseActivity<PrescriptionAction> i
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO 监听输入框字数变化
                 if (TextUtils.isEmpty(diagnosticMessageEt.getText().toString())){
                     diagnosticMessageNumTv.setText("0/300");
                 }else {
