@@ -54,6 +54,7 @@ import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -381,6 +382,9 @@ public class MainActivity extends UserBaseActivity {
         } catch (KeyManagementException e) {
             e.printStackTrace();
             Log.e("lgh_Socket:", "------KeyManagementException!!!" + e.getMessage());
+        }catch (SSLException e){
+            e.printStackTrace();
+            Log.e("lgh_Socket:", "------SSLException!!!" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("lgh_Socket:", "------IOException!!!" + e.getMessage());

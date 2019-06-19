@@ -451,9 +451,14 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     @Override
     public void sevaDoctorsInfoSuccessful(GeneralDto generalDto) {
         loadDiss();
-        showNormalToast(generalDto.getMsg());
+
         if (generalDto.getCode() == 1){
+            showNormalToast(generalDto.getMsg());
             finish();
+        }else if (generalDto.getCode() == 0){
+            showNormalToast("您未修改信息，提交失败");
+        }else {
+            showNormalToast(generalDto.getMsg());
         }
     }
 
@@ -617,6 +622,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                                     }else {
                                         certificate = images.get(0).path;
                                         GlideUtil.setImage(mContext,images.get(0).path,userCertificateIv,R.drawable.icon_placeholder);
+                                        userCertificateLl.setVisibility(View.VISIBLE);
                                     }
 
 
@@ -655,6 +661,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                             }else {
                                 certificate = images.get(0).path;
                                 GlideUtil.setImage(mContext,images.get(0).path,userCertificateIv,R.drawable.icon_placeholder);
+                                userCertificateLl.setVisibility(View.VISIBLE);
                             }
                         } catch (Exception e) {
                             loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);

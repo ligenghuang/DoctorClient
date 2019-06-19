@@ -11,9 +11,7 @@
     <include layout="@layout/layout_title_black_bar" />
 
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -222,6 +220,5 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

@@ -13,8 +13,8 @@ android {
         android.applicationVariants.all { variant ->
             variant.outputs.all {
                 if ("release".equals(variant.buildType.name)) {
-//                    def fileName = "yizhitong_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${packageTime()}_test_release.apk"
-                    def fileName = "yizhitong_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${packageTime()}_formal_release.apk"
+                    def fileName = "yizhitong_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${packageTime()}_test_release.apk"
+//                    def fileName = "yizhitong_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${packageTime()}_formal_release.apk"
                     outputFileName = fileName
                 } else if ("debug".equals(variant.buildType.name)) {
                     def fileName = "yizhitong_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${packageTime()}_debug.apk"

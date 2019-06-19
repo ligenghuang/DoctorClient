@@ -39,8 +39,12 @@ public class CheckNetwork {
             return flag;
         } else {
 
-            ToastUtils.getToast().cancel();
-            ToastUtils.show(ResUtil.getString(R.string.main_net_error));
+           try{
+               ToastUtils.getToast().cancel();
+               ToastUtils.show(ResUtil.getString(R.string.main_net_error));
+           }catch (Exception e){
+
+           }
         }
 
         return flag;

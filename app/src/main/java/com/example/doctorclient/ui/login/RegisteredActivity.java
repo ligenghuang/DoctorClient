@@ -232,8 +232,8 @@ public class RegisteredActivity extends UserBaseActivity<RegisteredAction> imple
     @Override
     public void registeredSuccessful(GeneralDto generalDto) {
         loadDiss();
+        showNormalToast(generalDto.getMsg());
         if (generalDto.getCode() == 1){
-            showNormalToast(generalDto.getMsg());
             if (timer != null) {
                 timer.cancel();
             }
