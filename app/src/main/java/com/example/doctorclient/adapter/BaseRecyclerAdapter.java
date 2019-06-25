@@ -62,8 +62,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<SmartV
 
     private void addAnimate(SmartViewHolder holder, int postion) {
         if (mOpenAnimationEnable && mLastPosition < postion) {
-            holder.itemView.setAlpha(0);
-            holder.itemView.animate().alpha(1).start();
+//            holder.itemView.setAlpha(0);
+//            holder.itemView.animate().alpha(1).start();
             mLastPosition = postion;
         }
     }

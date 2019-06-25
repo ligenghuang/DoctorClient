@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.BaseAction;
 import com.example.doctorclient.ui.MainActivity;
+import com.example.doctorclient.ui.mine.inquiry.MyInquiryActivity;
 import com.example.doctorclient.ui.mine.inquiry.MyInquiryFragment;
 import com.example.doctorclient.util.base.UserBaseFragment;
+import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.base.MyFragmentPagerAdapter;
 import com.lgh.huanglib.util.cusview.CustomViewPager;
 import com.lgh.huanglib.util.data.ResUtil;
@@ -74,7 +76,7 @@ public class PhysicianvisitsFragment extends UserBaseFragment {
         super.onFragmentVisibleChange(isVisible);
         if (isVisible){
             ((MainActivity) getActivity()).changeStatusBar(true, R.color.white);
-            MyInquiryFragment myInquiryFragment = (MyInquiryFragment) fragments.get(Position);
+            MyInquiryFragment myInquiryFragment = (MyInquiryFragment) fragments.get(MyInquiryActivity.Position );
             myInquiryFragment.getAskHead();
         }
 
@@ -88,7 +90,8 @@ public class PhysicianvisitsFragment extends UserBaseFragment {
             @Override
             public void onTabSelected(int index) {
                 //todo 获取tab位置
-                Position = index;
+                MyInquiryActivity.Position  = index;
+                L.e("lgh","onTabSelected"+index);
             }
 
             @Override
@@ -120,7 +123,7 @@ public class PhysicianvisitsFragment extends UserBaseFragment {
         fragments = new ArrayList<Fragment>();
 
         for (int i = 0; i < list.size(); i++) {
-            fragments.add(MyInquiryFragment.newInstance(i));
+            fragments.add(MyInquiryFragment.newInstance(i,false));
 
             tabSegment.addTab(new QMUITabSegment.Tab(list.get(i)));
         }
@@ -129,7 +132,7 @@ public class PhysicianvisitsFragment extends UserBaseFragment {
 
         viewPager.setPagingEnabled(false);
         viewPager.setAdapter(fragmentPagerAdapter);
-        viewPager.setCurrentItem(Position, false);
+        viewPager.setCurrentItem(MyInquiryActivity.Position , false);
         viewPager.setOffscreenPageLimit(list.size());
 
         tabSegment.setMode(QMUITabSegment.MODE_FIXED);

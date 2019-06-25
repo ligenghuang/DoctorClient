@@ -8,6 +8,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -219,6 +220,13 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
         loadDiss();
         drugListAdapter.refresh(preInfoDto.getData().getDrugMV());
         noteEt.setText(preInfoDto.getData().getThe_memo());
+        if (!TextUtils.isEmpty(preInfoDto.getData().getThe_memo())){
+            noteEt.setText(preInfoDto.getData().getThe_memo());
+        }else if (!TextUtils.isEmpty(preInfoDto.getData().getDiagnosis())){
+            noteEt.setText(preInfoDto.getData().getDiagnosis());
+        }else if (!TextUtils.isEmpty(preInfoDto.getData().getIll_note())){
+            noteEt.setText(preInfoDto.getData().getIll_note());
+        }
         photoDtos.addAll(preInfoDto.getData().getAskdrug_img());
         loadPicView();
     }

@@ -13,6 +13,7 @@ import com.example.doctorclient.R;
 import com.example.doctorclient.event.MyPrescriptionDto;
 import com.example.doctorclient.net.WebUrlUtil;
 import com.example.doctorclient.ui.mine.prescription.PrescriptionDetailsActivity;
+import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.config.GlideUtil;
 import com.lgh.huanglib.util.data.IsFastClick;
 import com.lgh.huanglib.util.data.PriceUtils;
@@ -32,8 +33,25 @@ public class MyPrescriptionAdapter extends BaseRecyclerAdapter<MyPrescriptionDto
         GlideUtil.setImageCircle(context, model.getImt_url(),userPortaitIv,R.drawable.icon_placeholder);
         holder.text(R.id.tv_item_name,model.getPatientName());
         holder.text(R.id.tv_item_income, ResUtil.getFormatString(R.string.prescription_tip_1, PriceUtils.formatPrice(model.getBrokerage())));
-        holder.text(R.id.tv_item_subtotal,ResUtil.getFormatString(R.string.prescription_tip_2,PriceUtils.formatPrice(model.getPay_flag())));
-        setType(holder,model.getAgree_flag());
+        holder.text(R.id.tv_item_subtotal,ResUtil.getFormatString(R.string.prescription_tip_2,PriceUtils.formatPrice(model.getDrug_money())));
+        int type = 0;
+        if (model.getReback_flag() == 1){
+            type = 3;
+            L.e("lgh_type","3");
+        }else if (model.getFinish_flag() == 1){
+            type = 2;
+            L.e("lgh_type","2");
+        }else if (model.getAgree_flag() == 1){
+            type = 1;
+            L.e("lgh_type","1");
+        }else if (model.getPay_flag() == 0){
+            type = 0;
+            L.e("lgh_type","0");
+        }else if (model.getPay_flag() == 1){
+            type = 1;
+            L.e("lgh_type","1");
+        }
+        setType(holder,type);
 
         RecyclerView recyclerView = holder.itemView.findViewById(R.id.rv_item_shop);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -85,6 +103,7 @@ public class MyPrescriptionAdapter extends BaseRecyclerAdapter<MyPrescriptionDto
                 text = ResUtil.getString(R.string.prescription_tip_6);
                 resId = R.color.color_38a234;
                 break;
+
         }
         typeTv.setText(text);
         typeTv.setTextColor(ResUtil.getColor(resId));

@@ -59,6 +59,7 @@ public class PhotographPrescriptionAction extends BaseAction<PhotographPrescript
         ));
     }
 
+
     /**
      * 处方药品列表
      * @param iuid
@@ -190,6 +191,7 @@ public class PhotographPrescriptionAction extends BaseAction<PhotographPrescript
                         view.onError(msg, action.getErrorType());
 
                         break;
+
                 }
 
             }

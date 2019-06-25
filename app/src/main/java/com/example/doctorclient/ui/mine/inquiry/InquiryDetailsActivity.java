@@ -84,6 +84,7 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
     String askId;
 
     boolean isSelect = false;
+    boolean isAccepts = false;
 
     @Override
     protected InquiryDetailsAction initAction() {
@@ -123,26 +124,33 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         mContext = this;
         iuid = getIntent().getStringExtra("iuid");
         isSelect = getIntent().getBooleanExtra("isSelect",false);
-
+        isAccepts = getIntent().getBooleanExtra("isAccepts",false);
+        L.e("lgh_accepts","isAccepts  = "+isAccepts);
+        viewChatHistoryTv.setText(ResUtil.getString(isAccepts?R.string.inquity_tip_6:R.string.inquity_tip_27));
         illessImgAdapter = new IllessImgAdapter(mContext);
         imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
         imgIllnessRv.setAdapter(illessImgAdapter);
 
-        getAskHeadById();
+
     }
 
     @OnClick(R.id.tv_view_chat_history)
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_view_chat_history:
-                if (isSelect){
-                    finish();
-                }else {
-                    Intent intent = new Intent(mContext, MessageDetailActivity.class);
-                    intent.putExtra("touserId", touserId);
-                    intent.putExtra("askId", askId);
-                    startActivity(intent);
+                if (isAccepts) {
+                    Confirmation(askId);
+                } else {
+                    if (isSelect) {
+                        finish();
+                    } else {
+                        Intent intent = new Intent(mContext, MessageDetailActivity.class);
+                        intent.putExtra("touserId", touserId);
+                        intent.putExtra("askId", askId);
+                        startActivity(intent);
+                    }
                 }
+
                 break;
         }
     }
@@ -183,6 +191,38 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         illnessTv.setText(dataBean.getIll_note());
         illessImgAdapter.refresh(dataBean.getIll_img());
     }
+    /**
+     * 确认接诊
+     *
+     * @param iuid
+     */
+    @Override
+    public void Confirmation(String iuid) {
+        if (CheckNetwork.checkNetwork2(mContext)) {
+            loadDialog();
+            baseAction.Confirmation(iuid);
+        }
+    }
+
+    /**
+     * 确认接诊成功
+     *
+     * @param generalDto
+     */
+    @Override
+    public void ConfirmationSuccessful(GeneralDto generalDto) {
+        loadDiss();
+        if (generalDto.getCode() == 1) {
+            Intent intent = new Intent(mContext, MessageDetailActivity.class);
+            intent.putExtra("touserId", iuid);
+            intent.putExtra("askId", askId);
+            intent.putExtra("isFirst", true);
+            startActivity(intent);
+
+        } else {
+            showToast(generalDto.getMsg());
+        }
+    }
 
 
     /**
@@ -210,6 +250,9 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         super.onResume();
         if (baseAction != null) {
             baseAction.toRegister();
+        }
+        if (!TextUtils.isEmpty(iuid)){
+            getAskHeadById();
         }
     }
 

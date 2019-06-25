@@ -77,8 +77,10 @@ public class MyInquiryAdapter extends BaseRecyclerAdapter<MyInquiryDto.DataBean>
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                L.e("lgh_accepts","model.getAsk_flag()   = "+model.getAsk_flag());
                 Intent intent = new Intent(context, model.getAsk_flag()== 1? InquiryDetailsActivity2.class:InquiryDetailsActivity.class);
                 intent.putExtra("iuid",model.getAskIUID());
+                intent.putExtra("isAccepts",model.getAsk_flag() == 0);
                 context.startActivity(intent);
             }
         });

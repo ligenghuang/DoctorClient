@@ -280,6 +280,7 @@ public class MainActivity extends UserBaseActivity {
             public void onOpen(ServerHandshake handshakedata) {
                 Log.e("lgh_Socket:", "------连接成功!!!");
                 isFirst = true;
+                Heartbeat = 0;
                 handler.postDelayed(runnable, 1000);
             }
 

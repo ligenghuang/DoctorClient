@@ -49,6 +49,7 @@ public class MyInquiryFragment extends UserBaseFragment<MyInquiryAction> impleme
     String ConfirmationId;
     String UserId;
     boolean isMessage = false;
+    boolean isActivity = true;
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,6 +65,7 @@ public class MyInquiryFragment extends UserBaseFragment<MyInquiryAction> impleme
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             position = bundle.getInt("position");
+            isActivity = bundle.getBoolean("isActivity");
         }
 
     }
@@ -145,7 +147,7 @@ public class MyInquiryFragment extends UserBaseFragment<MyInquiryAction> impleme
         if (isVisible && MySp.iSLoginLive(mContext) && MyInquiryActivity.Position == position) {
             //更新界面数据，如果数据还在下载中，就显示加载框
 //            loadNet();
-            loadDialog();
+//            loadDialog();
             getAskHead();
         }
 //        else if(!MySp.iSLoginLive(mContext) && MyInquiryActivity.Position == position){
@@ -160,10 +162,11 @@ public class MyInquiryFragment extends UserBaseFragment<MyInquiryAction> impleme
     }
 
 
-    public static MyInquiryFragment newInstance(int position) {
+    public static MyInquiryFragment newInstance(int position,boolean isActivity) {
         MyInquiryFragment fragment = new MyInquiryFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
+        args.putBoolean("isActivity",isActivity);
         fragment.setArguments(args);
         return fragment;
     }
@@ -245,7 +248,9 @@ public class MyInquiryFragment extends UserBaseFragment<MyInquiryAction> impleme
     @Override
     public void onLigonError() {
         loadDiss();
-        jumpActivity(mContext, LoginActivity.class);
+      if (isActivity){
+          jumpActivityNotFinish(mContext, LoginActivity.class);
+      }
     }
 
     @Override

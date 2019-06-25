@@ -31,4 +31,6 @@ public interface PhotographPrescriptionView extends BaseView {
     void savePhotographPrescription(String iuid,String diagonsis,String theImg);
 
     void savePhotographPrescriptionSuccessful(GeneralDto generalDto);
+
+
 }

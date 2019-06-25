@@ -14,5 +14,7 @@ public interface InquiryDetailsView extends BaseView {
 
     void getAskHeadByIdSuccessful(InquiryDetailDto inquiryDetailDto);
 
+    void Confirmation(String iuid);
 
+    void ConfirmationSuccessful(GeneralDto generalDt);
 }

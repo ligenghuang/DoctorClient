@@ -95,6 +95,15 @@ public class MessageDetailInquiryDto {
         private int age;
         private String note;
         private int askFlag;
+        private int drugFlag;
+
+        public int getDrugFlag() {
+            return drugFlag;
+        }
+
+        public void setDrugFlag(int drugFlag) {
+            this.drugFlag = drugFlag;
+        }
 
         public String getAskID() {
             return askID == null ? "" : askID;

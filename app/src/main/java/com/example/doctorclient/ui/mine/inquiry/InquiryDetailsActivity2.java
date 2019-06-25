@@ -84,6 +84,8 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     @BindView(R.id.rv_prescription)
     RecyclerView prescriptionRv;
+    @BindView(R.id.tv_submit)
+    TextView mTvSubmit;
 
     IllessImgAdapter illessImgAdapter;
     PhotographPrescriptionAdapter photographPrescriptionAdapter;
@@ -91,6 +93,9 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     String iuid;
     String touserId;
     String askId;
+
+    boolean isSelect = false;
+    boolean isAccepts = false;
 
     @Override
     public int intiLayout() {
@@ -132,7 +137,9 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
         mActicity = this;
 
         iuid = getIntent().getStringExtra("iuid");
-
+        isSelect = getIntent().getBooleanExtra("isSelect", false);
+        isAccepts = getIntent().getBooleanExtra("isAccepts", false);
+        mTvSubmit.setText(ResUtil.getString(isAccepts?R.string.inquity_tip_6:R.string.inquity_tip_27));
         illessImgAdapter = new IllessImgAdapter(mContext);
         imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
         imgIllnessRv.setAdapter(illessImgAdapter);
@@ -147,13 +154,18 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     }
 
     @OnClick({R.id.tv_submit})
-    void OnClick(View view){
-        switch (view.getId()){
+    void OnClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_submit:
-                Intent intent = new Intent(mContext, MessageDetailActivity.class);
-                intent.putExtra("touserId", touserId);
-                intent.putExtra("askId", askId);
-                startActivity(intent);
+                if (isSelect){
+                    finish();
+                }else {
+                    Intent intent = new Intent(mContext, MessageDetailActivity.class);
+                    intent.putExtra("touserId", touserId);
+                    intent.putExtra("askId", askId);
+                    startActivity(intent);
+                }
+
                 break;
         }
     }
@@ -187,6 +199,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     /**
      * 获取问诊信息成功
+     *
      * @param inquiryDetailDto
      */
     @Override
@@ -222,6 +235,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     /**
      * 获取处方药品列表成功
+     *
      * @param prescriptionListDto
      */
     @Override
@@ -232,11 +246,12 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     /**
      * 上传图片
+     *
      * @param str
      */
     @Override
     public void updataFileName(String str) {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.updatafileName(str);
         }
@@ -244,6 +259,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     /**
      * 上传图片成功
+     *
      * @param str
      */
     @Override
@@ -253,20 +269,22 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
 
     /**
      * 保存处方信息
+     *
      * @param iuid
      * @param diagonsis
      * @param theImg
      */
     @Override
-    public void savePhotographPrescription(String iuid,String diagonsis,String theImg) {
-        if (CheckNetwork.checkNetwork2(mContext)){
+    public void savePhotographPrescription(String iuid, String diagonsis, String theImg) {
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
-            baseAction.savePhotographPrescription(iuid,diagonsis,theImg);
+            baseAction.savePhotographPrescription(iuid, diagonsis, theImg);
         }
     }
 
     /**
      * 保存处方信息成功
+     *
      * @param generalDto
      */
     @Override
@@ -276,8 +294,10 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
         finish();
     }
 
+
     /**
-     *失败
+     * 失败
+     *
      * @param message
      * @param code
      */
@@ -294,9 +314,8 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     public void onLigonError() {
         loadDiss();
         jumpActivity(mContext, LoginActivity.class);
-        ActivityStack.getInstance().exitIsNotHaveMain(MainActivity.class,LoginActivity.class);
+        ActivityStack.getInstance().exitIsNotHaveMain(MainActivity.class, LoginActivity.class);
     }
-
 
 
     @Override

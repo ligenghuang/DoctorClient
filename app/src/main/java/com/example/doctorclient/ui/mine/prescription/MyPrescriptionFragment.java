@@ -145,7 +145,7 @@ public class MyPrescriptionFragment extends UserBaseFragment<MyPrescriptionActio
     @Override
     public void getPrescription() {
         if (CheckNetwork.checkNetwork2(mContext)){
-            baseAction.getPrescription(position-1);
+            baseAction.getPrescription(position);
         }
     }
 

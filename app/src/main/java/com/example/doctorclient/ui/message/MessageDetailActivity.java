@@ -33,9 +33,13 @@ import com.example.doctorclient.ui.MainActivity;
 import com.example.doctorclient.ui.impl.MessageDetailView;
 import com.example.doctorclient.ui.login.LoginActivity;
 import com.example.doctorclient.ui.mine.inquiry.InquiryDetailsActivity;
+import com.example.doctorclient.ui.mine.inquiry.InquiryDetailsActivity2;
+import com.example.doctorclient.ui.mine.inquiry.PrescriptionActivity;
 import com.example.doctorclient.ui.mine.inquiry.SelectPrescriptionActivity;
 import com.example.doctorclient.util.base.UserBaseActivity;
+import com.example.doctorclient.util.config.MyApp;
 import com.example.doctorclient.util.cusview.CustomLinearLayoutManager;
+import com.example.doctorclient.util.cusview.SoftKeyBoardListener;
 import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.PicturesDialog;
 import com.example.doctorclient.util.imageloader.GlideImageLoader;
@@ -138,10 +142,12 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
     String touserId;
     String userid;
     String askId;
+    String askIuid;
     int count = 0;
     //是否加载更多
     boolean isSlect = true;
     boolean isRefresh = false;
+    int ask_flag = 0;
 
     boolean isSend = false;
     boolean isAdd = false;
@@ -202,6 +208,7 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
         mActicity = this;
         touserId = getIntent().getStringExtra("touserId");
         askId = getIntent().getStringExtra("askId");
+        L.e("lgh_askid","askid  = "+askId);
         isFirst = getIntent().getBooleanExtra("isFirst",false);
         userid = MySp.getToken(mContext);
 
@@ -231,8 +238,26 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
         initImagePicker();
         isLogin();
         loadView();
+        SoftKeyBoardListener.setListener(this, onSoftKeyBoardChangeListener);
     }
 
+    /**
+     * 软键盘弹出收起监听
+     */
+    private SoftKeyBoardListener.OnSoftKeyBoardChangeListener onSoftKeyBoardChangeListener = new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
+        @Override
+        public void keyBoardShow(int height) {
+            L.e("lgh_key","键盘显示 高度 : " + height);
+            infoLl.setVisibility(View.GONE);
+            recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
+        }
+        @Override
+        public void keyBoardHide(int height) {
+            L.e("lgh_key","键盘隐藏 高度 : " + height);
+            infoLl.setVisibility(View.VISIBLE);
+            recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
+        }
+    };
 
     @Override
     protected void loadView() {
@@ -289,6 +314,15 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
             @Override
             public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5,
                                        int i6, int i7) {
+                L.e("lgh_recycler","i  = "+i);
+                L.e("lgh_recycler","i1  = "+i1);
+                L.e("lgh_recycler","i2  = "+i2);
+                L.e("lgh_recycler","i3  = "+i3);
+                L.e("lgh_recycler","i4  = "+i4);
+                L.e("lgh_recycler","i5  = "+i5);
+                L.e("lgh_recycler","i6  = "+i6);
+                L.e("lgh_recycler","i7  = "+i7);
+                L.e("lgh_recycler","----------------------------------------------");
                 if (i3 < i7) {
                     recyclerView.postDelayed(new Runnable() {
                         @Override
@@ -361,10 +395,17 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                 break;
             case R.id.ll_info:
                 //TODO 问诊信息
-                Intent intent = new Intent(mContext, InquiryDetailsActivity.class);
-                intent.putExtra("iuid", askId);
-                intent.putExtra("isSelect", true);
-                startActivity(intent);
+                Intent intent;
+                if (ask_flag == 1){
+                    intent = new Intent(mContext, InquiryDetailsActivity2.class);
+                    intent.putExtra("iuid", askId);
+                    intent.putExtra("isSelect", true);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(mContext, PrescriptionActivity.class);
+                    intent.putExtra("iuid",askId);
+                    startActivity(intent);
+                }
                 break;
             case R.id.tv_prescription:
                 //TODO 开方
@@ -464,6 +505,9 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
     public void getAskHeadByUserIdSuccessful(MessageDetailInquiryDto inquiryDetailDto) {
         loadDiss();
         MessageDetailInquiryDto.DataBean dataBean = inquiryDetailDto.getData();
+        askIuid = dataBean.getAskID();
+        MySp.setAskId(MyApp.getContext(),askIuid);
+        ask_flag = dataBean.getDrugFlag();
         endSessionTimeTv.setText(ResUtil.getFormatString(R.string.message_tip_3, dataBean.getLastTime()));
         nameInfoTv.setText(dataBean.getName());
         ageInfoTv.setText(dataBean.getSex() + "   " + dataBean.getAge() + "岁");
@@ -523,10 +567,20 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
             List<MessageDetailListDto.DataBean.ListBean> list = messageDetailListDto.getData().getList();
 //            Collections.reverse(list);
             messageDetailListAdapter.refresh(list);
-            recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
-            recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
+            recyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
+                }
+            }, 100);
         } else {
-            recyclerView.scrollToPosition(messageDetailListDto.getData().getList().size()+1);
+            recyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.scrollToPosition(messageDetailListDto.getData().getList().size()+1);
+                }
+            }, 100);
+
             List<MessageDetailListDto.DataBean.ListBean> listBeans = messageDetailListDto.getData().getList();
 //            Collections.reverse(listBeans);
             listBeans.addAll(messageDetailListAdapter.getAllData());
@@ -550,7 +604,7 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
     @Override
     public void sendMessage(String chat_note) {
         if (CheckNetwork.checkNetwork2(mContext)) {
-            loadDialog();
+//            loadDialog();
             baseAction.sendMessage(chat_note, touserId, askId);
             editText.setText("");
         }

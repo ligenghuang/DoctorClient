@@ -142,7 +142,7 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         prescriptionDetailRv.setAdapter(prescriptionDetailDrugAdapter);
 
         iuid = getIntent().getStringExtra("iuid");
-        getPreInfo(iuid);
+
     }
 
     @Override
@@ -210,6 +210,7 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         super.onResume();
         if (baseAction != null) {
             baseAction.toRegister();
+            getPreInfo(iuid);
         }
     }
 

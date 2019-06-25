@@ -123,7 +123,7 @@ public class MyInquiryActivity extends UserBaseActivity {
         fragments = new ArrayList<Fragment>();
 
         for (int i = 0; i < list.size(); i++) {
-            fragments.add(MyInquiryFragment.newInstance(i));
+            fragments.add(MyInquiryFragment.newInstance(i,true));
 
             tabSegment.addTab(new QMUITabSegment.Tab(list.get(i)));
         }
@@ -137,5 +137,11 @@ public class MyInquiryActivity extends UserBaseActivity {
 
         tabSegment.setMode(QMUITabSegment.MODE_FIXED);
         tabSegment.setupWithViewPager(viewPager, false);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Position = 0;
     }
 }

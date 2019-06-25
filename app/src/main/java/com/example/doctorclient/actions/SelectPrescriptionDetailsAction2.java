@@ -66,6 +66,7 @@ public class SelectPrescriptionDetailsAction2 extends BaseAction<SelectPrescript
      * @param prescribePost
      */
     public void AddPrescribe(AddPrescribePost prescribePost) {
+        String type = "2";
         String theImg = "[]";
         for (int i = 0; i < prescribePost.getTheImg().size(); i++) {
             if (i == 0) {
@@ -78,8 +79,9 @@ public class SelectPrescriptionDetailsAction2 extends BaseAction<SelectPrescript
                 theImg = theImg + "]";
             }
         }
-        String mycars = "";
+        String mycars = "[]";
         for (int i = 0; i < prescribePost.getMycars().size(); i++) {
+            type = "3";
             if (i == 0) {
                 mycars = "[";
             }else {
@@ -92,7 +94,7 @@ public class SelectPrescriptionDetailsAction2 extends BaseAction<SelectPrescript
         }
 
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("type", "null")
+                .addFormDataPart("type", type)
                 .addFormDataPart("askdrugheadid", prescribePost.getAskdrugheadid())
                 .addFormDataPart("askIuid", prescribePost.getAskIuid())
                 .addFormDataPart("the_memo", prescribePost.getThe_memo())

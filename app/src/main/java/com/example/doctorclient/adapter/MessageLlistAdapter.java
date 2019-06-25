@@ -35,7 +35,6 @@ public class MessageLlistAdapter extends BaseRecyclerAdapter<MessageListDto.Data
     @Override
     protected void onBindViewHolder(SmartViewHolder holder, MessageListDto.DataBean model, int position) {
         holder.setIsRecyclable(false);
-        MySp.setAskId(MyApp.getContext(),model.getAskid());
         holder.text(R.id.tv_message_name,model.getNiceName());
         holder.text(R.id.tv_message_time, DynamicTimeFormat.LongToString(model.getChat_time_stamp()));
         ImageView imageView = holder.itemView.findViewById(R.id.iv_message_portrait);

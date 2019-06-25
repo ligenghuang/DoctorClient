@@ -73,7 +73,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
     DrugListAdapter drugListAdapter;
 
     String prescriptionName;
-    int depart = 1;
+    String depart = "1";
 
     @Override
     public int intiLayout() {
@@ -131,7 +131,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
        if (!TextUtils.isEmpty(MySp.getData(mContext))){
            EditPrescriptionDto editPrescriptionDto = new Gson().fromJson(MySp.getData(mContext),new TypeToken<EditPrescriptionDto>() {
            }.getType());
-           depart = editPrescriptionDto.getDepart();
+           depart = editPrescriptionDto.getDepart()+"";
            prescriptionProjectTv.setText(editPrescriptionDto.getDepartName());
            prescriptionName = editPrescriptionDto.getPrescriptionName();
            prescriptionNameTv.setText(prescriptionName);
@@ -310,7 +310,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 201){
             if (data != null){
-                depart = Integer.parseInt(data.getStringExtra("iuid"));
+                depart = data.getStringExtra("iuid");
                 String name = data.getStringExtra("name");
                 prescriptionProjectTv.setText(name);
             }

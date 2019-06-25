@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -14,6 +16,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.example.doctorclient.R;
 import com.example.doctorclient.event.MessageDto;
+import com.example.doctorclient.ui.message.MessageDetailActivity;
 import com.example.doctorclient.util.data.MySp;
 
 public class NotificationHelper {
@@ -47,6 +50,12 @@ public class NotificationHelper {
         }else {
             channel.setSound(null,null);
         }
+        //todo 点击事件
+//        Intent intent = new Intent(context, MessageDetailActivity.class);
+//        intent.putExtra("touserId", messageDto.getTouserid());
+//        intent.putExtra("askId", askId);
+
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 200, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 //        channel.enableLights(true);
         Notification notification;

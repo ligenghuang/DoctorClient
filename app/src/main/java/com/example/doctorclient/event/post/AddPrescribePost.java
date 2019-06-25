@@ -108,7 +108,7 @@ public class AddPrescribePost {
         public String toString() {
             final StringBuilder sb = new StringBuilder("{");
             sb.append("\"IUID\":\"")
-                    .append(IUID).append('\"');
+                    .append(getIUID()).append('\"');
             sb.append(",\"drug_num\":\"")
                     .append(drug_num).append('\"');
             sb.append(",\"use_note\":\"")

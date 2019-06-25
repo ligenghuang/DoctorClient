@@ -2,16 +2,16 @@ package com.example.doctorclient.event;
 
 public class EditPrescriptionDto {
 
-    private int depart;
+    private String depart;
     private String departName;
     private String prescriptionName;
     private String note;
 
-    public int getDepart() {
+    public String getDepart() {
         return depart;
     }
 
-    public void setDepart(int depart) {
+    public void setDepart(String depart) {
         this.depart = depart;
     }
 

@@ -39,13 +39,16 @@ public class MyPrescriptionAction extends BaseAction<MyPrescriptionView> {
      * @param status
      */
     public void getPrescription(int status){
-        if (status == -1){
-            post(WebUrlUtil.POST_PRESCRIPTION_LIST,false,service -> manager.runHttp(
-                    service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("H5ORDOC","1","status","null"),WebUrlUtil.POST_PRESCRIPTION_LIST)));
-        }else {
-            post(WebUrlUtil.POST_PRESCRIPTION_LIST,false,service -> manager.runHttp(
-                    service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("H5ORDOC","1","status",status+""),WebUrlUtil.POST_PRESCRIPTION_LIST)));
-        }
+//        if (status == -1){
+//            post(WebUrlUtil.POST_PRESCRIPTION_LIST,false,service -> manager.runHttp(
+//                    service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("H5ORDOC","1","status","0"),WebUrlUtil.POST_PRESCRIPTION_LIST)));
+//        }else {
+//            post(WebUrlUtil.POST_PRESCRIPTION_LIST,false,service -> manager.runHttp(
+//                    service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("H5ORDOC","1","status",status+""),WebUrlUtil.POST_PRESCRIPTION_LIST)));
+//        }
+        post(WebUrlUtil.POST_PRESCRIPTION_LIST,false,service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("H5ORDOC","1","status",status+""),WebUrlUtil.POST_PRESCRIPTION_LIST)));
+
     }
 
     /**

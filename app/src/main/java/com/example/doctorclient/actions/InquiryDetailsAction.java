@@ -42,6 +42,18 @@ public class InquiryDetailsAction extends BaseAction<InquiryDetailsView> {
         ));
     }
 
+    /**
+     * 确认接诊
+     *
+     * @param iuid
+     */
+    public void Confirmation(String iuid) {
+        post(WebUrlUtil.POST_CONFIRMATION_OF_CONSULTATION, false, service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("iuid", iuid), WebUrlUtil.POST_CONFIRMATION_OF_CONSULTATION)
+        ));
+    }
+
+
 
     /**
      * sticky:表明优先接收最高级  threadMode = ThreadMode.MAIN：表明在主线程
@@ -81,7 +93,29 @@ public class InquiryDetailsAction extends BaseAction<InquiryDetailsView> {
                         }
                         view.onError(msg,action.getErrorType());
                         break;
-
+                    case WebUrlUtil.POST_CONFIRMATION_OF_CONSULTATION:
+                        //todo 确认接诊
+                        if (aBoolean) {
+                            L.e("xx", "输出返回结果 " + action.getUserData().toString());
+                            Gson gson = new Gson();
+                            try {
+                                GeneralDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<GeneralDto>() {
+                                }.getType());
+                                view.ConfirmationSuccessful(generalDto);
+                            } catch (JsonSyntaxException e) {
+                                GeneralDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<GeneralDto>() {
+                                }.getType());
+                                if (generalDto.getCode() == -2) {
+                                    view.onLigonError();
+                                } else {
+                                    view.onError(generalDto.getMsg(), generalDto.getCode());
+                                }
+                                return;
+                            }
+                            return;
+                        }
+                        view.onError(msg, action.getErrorType());
+                        break;
                 }
 
             }
