@@ -299,7 +299,7 @@ public class MainActivity extends UserBaseActivity {
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE_1,
                                 Action.KEY_OBJ, message);
                         if (MySp.getMessage(mContext)) {
-                            NotificationHelper.show(mContext,messageDto);
+//                            NotificationHelper.show(mContext,messageDto);
                         }
                     }else if (messageDto.getEvent().equals("return")){
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE,

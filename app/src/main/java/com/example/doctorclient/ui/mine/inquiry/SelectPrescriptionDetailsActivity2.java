@@ -222,9 +222,11 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
         noteEt.setText(preInfoDto.getData().getThe_memo());
         if (!TextUtils.isEmpty(preInfoDto.getData().getThe_memo())){
             noteEt.setText(preInfoDto.getData().getThe_memo());
-        }else if (!TextUtils.isEmpty(preInfoDto.getData().getDiagnosis())){
-            noteEt.setText(preInfoDto.getData().getDiagnosis());
-        }else if (!TextUtils.isEmpty(preInfoDto.getData().getIll_note())){
+        }
+//        else if (!TextUtils.isEmpty(preInfoDto.getData().getDiagnosis())){
+//            noteEt.setText(preInfoDto.getData().getDiagnosis());
+//        }
+        else if (!TextUtils.isEmpty(preInfoDto.getData().getIll_note())){
             noteEt.setText(preInfoDto.getData().getIll_note());
         }
         photoDtos.addAll(preInfoDto.getData().getAskdrug_img());

@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.example.doctorclient.R;
 import com.example.doctorclient.event.CommonLanguageListDto;
+
 /**
  * description:常用语列表 适配器
  * autour: huang
@@ -32,9 +33,9 @@ public class CommonLanguageAdpater extends BaseRecyclerAdapter<CommonLanguageLis
     @Override
     protected void onBindViewHolder(SmartViewHolder holder, CommonLanguageListDto.DataBean model, int position) {
         holder.setIsRecyclable(false);
-        holder.text(R.id.tv_name,model.getTextContent());
+        holder.text(R.id.tv_name, model.getTextContent());
         ImageView imageView = holder.itemView.findViewById(R.id.iv_close);
-        imageView.setVisibility(isEdit ? View.VISIBLE:View.GONE);
+        imageView.setVisibility(isEdit ? View.VISIBLE : View.GONE);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,13 +45,16 @@ public class CommonLanguageAdpater extends BaseRecyclerAdapter<CommonLanguageLis
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             onClickListener.onClick(model.getTextContent());
+                if (!isEdit) {
+                    onClickListener.onClick(model.getTextContent());
+                }
             }
         });
     }
 
-    public interface OnClickListener{
+    public interface OnClickListener {
         void onClick(String txt);
+
         void onClose(CommonLanguageListDto.DataBean model);
     }
 }

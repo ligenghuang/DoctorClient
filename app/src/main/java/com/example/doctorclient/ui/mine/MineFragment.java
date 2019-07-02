@@ -152,12 +152,12 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                 jumpActivityNotFinish(mContext, MyPrescriptionActivity.class);
                 break;
             case R.id.ll_setting:
+                //todo 设置
                 if (!MySp.iSLoginLive(mContext)) {
                     //todo 判断是否登录
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
-                //todo 设置
                 jumpActivityNotFinish(mContext, SettingActivity.class);
                 break;
             case R.id.ll_feedback:
@@ -167,7 +167,6 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
-                //TODO 意见反馈
                 jumpActivityNotFinish(mContext, FeedbackActivity.class);
                 break;
             case R.id.ll_prescription_template:
@@ -210,7 +209,6 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
-
                 jumpActivityNotFinish(mContext, EvaluationActivity.class);
                 break;
             case R.id.ll_invitation:
@@ -220,7 +218,6 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
-
                 jumpActivityNotFinish(mContext, InvitationActivity.class);
                 break;
         }

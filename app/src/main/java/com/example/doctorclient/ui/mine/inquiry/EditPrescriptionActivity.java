@@ -194,7 +194,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
                 break;
             case R.id.tv_prescription_name:
                 //TODO 填写处方名称
-                ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10));
+                ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10),prescriptionNameTv.getText().toString());
                 modifyDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override
                     public void confirm(String txet) {

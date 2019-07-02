@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 可选 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+
     <application
         android:name=".util.config.MyApp"
         android:allowBackup="true"
