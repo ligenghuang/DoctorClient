@@ -314,15 +314,6 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
             @Override
             public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5,
                                        int i6, int i7) {
-                L.e("lgh_recycler","i  = "+i);
-                L.e("lgh_recycler","i1  = "+i1);
-                L.e("lgh_recycler","i2  = "+i2);
-                L.e("lgh_recycler","i3  = "+i3);
-                L.e("lgh_recycler","i4  = "+i4);
-                L.e("lgh_recycler","i5  = "+i5);
-                L.e("lgh_recycler","i6  = "+i6);
-                L.e("lgh_recycler","i7  = "+i7);
-                L.e("lgh_recycler","----------------------------------------------");
                 if (i3 < i7) {
                     recyclerView.postDelayed(new Runnable() {
                         @Override

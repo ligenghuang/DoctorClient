@@ -9,8 +9,17 @@ public class AddPrescribePost {
     private String askdrugheadid;
     private String askIuid;
     private String the_memo;
+    private String diagnosis;
     private List<String> theImg;
     private List<DrugBean> mycars;
+
+    public String getDiagnosis() {
+        return diagnosis == null ? "" : diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
 
     public String getType() {
         return type == null ? "" : type;

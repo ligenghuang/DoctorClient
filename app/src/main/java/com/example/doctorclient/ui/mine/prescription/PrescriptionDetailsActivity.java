@@ -84,6 +84,8 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
     TextView realPayTv;
     @BindView(R.id.tv_price)
     TextView priceTv;
+    @BindView(R.id.tv_diagnosis)
+    TextView diagnosisTv;
 
     String iuid;
     String drugIuid;
@@ -191,6 +193,7 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         realPayTv.setText(PriceUtils.formatPrice(dataBean.getPay_money()));
         payTypeTv.setText(dataBean.getPay_class());
         prescriptionDetailDrugAdapter.refresh(dataBean.getDrugMV());
+        diagnosisTv.setText(dataBean.getDiagnosis());
     }
 
     @Override

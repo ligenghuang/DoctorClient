@@ -8,7 +8,9 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -81,6 +83,10 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
     @BindView(R.id.f_title_tv)
     TextView titleTv;
 
+    @BindView(R.id.et_diagnostic_message)
+    EditText editText;
+    @BindView(R.id.tv_diagnostic_message_num)
+    TextView messageNumTv;
 
     @BindView(R.id.rv_drug)
     RecyclerView drugRv;
@@ -105,9 +111,10 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
     private ArrayList<ImageItem> selImageList = new ArrayList<>(); //当前选择的所有图片
     ArrayList<ImageItem> images = null;
     CustomLinearLayoutManager linearLayoutManager;
+
     @Override
     protected SelectPrescriptionDetailsAction2 initAction() {
-        return new SelectPrescriptionDetailsAction2(this,this);
+        return new SelectPrescriptionDetailsAction2(this, this);
     }
 
     @Override
@@ -152,22 +159,48 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
         initImagePicker();
         getPreInfo();
+        loadView();
         loadPicView();
+
     }
 
+    @Override
+    protected void loadView() {
+        super.loadView();
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    @OnClick({R.id.tv_submit,R.id.tv_add_drug})
-    void OnClick(View view){
-        switch (view.getId()){
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (TextUtils.isEmpty(editText.getText().toString())) {
+                    messageNumTv.setText("0/200");
+                } else {
+                    messageNumTv.setText(editText.getText().length() + "/200");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    @OnClick({R.id.tv_submit, R.id.tv_add_drug})
+    void OnClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_submit:
                 //TODO  提交数据
                 submit();
                 break;
             case R.id.tv_add_drug:
                 //TODO  添加药品
-                Intent intent = new Intent(mContext,SelectDrugsActivity.class);
-                intent.putExtra("isSelect",true);
-                startActivityForResult(intent,200);
+                Intent intent = new Intent(mContext, SelectDrugsActivity.class);
+                intent.putExtra("isSelect", true);
+                startActivityForResult(intent, 200);
                 break;
         }
     }
@@ -179,17 +212,18 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
         AddPrescribePost addPrescribePost = new AddPrescribePost();
         addPrescribePost.setAskIuid(MySp.getAskId(mContext));
         addPrescribePost.setAskdrugheadid(iuid);
+        addPrescribePost.setDiagnosis(editText.getText().toString());
         addPrescribePost.setThe_memo(noteEt.getText().toString());
         addPrescribePost.setTheImg(photoDtos);
         List<AddPrescribePost.DrugBean> beans = new ArrayList<>();
-        for (int i = 0; i <drugListAdapter.mList.size() ; i++) {
+        for (int i = 0; i < drugListAdapter.mList.size(); i++) {
             AddPrescribePost.DrugBean drugBean = new AddPrescribePost.DrugBean();
             PreInfoDto.DataBean.DrugMVBean dataBean = drugListAdapter.getAllData().get(i);
-            if (dataBean.getDrug_num() == 0){
+            if (dataBean.getDrug_num() == 0) {
                 showNormalToast(ResUtil.getString(R.string.edit_prescription_tip_15));
                 return;
             }
-            drugBean.setDrug_num(dataBean.getDrug_num()+"");
+            drugBean.setDrug_num(dataBean.getDrug_num() + "");
             drugBean.setDrugid(dataBean.getIUID());
             drugBean.setIUID(dataBean.getAskDrugId());
             drugBean.setUse_note(dataBean.getNum_note());
@@ -205,7 +239,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
      */
     @Override
     public void getPreInfo() {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.getPreInfo(iuid);
         }
@@ -213,6 +247,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
     /**
      * 获取处方详情成功
+     *
      * @param preInfoDto
      */
     @Override
@@ -220,26 +255,33 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
         loadDiss();
         drugListAdapter.refresh(preInfoDto.getData().getDrugMV());
         noteEt.setText(preInfoDto.getData().getThe_memo());
-        if (!TextUtils.isEmpty(preInfoDto.getData().getThe_memo())){
+        if (!TextUtils.isEmpty(preInfoDto.getData().getThe_memo())) {
             noteEt.setText(preInfoDto.getData().getThe_memo());
         }
 //        else if (!TextUtils.isEmpty(preInfoDto.getData().getDiagnosis())){
 //            noteEt.setText(preInfoDto.getData().getDiagnosis());
 //        }
-        else if (!TextUtils.isEmpty(preInfoDto.getData().getIll_note())){
+        else if (!TextUtils.isEmpty(preInfoDto.getData().getIll_note())) {
             noteEt.setText(preInfoDto.getData().getIll_note());
         }
         photoDtos.addAll(preInfoDto.getData().getAskdrug_img());
+        editText.setText(preInfoDto.getData().getDiagnosis());
+        if (TextUtils.isEmpty(editText.getText().toString())) {
+            messageNumTv.setText("0/200");
+        } else {
+            messageNumTv.setText(editText.getText().length() + "/200");
+        }
         loadPicView();
     }
 
     /**
      * 上传图片
+     *
      * @param str
      */
     @Override
     public void updataFileName(String str) {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.updatafileName(str);
         }
@@ -247,6 +289,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
     /**
      * 上传图片成功
+     *
      * @param str
      */
     @Override
@@ -258,11 +301,12 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
     /**
      * 提交添加处方
+     *
      * @param prescribePost
      */
     @Override
     public void AddPrescribe(AddPrescribePost prescribePost) {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDiss();
             baseAction.AddPrescribe(prescribePost);
         }
@@ -270,6 +314,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
     /**
      * 提交添加处方成功
+     *
      * @param generalDto
      */
     @Override
@@ -282,6 +327,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 
     /**
      * 失败
+     *
      * @param message
      * @param code
      */
@@ -298,7 +344,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
     public void onLigonError() {
         loadDiss();
         jumpActivity(mContext, LoginActivity.class);
-        ActivityStack.getInstance().exitIsNotHaveMain(MainActivity.class,LoginActivity.class);
+        ActivityStack.getInstance().exitIsNotHaveMain(MainActivity.class, LoginActivity.class);
     }
 
     @Override
@@ -468,7 +514,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
 ////                                    PicUtils.getCompressedImgPath(images.get(0).path, photoOption);
 //                                    //todo  请求接口 上传图片
 //                                    uploadAvatar(images.get(0).path);
-                                    L.e("lgh","images.get(0).path  = "+images.get(0).path);
+                                    L.e("lgh", "images.get(0).path  = " + images.get(0).path);
                                     updataFileName(images.get(0).path);
                                 } catch (Exception e) {
                                     loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
@@ -498,7 +544,7 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
                         try {
                             //todo  请求接口 上传图片
 //                            uploadAvatar(images.get(0).path);
-                            L.e("lgh","images.get(0).path  = "+images.get(0).path);
+                            L.e("lgh", "images.get(0).path  = " + images.get(0).path);
                             updataFileName(images.get(0).path);
                         } catch (Exception e) {
                             loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
@@ -513,11 +559,11 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
             if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
 
             }
-        }else if (resultCode == 200){
+        } else if (resultCode == 200) {
             List<PreInfoDto.DataBean.DrugMVBean> list = new ArrayList<>();
             List<DrugListDto.DataBean> dataBeans = (List<DrugListDto.DataBean>) data.getSerializableExtra("list");
-            L.e("lgh_list","dataBeans  = "+dataBeans.toString());
-            for (int i = 0; i <dataBeans.size() ; i++) {
+            L.e("lgh_list", "dataBeans  = " + dataBeans.toString());
+            for (int i = 0; i < dataBeans.size(); i++) {
                 PreInfoDto.DataBean.DrugMVBean dataBean = new PreInfoDto.DataBean.DrugMVBean();
                 DrugListDto.DataBean drugDto = dataBeans.get(i);
                 dataBean.setThe_img(drugDto.getThe_img());
@@ -526,11 +572,11 @@ public class SelectPrescriptionDetailsActivity2 extends UserBaseActivity<SelectP
                 dataBean.setName(drugDto.getName());
                 dataBean.setIUID(drugDto.getIUID());
                 list.add(dataBean);
-                L.e("lgh_list","dataBean  = "+dataBean.toString());
+                L.e("lgh_list", "dataBean  = " + dataBean.toString());
             }
             drugListAdapter.loadMore(list);
-            L.e("lgh_list","list  = "+list.toString());
-            L.e("lgh_list","drugListAdapter  = "+drugListAdapter.mList.toString());
+            L.e("lgh_list", "list  = " + list.toString());
+            L.e("lgh_list", "drugListAdapter  = " + drugListAdapter.mList.toString());
         }
 
     }

@@ -268,7 +268,7 @@ public class InquiryDetailDto {
         }
 
         public String getDiagnosis() {
-            return diagnosis;
+            return diagnosis == null ? "无" : diagnosis;
         }
 
         public void setDiagnosis(String diagnosis) {

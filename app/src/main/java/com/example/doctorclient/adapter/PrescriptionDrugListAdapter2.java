@@ -36,13 +36,8 @@ public class PrescriptionDrugListAdapter2 extends BaseRecyclerAdapter<PreInfoDto
         holder.setIsRecyclable(false);
         ImageView imageView = holder.itemView.findViewById(R.id.iv_item_drug_shop);
         String portrait = model.getThe_img();
-        if (portrait.indexOf("DOC") != -1) {
-            GlideUtil.setImage(context, WebUrlUtil.IMG_URL + portrait, imageView, 0);
-            L.e("lgh", WebUrlUtil.IMG_URL + portrait);
-        } else {
-            GlideUtil.setImage(context, WebUrlUtil.IMG_URL + "DOC/my" + portrait, imageView, 0);
-            L.e("lgh", WebUrlUtil.IMG_URL + "DOC/my" + portrait);
-        }
+        GlideUtil.setImage(context, WebUrlUtil.IMG_URL + portrait, imageView, R.drawable.ic_photo_size_select_actual_black);
+        L.e("lgh", WebUrlUtil.IMG_URL + portrait);
         holder.text(R.id.tv_item_drug_name, model.getName());
         holder.text(R.id.tv_item_drug_spec, model.getThe_spec());
         TextView drugNum = holder.itemView.findViewById(R.id.tv_item_drug_num);

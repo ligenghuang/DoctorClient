@@ -110,6 +110,7 @@ public class SelectPrescriptionDetailsAction extends BaseAction<SelectPrescripti
                 .addFormDataPart("the_memo", prescribePost.getThe_memo())
                 .addFormDataPart("theImg" ,theImg)
                 .addFormDataPart("mycars",mycars)
+                .addFormDataPart("diagnosis",prescribePost.getDiagnosis())
                 .build();
         post(WebUrlUtil.POST_ADDPRESCRIBE,false,service -> manager.runHttp(
                 service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApp.getContext()),requestBody,WebUrlUtil.POST_ADDPRESCRIBE)));

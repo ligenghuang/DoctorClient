@@ -81,6 +81,7 @@
     <string name="inquity_tip_33">选择处方</string>
     <string name="inquity_tip_34">新增处方</string>
     <string name="inquity_tip_35">共%0$s种药</string>
+    <string name="inquity_tip_36">诊断信息</string>
 
     <string name="select_drugs_title">选择药品</string>
     <string name="select_drugs_tip_1">根据医院、疾病搜索医生</string>

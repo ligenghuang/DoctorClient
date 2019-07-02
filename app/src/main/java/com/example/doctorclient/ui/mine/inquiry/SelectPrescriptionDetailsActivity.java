@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -80,6 +83,10 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
     @BindView(R.id.f_title_tv)
     TextView titleTv;
 
+    @BindView(R.id.et_diagnostic_message)
+    EditText editText;
+    @BindView(R.id.tv_diagnostic_message_num)
+    TextView messageNumTv;
 
     @BindView(R.id.rv_drug)
     RecyclerView drugRv;
@@ -155,6 +162,26 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
     @Override
     protected void loadView() {
         super.loadView();
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (TextUtils.isEmpty(editText.getText().toString())) {
+                    messageNumTv.setText("0/200");
+                } else {
+                    messageNumTv.setText(editText.getText().length() + "/200");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @OnClick({R.id.tv_submit,R.id.tv_add_drug})
@@ -180,6 +207,7 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
         AddPrescribePost addPrescribePost = new AddPrescribePost();
         addPrescribePost.setAskIuid(MySp.getAskId(mContext));
         addPrescribePost.setAskdrugheadid(iuid);
+        addPrescribePost.setDiagnosis(editText.getText().toString());
         addPrescribePost.setThe_memo(noteEt.getText().toString());
         addPrescribePost.setTheImg(photoDtos);
         List<AddPrescribePost.DrugBean> beans = new ArrayList<>();

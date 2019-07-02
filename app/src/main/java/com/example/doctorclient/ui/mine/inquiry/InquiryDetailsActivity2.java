@@ -86,6 +86,8 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     RecyclerView prescriptionRv;
     @BindView(R.id.tv_submit)
     TextView mTvSubmit;
+    @BindView(R.id.tv_inquity_diagnosis)
+    TextView diagnosisTv;
 
     IllessImgAdapter illessImgAdapter;
     PhotographPrescriptionAdapter photographPrescriptionAdapter;
@@ -139,7 +141,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
         iuid = getIntent().getStringExtra("iuid");
         isSelect = getIntent().getBooleanExtra("isSelect", false);
         isAccepts = getIntent().getBooleanExtra("isAccepts", false);
-        mTvSubmit.setText(ResUtil.getString(isAccepts?R.string.inquity_tip_6:R.string.inquity_tip_27));
+        mTvSubmit.setText(ResUtil.getString(isAccepts ? R.string.inquity_tip_6 : R.string.inquity_tip_27));
         illessImgAdapter = new IllessImgAdapter(mContext);
         imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
         imgIllnessRv.setAdapter(illessImgAdapter);
@@ -157,9 +159,9 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_submit:
-                if (isSelect){
+                if (isSelect) {
                     finish();
-                }else {
+                } else {
                     Intent intent = new Intent(mContext, MessageDetailActivity.class);
                     intent.putExtra("touserId", touserId);
                     intent.putExtra("askId", askId);
@@ -218,7 +220,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
         allergyTv.setText(patientMVBean.getAllergy_note());
         familyTv.setText(patientMVBean.getMed_family());
         medicalHistoryTv.setText(patientMVBean.getMed_history());
-
+        diagnosisTv.setText(dataBean.getDiagnosis());
         illnessTv.setText(dataBean.getIll_note());
         illessImgAdapter.refresh(dataBean.getIll_img());
     }
