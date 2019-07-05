@@ -9,7 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/CallKit" />
+            <option value="$PROJECT_DIR$/CallLib" />
             <option value="$PROJECT_DIR$/HuangLib" />
+            <option value="$PROJECT_DIR$/IMKit" />
+            <option value="$PROJECT_DIR$/IMLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/imagepickerLib" />
           </set>

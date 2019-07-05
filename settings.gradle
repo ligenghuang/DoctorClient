@@ -1,1 +1,1 @@
-include ':app', ':HuangLib', ':imagepickerLib'
+include ':app', ':HuangLib', ':imagepickerLib', ':IMLib', ':IMKit', ':CallLib', ':CallKit'
