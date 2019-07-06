@@ -258,4 +258,15 @@ public class DynamicTimeFormat extends SimpleDateFormat {
         }
     }
 
+    /**
+     * 获取今天日期时间戳
+     *
+     * @return
+     */
+    public static String getTimestamp () {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.getTime().getTime()+"";
+    }
+
+
 }

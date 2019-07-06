@@ -37,6 +37,8 @@ public class SpecialtyActivity extends UserBaseActivity {
     @BindView(R.id.et_specialty)
     EditText specialtyEt;
 
+    int type=0;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_specialty;
@@ -60,7 +62,7 @@ public class SpecialtyActivity extends UserBaseActivity {
                 .navigationBarWithKitkatEnable(false)
                 .init();
         toolbar.setNavigationOnClickListener(view -> finish());
-        titleTv.setText(ResUtil.getString(R.string.user_info_tip_6));
+
     }
 
     @Override
@@ -68,7 +70,9 @@ public class SpecialtyActivity extends UserBaseActivity {
         super.init();
         mContext = this;
         mActicity = this;
-
+        type = getIntent().getIntExtra("type",0);
+        titleTv.setText(ResUtil.getString(type == 0?R.string.user_info_tip_6:R.string.user_info_tip_29));
+        specialtyEt.setHint(ResUtil.getString(type == 0?R.string.user_info_tip_26:R.string.user_info_tip_30));
         specialtyEt.setText(getIntent().getStringExtra("specialty"));
     }
 
@@ -82,6 +86,7 @@ public class SpecialtyActivity extends UserBaseActivity {
                 }
                 Intent intent = new Intent();
                 intent.putExtra("specialty",specialtyEt.getText().toString());
+                intent.putExtra("type",type);
                 setResult(200,intent);
                 finish();
                 break;

@@ -216,4 +216,90 @@ public class MySp extends MySharedPreferencesUtil {
         SharedPreferences sp = getProjectSP(context);
         return sp.getString("EditPrescriptionDto", null);
     }
+
+    /**
+     * 融云userID
+     * @param context
+     * @param userId
+     * @return
+     */
+    public static boolean setRoogUserId(Context context,String userId){
+        SharedPreferences sp = getProjectSP(context);
+        SharedPreferences.Editor editor = sp.edit();
+        return editor.putString("DoctorRoogUserId", userId).commit();
+    }
+
+    public static String getRoogUserId(Context context){
+        SharedPreferences sp = getProjectSP(context);
+        return sp.getString("DoctorRoogUserId", "");
+    }
+
+
+    /**
+     * 融云user名字
+     * @param context
+     * @param userId
+     * @return
+     */
+    public static boolean setRoogUserName(Context context,String userId){
+        SharedPreferences sp = getProjectSP(context);
+        SharedPreferences.Editor editor = sp.edit();
+        return editor.putString("DoctorRoogUserName", userId).commit();
+    }
+
+    public static String getRoogUserName(Context context){
+        SharedPreferences sp = getProjectSP(context);
+        return sp.getString("DoctorRoogUserName", "");
+    }
+
+    /**
+     * 融云user头像
+     * @param context
+     * @param userId
+     * @return
+     */
+    public static boolean setRoogUserImg(Context context,String userId){
+        SharedPreferences sp = getProjectSP(context);
+        SharedPreferences.Editor editor = sp.edit();
+        return editor.putString("DoctorRoogUserImg", userId).commit();
+    }
+
+    public static String getRoogUserImg(Context context){
+        SharedPreferences sp = getProjectSP(context);
+        return sp.getString("DoctorRoogUserImg", "");
+    }
+
+    /**
+     * 融云登录userid
+     * @param context
+     * @param userId
+     * @return
+     */
+    public static boolean setRoogLoginUserId(Context context,String userId){
+        SharedPreferences sp = getProjectSP(context);
+        SharedPreferences.Editor editor = sp.edit();
+        return editor.putString("DoctorRoogLoginUserId", userId).commit();
+    }
+
+    public static String getRoogLoginUserId(Context context){
+        SharedPreferences sp = getProjectSP(context);
+        return sp.getString("DoctorRoogLoginUserId", "");
+    }
+
+    /**
+     * 融云Token
+     * @param context
+     * @param userId
+     * @return
+     */
+    public static boolean setRoogToken(Context context,String userId){
+        SharedPreferences sp = getProjectSP(context);
+        SharedPreferences.Editor editor = sp.edit();
+        return editor.putString("DoctorRoogToken", userId).commit();
+    }
+
+    public static String getRoogToken(Context context){
+        SharedPreferences sp = getProjectSP(context);
+        return sp.getString("DoctorRoogToken", "");
+    }
 }

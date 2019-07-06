@@ -71,6 +71,11 @@
         <meta-data
             android:name="PGYER_APPID"
             android:value="b992d09cc6d6dc9c66ca03fbe68f9901"></meta-data>
+
+        <!--融云appkey-->
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="c9kqb3rdc4wxj" />
     </application>
 
 </manifest>

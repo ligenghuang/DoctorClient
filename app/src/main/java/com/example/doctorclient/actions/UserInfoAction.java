@@ -78,7 +78,8 @@ public class UserInfoAction extends BaseAction<UserInfoView> {
                 .addFormDataPart("departName",post.getDepartName())//todo 科室
                 .addFormDataPart("hospital",post.getHospital())//todo 在职医院
                 .addFormDataPart("isPrescribe",post.getIsPrescribe()+"") //todo 是否开处方
-                .addFormDataPart("phone",post.getPhone());
+                .addFormDataPart("phone",post.getPhone())
+                .addFormDataPart("the_note",post.getThe_note());
         //todo 执业证书
         if (!TextUtils.isEmpty(post.getFile())){
             File file = new File(post.getFile());

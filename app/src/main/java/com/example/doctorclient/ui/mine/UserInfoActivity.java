@@ -56,10 +56,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
-* 个人信息
-* @author lgh
-* created at 2019/5/16 0016 10:22
-*/
+ * 个人信息
+ *
+ * @author lgh
+ * created at 2019/5/16 0016 10:22
+ */
 public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implements UserInfoView {
 
     @BindView(R.id.top_view)
@@ -95,6 +96,8 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     LinearLayout userCertificateLl;
     @BindView(R.id.iv_user_certificate)
     ImageView userCertificateIv;
+    @BindView(R.id.tv_user_note)
+    TextView userNoteTv;
 
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
@@ -111,47 +114,51 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     /**
      * 头像
      */
-    private String portrait="";
+    private String portrait = "";
     /**
      * 姓名
      */
-    private String doctorName="";
+    private String doctorName = "";
     /**
      * 性别
      */
-    private String sex="";
+    private String sex = "";
     /**
      * 从业时间
      */
-    private String workingTime="";
+    private String workingTime = "";
     /**
      * 职位
      */
-    private String jobs="";
+    private String jobs = "";
     /**
      * 特长
      */
-    private String specialty="";
+    private String specialty = "";
     /**
      * 科室
      */
-    private String department="";
+    private String department = "";
     /**
      * 在职医院
      */
-    private String hospital="";
+    private String hospital = "";
     /**
      * 开处方
      */
-    private int prescription=0;
+    private int prescription = 0;
     /**
      * 手机号码
      */
-    private String mobile="";
+    private String mobile = "";
     /**
      * 执业证书
      */
-    private String certificate="";
+    private String certificate = "";
+    /**
+     * 医生简介
+     */
+    private String the_note = "";
 
     List<String> sexLists = new ArrayList<>();
 
@@ -159,9 +166,10 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     public int intiLayout() {
         return R.layout.activity_user_info;
     }
+
     @Override
     protected UserInfoAction initAction() {
-        return new UserInfoAction(this,this);
+        return new UserInfoAction(this, this);
     }
 
     @Override
@@ -198,11 +206,12 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     }
 
 
-    @OnClick({R.id.rl_user_portrait,R.id.rl_user_name,R.id.rl_user_sex,
-            R.id.rl_user_working_time,R.id.rl_user_jobs,R.id.rl_user_specialty,
-    R.id.rl_user_department,R.id.rl_user_hospital,R.id.rl_user_prescription,R.id.rl_user_mobile,R.id.rl_user_certificate,R.id.tv_submit})
-    void OnClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.rl_user_portrait, R.id.rl_user_name, R.id.rl_user_sex,
+            R.id.rl_user_working_time, R.id.rl_user_jobs, R.id.rl_user_specialty,
+            R.id.rl_user_department, R.id.rl_user_hospital, R.id.rl_user_prescription, R.id.rl_user_mobile, R.id.rl_user_certificate, R.id.tv_submit,
+            R.id.rl_user_note})
+    void OnClick(View view) {
+        switch (view.getId()) {
             case R.id.rl_user_portrait:
                 //todo 头像
                 isPortrait = true;
@@ -210,13 +219,13 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                 break;
             case R.id.rl_user_name:
                 //todo 姓名
-                ModifyDialog modifyDialog = new ModifyDialog(mContext,R.style.MY_AlertDialog,ResUtil.getString(R.string.user_info_tip_17),userNameTv.getText().toString());
+                ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.user_info_tip_17), userNameTv.getText().toString());
                 modifyDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override
                     public void confirm(String txet) {
-                        if (TextUtils.isEmpty(txet)){
+                        if (TextUtils.isEmpty(txet)) {
                             showNormalToast(ResUtil.getString(R.string.user_info_tip_17));
-                        }else {
+                        } else {
                             doctorName = txet;
                             userNameTv.setText(doctorName);
                             hideInput();
@@ -228,7 +237,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                 break;
             case R.id.rl_user_sex:
                 //todo 性别
-                new TimePickerBuilder(mContext).setSexPicker(sexLists,"选择性别",new TimePickerBuilder.SexPickerCustomListener() {
+                new TimePickerBuilder(mContext).setSexPicker(sexLists, "选择性别", new TimePickerBuilder.SexPickerCustomListener() {
                     @Override
                     public void sexSelect(String sexStr) {
                         sex = sexStr;
@@ -249,13 +258,13 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                 break;
             case R.id.rl_user_jobs:
                 //todo 职位
-                ModifyDialog modifyJobDialog = new ModifyDialog(mContext,R.style.MY_AlertDialog,ResUtil.getString(R.string.user_info_tip_18),userJobsTv.getText().toString());
+                ModifyDialog modifyJobDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.user_info_tip_18), userJobsTv.getText().toString());
                 modifyJobDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override
                     public void confirm(String txet) {
-                        if (TextUtils.isEmpty(txet)){
+                        if (TextUtils.isEmpty(txet)) {
                             showNormalToast(ResUtil.getString(R.string.user_info_tip_18));
-                        }else {
+                        } else {
                             jobs = txet;
                             userJobsTv.setText(jobs);
                             hideInput();
@@ -267,9 +276,17 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                 break;
             case R.id.rl_user_specialty:
                 //todo 特长
-                Intent intent = new Intent(mContext,SpecialtyActivity.class);
-                intent.putExtra("specialty",specialty);
-                startActivityForResult(intent,200);
+                Intent intent = new Intent(mContext, SpecialtyActivity.class);
+                intent.putExtra("specialty", specialty);
+                intent.putExtra("type", 0);
+                startActivityForResult(intent, 200);
+                break;
+            case R.id.rl_user_note:
+                //todo 医生简介
+                Intent intent2 = new Intent(mContext, SpecialtyActivity.class);
+                intent2.putExtra("specialty", the_note);
+                intent2.putExtra("type", 1);
+                startActivityForResult(intent2, 200);
                 break;
             case R.id.rl_user_department:
                 //todo 科室
@@ -282,10 +299,10 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                 break;
             case R.id.rl_user_prescription:
                 //todo 开处方
-                PrescriptionDialog prescriptionDialog = new PrescriptionDialog(mContext,R.style.MY_AlertDialog);
+                PrescriptionDialog prescriptionDialog = new PrescriptionDialog(mContext, R.style.MY_AlertDialog);
                 prescriptionDialog.setOnClickListener(new PrescriptionDialog.OnClickListener() {
                     @Override
-                    public void isPrescription(int type,String text) {
+                    public void isPrescription(int type, String text) {
                         prescription = type;
                         userPrescriptionTv.setText(text);
                         prescriptionDialog.dismiss();
@@ -316,7 +333,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
      */
     @Override
     public void getDoctorsInfo() {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.getDoctorsInfo();
         }
@@ -333,12 +350,12 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
         doctorName = dataBean.getName();
         workingTime = DynamicTimeFormat.LongToString3(dataBean.getPracticing_time_stamp());
         userWorkingTimeTv.setText(workingTime);
-        if (dataBean.getThe_img().indexOf("DOC") != -1){
-            GlideUtil.setImageCircle(mContext, WebUrlUtil.IMG_URL+dataBean.getThe_img(),userPortaitIv,R.drawable.icon_placeholder);
-            L.e("lgh",WebUrlUtil.IMG_URL+dataBean.getThe_img());
-        }else {
-            GlideUtil.setImageCircle(mContext,WebUrlUtil.IMG_URL+"DOC/my"+dataBean.getThe_img(),userPortaitIv,R.drawable.icon_placeholder);
-            L.e("lgh",WebUrlUtil.IMG_URL+"DOC/my"+dataBean.getThe_img());
+        if (dataBean.getThe_img().indexOf("DOC") != -1) {
+            GlideUtil.setImageCircle(mContext, WebUrlUtil.IMG_URL + dataBean.getThe_img(), userPortaitIv, R.drawable.icon_placeholder);
+            L.e("lgh", WebUrlUtil.IMG_URL + dataBean.getThe_img());
+        } else {
+            GlideUtil.setImageCircle(mContext, WebUrlUtil.IMG_URL + "DOC/my" + dataBean.getThe_img(), userPortaitIv, R.drawable.icon_placeholder);
+            L.e("lgh", WebUrlUtil.IMG_URL + "DOC/my" + dataBean.getThe_img());
         }
         /**
          * 性别
@@ -353,7 +370,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
         /**
          * 特长
          */
-        userSpecialtyTv.setText(ResUtil.getString(!dataBean.getThe_spec().isEmpty()?R.string.user_info_tip_24:R.string.user_info_tip_25));
+        userSpecialtyTv.setText(ResUtil.getString(!dataBean.getThe_spec().isEmpty() ? R.string.user_info_tip_24 : R.string.user_info_tip_25));
         specialty = dataBean.getThe_spec();
         /**
          * 科室
@@ -368,20 +385,25 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
         /**
          * 是否可开处方药
          */
-        prescription =dataBean.getIsPrescribe();
-        userPrescriptionTv.setText(ResUtil.getString(dataBean.getIsPrescribe() == 0?R.string.user_info_tip_13:R.string.user_info_tip_14));
+        prescription = dataBean.getIsPrescribe();
+        userPrescriptionTv.setText(ResUtil.getString(dataBean.getIsPrescribe() == 0 ? R.string.user_info_tip_13 : R.string.user_info_tip_14));
         /**
          * 手机号码
          */
         userMobileTv.setText(dataBean.getPhone());
         mobile = dataBean.getPhone();
         /**
+         * 医生简介
+         */
+        userNoteTv.setText(ResUtil.getString(!dataBean.getThe_note().isEmpty() ? R.string.user_info_tip_24 : R.string.user_info_tip_25));
+        the_note = dataBean.getThe_note();
+        /**
          * 是否上传执业证书
          */
-        if (dataBean.getPracticing_certificate().isEmpty()){
+        if (dataBean.getPracticing_certificate().isEmpty()) {
             userCertificateLl.setVisibility(View.GONE);
             userCertificateTv.setText(ResUtil.getString(R.string.user_info_tip_15));
-        }else {
+        } else {
             userCertificateLl.setVisibility(View.GONE);
             userCertificateTv.setText(ResUtil.getString(R.string.user_info_tip_16));
 //            GlideUtil.setImage(mContext,WebUrlUtil.IMG_URL+dataBean.getPracticing_certificate(),userCertificateIv,0);
@@ -395,7 +417,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
      */
     @Override
     public void getFindDepartid() {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.getFindDepartid();
         }
@@ -403,16 +425,19 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
 
     /**
      * 获取科室成功
+     *
      * @param departidDto
      */
     @Override
     public void getFindDepartidSuccessful(DepartidDto departidDto) {
         loadDiss();
         List<String> list = new ArrayList<>();
-        for (int i = 0; i <departidDto.getData().size() ; i++) {
+        for (int i = 0; i < departidDto.getData().size(); i++) {
+//            if(!departidDto.getData().get(i).getParentid().isEmpty()){
             list.add(departidDto.getData().get(i).getName());
+//            }
         }
-        new TimePickerBuilder(mContext).setSexPicker(list, "选择科室",new TimePickerBuilder.SexPickerCustomListener() {
+        new TimePickerBuilder(mContext).setSexPicker(list, "选择科室", new TimePickerBuilder.SexPickerCustomListener() {
             @Override
             public void sexSelect(String sexStr) {
                 department = sexStr;
@@ -438,7 +463,8 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
         post.setSex(sex);
         post.setThe_level(jobs);
         post.setThe_spec(specialty);
-        if (CheckNetwork.checkNetwork2(mContext)){
+        post.setThe_note(the_note);
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.seveInfo(post);
         }
@@ -446,25 +472,26 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
 
     /**
      * 保存医生个人信息成功
+     *
      * @param generalDto
      */
     @Override
     public void sevaDoctorsInfoSuccessful(GeneralDto generalDto) {
         loadDiss();
 
-        if (generalDto.getCode() == 1){
+        if (generalDto.getCode() == 1) {
             showNormalToast(generalDto.getMsg());
             finish();
-        }else if (generalDto.getCode() == 0){
+        } else if (generalDto.getCode() == 0) {
             showNormalToast("您未修改信息，提交失败");
-        }else {
+        } else {
             showNormalToast(generalDto.getMsg());
         }
     }
 
     @Override
     public void getHospitalName() {
-        if (CheckNetwork.checkNetwork2(mContext)){
+        if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
             baseAction.getHospitalName();
         }
@@ -473,7 +500,7 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     @Override
     public void getHospitalNameSuccessful(HospitalListDto hospitalListDto) {
         loadDiss();
-        new TimePickerBuilder(mContext).setSexPicker(hospitalListDto.getData(), ResUtil.getString(R.string.user_info_tip_28),new TimePickerBuilder.SexPickerCustomListener() {
+        new TimePickerBuilder(mContext).setSexPicker(hospitalListDto.getData(), ResUtil.getString(R.string.user_info_tip_28), new TimePickerBuilder.SexPickerCustomListener() {
             @Override
             public void sexSelect(String sexStr) {
                 hospital = sexStr;
@@ -485,18 +512,19 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
 
     /**
      * 失败
+     *
      * @param message
      * @param code
      */
     @Override
     public void onError(String message, int code) {
         loadDiss();
-      if (code == -2){
-          showNormalToast(message);
-          jumpActivity(mContext, LoginActivity.class);
-      }else {
-          showNormalToast(message);
-      }
+        if (code == -2) {
+            showNormalToast(message);
+            jumpActivity(mContext, LoginActivity.class);
+        } else {
+            showNormalToast(message);
+        }
     }
 
     @Override
@@ -615,13 +643,13 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
 ////                                    PicUtils.getCompressedImgPath(images.get(0).path, photoOption);
 //                                    //todo  请求接口 修改头像
 //                                    uploadAvatar(images.get(0).path);
-                                    L.e("lgh","images.get(0).path  = "+images.get(0).path);
-                                    if (isPortrait){
+                                    L.e("lgh", "images.get(0).path  = " + images.get(0).path);
+                                    if (isPortrait) {
                                         portrait = images.get(0).path;
-                                        GlideUtil.setImageCircle(mContext,images.get(0).path,userPortaitIv,R.drawable.icon_placeholder);
-                                    }else {
+                                        GlideUtil.setImageCircle(mContext, images.get(0).path, userPortaitIv, R.drawable.icon_placeholder);
+                                    } else {
                                         certificate = images.get(0).path;
-                                        GlideUtil.setImage(mContext,images.get(0).path,userCertificateIv,R.drawable.icon_placeholder);
+                                        GlideUtil.setImage(mContext, images.get(0).path, userCertificateIv, R.drawable.icon_placeholder);
                                         userCertificateLl.setVisibility(View.VISIBLE);
                                     }
 
@@ -654,13 +682,13 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
                         try {
                             //todo  请求接口 修改头像
 //                            uploadAvatar(images.get(0).path);
-                            L.e("lgh","images.get(0).path  = "+images.get(0).path);
-                            if (isPortrait){
+                            L.e("lgh", "images.get(0).path  = " + images.get(0).path);
+                            if (isPortrait) {
                                 portrait = images.get(0).path;
-                                GlideUtil.setImageCircle(mContext,images.get(0).path,userPortaitIv,R.drawable.icon_placeholder);
-                            }else {
+                                GlideUtil.setImageCircle(mContext, images.get(0).path, userPortaitIv, R.drawable.icon_placeholder);
+                            } else {
                                 certificate = images.get(0).path;
-                                GlideUtil.setImage(mContext,images.get(0).path,userCertificateIv,R.drawable.icon_placeholder);
+                                GlideUtil.setImage(mContext, images.get(0).path, userCertificateIv, R.drawable.icon_placeholder);
                                 userCertificateLl.setVisibility(View.VISIBLE);
                             }
                         } catch (Exception e) {
@@ -676,17 +704,25 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
             if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
 
             }
-        }else if (resultCode == 200){
-            if (data != null){
-                specialty = data.getStringExtra("specialty");
-                userSpecialtyTv.setText(specialty);
+        } else if (resultCode == 200) {
+            if (data != null) {
+               int type = data.getIntExtra("type",0);
+               switch (type){
+                   case 0:
+                       specialty = data.getStringExtra("specialty");
+                       userSpecialtyTv.setText(specialty);
+                       break;
+                   case 1:
+                       the_note = data.getStringExtra("specialty");
+                       userNoteTv.setText(the_note);
+                       break;
+               }
             }
         }
 
     }
 
     /**********************************修改头像 end*********************************************/
-
 
 
 }

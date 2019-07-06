@@ -144,11 +144,14 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
     @Override
     public void LoginSuccessful(LoginDto generalDto) {
         loadDiss();
-       if (generalDto.getCode() != 1){
-           showNormalToast(generalDto.getMsg());
-           return;
-       }
-        MySp.setToken(mContext,generalDto.getData());
+        if (generalDto.getCode() != 1) {
+            showNormalToast(generalDto.getMsg());
+            return;
+        }
+        MySp.setToken(mContext, generalDto.getData().getIuid());
+        MySp.setRoogUserId(mContext, generalDto.getData().getIuid());
+        MySp.setRoogUserImg(mContext,generalDto.getData().getNiceImg());
+        MySp.setRoogUserName(mContext,generalDto.getData().getNicename());
         finish();
     }
 

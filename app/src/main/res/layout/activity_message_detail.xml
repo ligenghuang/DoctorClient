@@ -286,9 +286,9 @@
                                     android:id="@+id/tv_photo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="@dimen/dp_10"
                                     android:drawableTop="@drawable/photo_album"
                                     android:drawablePadding="5dp"
+                                    android:layout_weight="1"
                                     android:gravity="center_horizontal"
                                     android:text="@string/message_tip_9" />
 
@@ -299,7 +299,29 @@
                                     android:drawableTop="@drawable/common_expression"
                                     android:drawablePadding="5dp"
                                     android:gravity="center_horizontal"
+                                    android:layout_weight="1"
                                     android:text="@string/message_tip_10" />
+
+                                <TextView
+                                    android:id="@+id/tv_audio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@drawable/icon_audio"
+                                    android:drawablePadding="5dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:text="@string/message_tip_17" />
+
+                                <TextView
+                                    android:id="@+id/tv_video"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@drawable/icon_video"
+                                    android:drawablePadding="5dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:text="@string/message_tip_16" />
+
 
                             </LinearLayout>
 

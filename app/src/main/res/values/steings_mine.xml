@@ -13,7 +13,7 @@
 
 
     <string name="user_info_tip_title">个人认证资料</string>
-    <string name="user_info_tip_1">工作头像</string>
+    <string name="user_info_tip_1">头像</string>
     <string name="user_info_tip_2">姓名</string>
     <string name="user_info_tip_3">性别</string>
     <string name="user_info_tip_4">从业时间</string>
@@ -41,6 +41,8 @@
     <string name="user_info_tip_26">请填写你的特长</string>
     <string name="user_info_tip_27">内容不能为空</string>
     <string name="user_info_tip_28">选择所属医院</string>
+    <string name="user_info_tip_29">简介</string>
+    <string name="user_info_tip_30">请填写你的简介</string>
 
     <string name="income_tip_1">收入金额(元)</string>
     <string name="income_tip_2">提现</string>
@@ -81,7 +83,7 @@
     <string name="inquity_tip_33">选择处方</string>
     <string name="inquity_tip_34">新增处方</string>
     <string name="inquity_tip_35">共%0$s种药</string>
-    <string name="inquity_tip_36">诊断信息</string>
+    <string name="inquity_tip_36">诊断信息:</string>
 
     <string name="select_drugs_title">选择药品</string>
     <string name="select_drugs_tip_1">根据医院、疾病搜索医生</string>

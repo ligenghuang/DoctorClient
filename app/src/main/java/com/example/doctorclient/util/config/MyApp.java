@@ -17,6 +17,10 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import io.rong.imkit.RongContext;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+
 
 /**
 *
@@ -73,6 +77,12 @@ public class MyApp extends MyApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        RongIMClient.init(this);
+        RongContext.init(this);
+        RongIM.init(this);
+
+
         PgyCrashManager.register(this);
     }
 }

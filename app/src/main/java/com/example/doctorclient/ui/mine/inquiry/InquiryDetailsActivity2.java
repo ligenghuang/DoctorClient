@@ -159,6 +159,7 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_submit:
+                //TODO 查看聊天记录
                 if (isSelect) {
                     finish();
                 } else {
@@ -167,7 +168,6 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
                     intent.putExtra("askId", askId);
                     startActivity(intent);
                 }
-
                 break;
         }
     }

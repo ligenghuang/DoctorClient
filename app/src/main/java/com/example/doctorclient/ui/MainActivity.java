@@ -1,7 +1,10 @@
 package com.example.doctorclient.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,18 +12,25 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.BaseAction;
 import com.example.doctorclient.event.MessageDto;
+import com.example.doctorclient.event.RongUserInfoDto;
+import com.example.doctorclient.event.RoogIMDto;
 import com.example.doctorclient.event.SendMessageDto;
+import com.example.doctorclient.event.UserInfoDto;
 import com.example.doctorclient.event.post.SendMessagePost;
 import com.example.doctorclient.net.WebUrlUtil;
 import com.example.doctorclient.ui.login.LoginActivity;
 import com.example.doctorclient.ui.message.MessageFragment;
 import com.example.doctorclient.ui.mine.MineFragment;
 import com.example.doctorclient.ui.physicianvisits.PhysicianvisitsFragment;
+import com.example.doctorclient.util.Constanst;
+import com.example.doctorclient.util.Utilt;
 import com.example.doctorclient.util.base.UserBaseActivity;
 import com.example.doctorclient.util.cusview.NotificationHelper;
+import com.example.doctorclient.util.data.DynamicTimeFormat;
 import com.example.doctorclient.util.data.MySp;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,6 +41,8 @@ import com.lgh.huanglib.util.base.ActivityStack;
 import com.lgh.huanglib.util.base.MyFragmentPagerAdapter;
 import com.lgh.huanglib.util.cusview.CustomViewPager;
 import com.pgyersdk.feedback.PgyFeedbackShakeManager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -44,6 +56,14 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnTouch;
+import io.rong.callkit.RongCallAction;
+import io.rong.callkit.SingleCallActivity;
+import io.rong.calllib.IRongReceivedCallListener;
+import io.rong.calllib.RongCallClient;
+import io.rong.calllib.RongCallCommon;
+import io.rong.calllib.RongCallSession;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 
 import android.os.Process;
 import android.widget.Toast;
@@ -498,6 +518,7 @@ public class MainActivity extends UserBaseActivity {
         super.onResume();
         if (isFirst && MySp.iSLoginLive(mContext)) {
             loginSocket();
+            loginRoogIM(MySp.getRoogUserId(mContext), MySp.getRoogUserName(mContext), MySp.getRoogUserImg(mContext));
         }
         if (!MySp.iSLoginLive(mContext)){
           if (client != null){
@@ -522,5 +543,162 @@ public class MainActivity extends UserBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable);
+    }
+
+
+
+    private void loginRoogIM(String userId, String name, String portraitUri) {
+        int rand = Utilt.getRandom();
+        String timestamp = DynamicTimeFormat.getTimestamp();
+        String signature = Utilt.shaEncrypt(Constanst.appSecret + rand + timestamp);
+        OkHttpUtils.post().url("http://api-cn.ronghub.com/user/getToken.json")
+                .addHeader("App-Key", Constanst.appkey)
+                .addHeader("Nonce", rand + "")
+                .addHeader("Timestamp", timestamp)
+                .addHeader("Signature", signature)
+                .addParams("userId", userId)
+                .addParams("name", name)
+                .addParams("portraitUri", portraitUri)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(okhttp3.Call call, Exception e, int id) {
+                        L.d("lgh_userId", "请求错误.." + e.toString());
+                        L.d("lgh_userId", "请求错误.." + call.toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().url().toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        L.d("response:" + response);
+                        RoogIMDto roogIMDto = JSON.parseObject(response, RoogIMDto.class);
+                        if (roogIMDto.getCode() == 200) {
+                            L.d("lgh_userId", "成功....." + roogIMDto.toString());
+//                            loginlistener.onSuccess(accessTokenEntity);
+                            connect(roogIMDto.getToken());
+                            MySp.setRoogToken(mContext, roogIMDto.getToken());
+                        } else {
+                            L.d("lgh_userId", "获取失败");
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 连接融云服务器
+     *
+     * @param token
+     */
+    private void connect(String token) {
+        RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
+
+            /**
+             * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+             *                            2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
+             */
+            @Override
+            public void onTokenIncorrect() {
+
+            }
+
+            /**
+             * 连接融云成功
+             * @param userid 当前 token 对应的用户 id
+             */
+            @Override
+            public void onSuccess(String userid) {
+                L.e("lgh_userId", "onSuccess  userId  = " + userid);
+                MySp.setRoogLoginUserId(mContext, userid);
+                setListener();
+                RongCallClient.getInstance().setVideoProfile(RongCallCommon.CallVideoProfile.VIDEO_PROFILE_720P);
+                RongCallClient.getInstance().setEnableBeauty(false);
+//                finish();
+            }
+
+            /**
+             * 连接融云失败
+             * @param errorCode 错误码，可到官网 查看错误码对应的注释
+             */
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                L.e("lgh_userId", "onError  errorCode  = " + errorCode);
+            }
+        });
+    }
+
+    private void setListener() {
+        RongCallClient.setReceivedCallListener(new IRongReceivedCallListener() {
+            /**
+             * 来电回调
+             * @param callSession 通话实体
+             */
+            @Override
+            public void onReceivedCall(RongCallSession callSession) {
+                //accept or hangup the call
+                L.e("RongRTCVideoActivity", "callSession  = " + callSession.getCallId());
+                L.e("RongRTCVideoActivity", "callSession  = " + callSession.getCallerUserId());
+                L.e("RongRTCVideoActivity", "callSession  = " + callSession.getMediaType().name());
+                L.e("RongRTCVideoActivity", "callSession  = " + callSession.getInviterUserId());
+                L.e("RongRTCVideoActivity", "callSession  = " + callSession.getSelfUserId());
+//               Intent intent = new Intent(mContext, SingleCallActivity.class);
+//               intent.putExtra("checkPermissions",true);
+//               intent.putExtra("callAction", RongCallAction.ACTION_INCOMING_CALL.getName());
+//               intent.putExtra("callSession",(Parcelable) callSession);
+                setCallVideo(callSession);
+            }
+
+            /**
+             * targetSDKVersion>＝23时检查权限的回调。当targetSDKVersion<23的时候不需要实现。
+             * 在这个回调里用户需要使用Android6.0新增的动态权限分配接口requestCallPermissions通知用户授权，
+             * 然后在onRequestPermissionResult回调里根据用户授权或者不授权分别回调
+             * RongCallClient.getInstance().onPermissionGranted()和
+             * RongCallClient.getInstance().onPermissionDenied()来通知CallLib。
+             * 其中audio call需要获取Manifest.permission.RECORD_AUDIO权限；
+             * video call需要获取Manifest.permission.RECORD_AUDIO和Manifest.permission.CAMERA两项权限。
+             * @param callSession 通话实体
+             */
+            @Override
+            public void onCheckPermission(RongCallSession callSession) {
+
+            }
+        });
+    }
+
+    private void setCallVideo(RongCallSession callSession) {
+        int rand = Utilt.getRandom();
+        String timestamp = DynamicTimeFormat.getTimestamp();
+        String signature = Utilt.shaEncrypt(Constanst.appSecret + rand + timestamp);
+        OkHttpUtils.post().url("http://api-cn.ronghub.com/user/info.json")
+                .addHeader("App-Key", Constanst.appkey)
+                .addHeader("Nonce", rand + "")
+                .addHeader("Timestamp", timestamp)
+                .addHeader("Signature", signature)
+                .addParams("userId", callSession.getCallerUserId())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(okhttp3.Call call, Exception e, int id) {
+                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + e.toString());
+                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.toString());
+                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.request().url().toString());
+                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.request().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        L.d("RongRTCVideoActivity:" + response);
+                        RongUserInfoDto userInfoDto = new Gson().fromJson(response, new TypeToken<RongUserInfoDto>() {
+                        }.getType());
+                        Uri uri = Uri.parse(userInfoDto.getUserPortrait());
+                        UserInfo userInfo= new UserInfo(callSession.getCallerUserId(),userInfoDto.getUserName(),uri);
+                        Intent intent = new Intent(mContext, SingleCallActivity.class);
+                        intent.putExtra("checkPermissions",true);
+                        intent.putExtra("callAction", RongCallAction.ACTION_INCOMING_CALL.getName());
+                        intent.putExtra("callSession",(Parcelable) callSession);
+                        intent.putExtra("userInfoDto",userInfo);
+                        startActivity(intent);
+                    }
+                });
     }
 }

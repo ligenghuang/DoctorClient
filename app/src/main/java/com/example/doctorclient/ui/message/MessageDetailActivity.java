@@ -2,6 +2,7 @@ package com.example.doctorclient.ui.message;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
@@ -23,11 +24,13 @@ import com.example.doctorclient.R;
 import com.example.doctorclient.actions.MessageDetailAction;
 import com.example.doctorclient.adapter.CommonLanguageAdpater;
 import com.example.doctorclient.adapter.MessageDetailListAdapter;
+import com.example.doctorclient.event.CheckOnlineDto;
 import com.example.doctorclient.event.CommonLanguageListDto;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.MessageDetailInquiryDto;
 import com.example.doctorclient.event.MessageDetailListDto;
 import com.example.doctorclient.event.MessageDto;
+import com.example.doctorclient.event.RongUserInfoDto;
 import com.example.doctorclient.event.SendMessageDto;
 import com.example.doctorclient.ui.MainActivity;
 import com.example.doctorclient.ui.impl.MessageDetailView;
@@ -36,14 +39,19 @@ import com.example.doctorclient.ui.mine.inquiry.InquiryDetailsActivity;
 import com.example.doctorclient.ui.mine.inquiry.InquiryDetailsActivity2;
 import com.example.doctorclient.ui.mine.inquiry.PrescriptionActivity;
 import com.example.doctorclient.ui.mine.inquiry.SelectPrescriptionActivity;
+import com.example.doctorclient.util.Constanst;
+import com.example.doctorclient.util.Utilt;
 import com.example.doctorclient.util.base.UserBaseActivity;
 import com.example.doctorclient.util.config.MyApp;
 import com.example.doctorclient.util.cusview.CustomLinearLayoutManager;
 import com.example.doctorclient.util.cusview.SoftKeyBoardListener;
+import com.example.doctorclient.util.data.DynamicTimeFormat;
 import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.PicturesDialog;
 import com.example.doctorclient.util.imageloader.GlideImageLoader;
 import com.example.doctorclient.util.photo.PicUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lgh.huanglib.util.CheckNetwork;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.base.ActivityStack;
@@ -55,6 +63,8 @@ import com.lzy.imagepicker.view.CropImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.java_websocket.client.WebSocketClient;
 
@@ -66,6 +76,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.rong.callkit.RongCallAction;
+import io.rong.callkit.RongVoIPIntent;
+import io.rong.callkit.SingleCallActivity;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
 
 import static com.lgh.huanglib.util.cusview.magicIndicator.ScrollState.SCROLL_STATE_IDLE;
 
@@ -358,7 +373,7 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
 
     @OnClick({R.id.tv_send, R.id.tv_add, R.id.tv_photo, R.id.edit_direct, R.id.ll_info,
             R.id.tv_prescription, R.id.tv_photograph, R.id.tv_common_expression, R.id.tv_add_common_language,
-            R.id.tv_send_common_language, R.id.tv_end_session, R.id.tv_edit_common_language, R.id.tv_complete})
+            R.id.tv_send_common_language, R.id.tv_end_session, R.id.tv_edit_common_language, R.id.tv_complete, R.id.tv_video, R.id.tv_audio})
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_send:
@@ -438,8 +453,127 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                 completeTv.setVisibility(View.GONE);
                 addCommonLanguageLl.setVisibility(View.VISIBLE);
                 break;
+            case R.id.tv_video:
+                //todo 视频聊天
+                checkOnline(1);
+                addllGone();
+                break;
+            case R.id.tv_audio:
+                //todo 语音聊天
+                checkOnline(2);
+                addllGone();
+                break;
         }
     }
+
+    /**
+     * 隐藏布局
+     */
+    private void addllGone() {
+        isAdd = false;
+        addLl.setVisibility(View.GONE);
+        recyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView.scrollToPosition(messageDetailListAdapter.getAllData().size() - 1);
+            }
+        }, 100);
+    }
+
+    /**
+     * 判断对方是否在线
+     *
+     * @param type
+     */
+    private void checkOnline(int type) {
+        int rand = Utilt.getRandom();
+        String timestamp = DynamicTimeFormat.getTimestamp();
+        String signature = Utilt.shaEncrypt(Constanst.appSecret + rand + timestamp);
+        OkHttpUtils.post().url("http://api-cn.ronghub.com/user/checkOnline.json")
+                .addHeader("App-Key", Constanst.appkey)
+                .addHeader("Nonce", rand + "")
+                .addHeader("Timestamp", timestamp)
+                .addHeader("Signature", signature)
+                .addParams("userId", touserId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(okhttp3.Call call, Exception e, int id) {
+                        L.d("lgh_userId", "请求错误.." + e.toString());
+                        L.d("lgh_userId", "请求错误.." + call.toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().url().toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        L.d("response:" + response);
+                        CheckOnlineDto checkOnlineDto = new Gson().fromJson(response, new TypeToken<CheckOnlineDto>() {
+                        }.getType());
+                        if (checkOnlineDto.getCode() == 200) {
+                            if (checkOnlineDto.getStatus().equals("1")) {
+                                setCallVideo(type);
+                            } else {
+                                showNormalToast("用户不在线！");
+                            }
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取对方信息并发起通话
+     * @param type
+     */
+    private void setCallVideo(int type) {
+        int rand = Utilt.getRandom();
+        String timestamp = DynamicTimeFormat.getTimestamp();
+        String signature = Utilt.shaEncrypt(Constanst.appSecret + rand + timestamp);
+        OkHttpUtils.post().url("http://api-cn.ronghub.com/user/info.json")
+                .addHeader("App-Key", Constanst.appkey)
+                .addHeader("Nonce", rand + "")
+                .addHeader("Timestamp", timestamp)
+                .addHeader("Signature", signature)
+                .addParams("userId", touserId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(okhttp3.Call call, Exception e, int id) {
+                        L.d("lgh_userId", "请求错误.." + e.toString());
+                        L.d("lgh_userId", "请求错误.." + call.toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().url().toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        L.d("RongRTCVideoActivity:" + response);
+                        RongUserInfoDto userInfoDto = new Gson().fromJson(response, new TypeToken<RongUserInfoDto>() {
+                        }.getType());
+                        Uri uri = Uri.parse(userInfoDto.getUserPortrait());
+                        UserInfo userInfo = new UserInfo(touserId, userInfoDto.getUserName(), uri);
+
+                        Intent intent = new Intent(mContext, SingleCallActivity.class);
+                        switch (type) {
+                            case 1:
+                                //todo 视频
+                                intent.setAction(RongVoIPIntent.RONG_INTENT_ACTION_VOIP_SINGLEVIDEO);
+                                break;
+                            case 2:
+                                //TODO 语音
+                                intent.setAction(RongVoIPIntent.RONG_INTENT_ACTION_VOIP_SINGLEAUDIO);
+                                break;
+                        }
+                        intent.putExtra("checkPermissions", true);
+                        intent.putExtra("callAction", RongCallAction.ACTION_OUTGOING_CALL.getName());
+                        intent.putExtra("conversationType", Conversation.ConversationType.PRIVATE.getName());
+                        intent.putExtra("targetId", touserId);
+                        intent.putExtra("userInfoDto", (Parcelable) userInfo);
+                        startActivity(intent);
+                    }
+                });
+    }
+
 
     /**
      * 提交数据

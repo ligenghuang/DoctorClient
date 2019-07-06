@@ -75,6 +75,8 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
     TextView prescriptionNoteTv;
     @BindView(R.id.tv_view_chat_history)
     TextView viewChatHistoryTv;
+    @BindView(R.id.tv_inquity_diagnosis)
+    TextView diagnosisTv;
 
     IllessImgAdapter illessImgAdapter;
 
@@ -187,7 +189,7 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         allergyTv.setText(patientMVBean.getAllergy_note());
         familyTv.setText(patientMVBean.getMed_family());
         medicalHistoryTv.setText(patientMVBean.getMed_history());
-
+        diagnosisTv.setText(dataBean.getDiagnosis());
         illnessTv.setText(dataBean.getIll_note());
         illessImgAdapter.refresh(dataBean.getIll_img());
     }

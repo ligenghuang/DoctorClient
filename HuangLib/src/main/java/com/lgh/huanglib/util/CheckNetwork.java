@@ -30,9 +30,10 @@ public class CheckNetwork {
     public static boolean checkNetwork2(final Context myContext) {
         boolean flag = false;
 
-        ConnectivityManager CM = (ConnectivityManager) myContext
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
         try{
+            ConnectivityManager CM = (ConnectivityManager) myContext
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
             if (CM.getActiveNetworkInfo() != null)
                 flag = CM.getActiveNetworkInfo().isAvailable();
             if (flag) {

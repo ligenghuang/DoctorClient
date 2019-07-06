@@ -13,6 +13,15 @@ public class DoctorsInfoPost {
     private String hospital;
     private int isPrescribe;
     private String phone;
+    private String the_note;
+
+    public String getThe_note() {
+        return the_note == null ? "" : the_note;
+    }
+
+    public void setThe_note(String the_note) {
+        this.the_note = the_note;
+    }
 
     public String getFile() {
         return file;
