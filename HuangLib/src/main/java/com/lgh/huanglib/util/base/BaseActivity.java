@@ -56,7 +56,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.VIBRATE,
-            Manifest.permission.MODIFY_AUDIO_SETTINGS
+            Manifest.permission.MODIFY_AUDIO_SETTINGS,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.PROCESS_OUTGOING_CALLS,
+            Manifest.permission.INTERNET,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN
     };
 
     private static final int PERMISSION_REQUEST_CODE = 0;
