@@ -182,6 +182,8 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
 
             }
         });
+        setEditText(editText);
+        setEditText(noteEt);
     }
 
     @OnClick({R.id.tv_submit,R.id.tv_add_drug})

@@ -99,9 +99,9 @@ public class FindPwdActivity extends UserBaseActivity<FindPwdAction> implements 
         imgCode = getIntent().getStringExtra("imgCode");
 
         submitTv.setEnabled(false);
-        setEditText(findPwdEt);
-        setEditText(findPwdAgainEt);
-        setEditText(codeEt);
+        setEditTexts(findPwdEt);
+        setEditTexts(findPwdAgainEt);
+        setEditTexts(codeEt);
     }
 
 
@@ -109,7 +109,7 @@ public class FindPwdActivity extends UserBaseActivity<FindPwdAction> implements 
      * 判断是否可进行修改
      * @param editText
      */
-    private void setEditText(EditText editText) {
+    private void setEditTexts(EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -100,6 +100,9 @@
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toLeftOf="@id/iv_user_name_more"
                     android:textColor="@color/color_9"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginLeft="40dp"
                     android:textSize="@dimen/text_size17" />
 
                 <View
@@ -188,6 +191,9 @@
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toLeftOf="@id/iv_user_jobs_more"
                     android:textColor="@color/color_9"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginLeft="40dp"
                     android:textSize="@dimen/text_size17" />
 
                 <View
@@ -231,6 +237,9 @@
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toLeftOf="@id/iv_user_specialty_more"
                     android:textColor="@color/color_9"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginLeft="40dp"
                     android:textSize="@dimen/text_size17" />
 
                 <View
@@ -272,6 +281,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_10"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginLeft="40dp"
                     android:layout_toLeftOf="@id/iv_user_note_more"
                     android:textColor="@color/color_9"
                     android:textSize="@dimen/text_size17" />

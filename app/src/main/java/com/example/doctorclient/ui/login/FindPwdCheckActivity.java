@@ -88,15 +88,15 @@ public class FindPwdCheckActivity extends UserBaseActivity<FindPwdAction> implem
 
         getCode();
         nextTv.setEnabled(false);
-       setEditText(accountEt);
-       setEditText(codeEt);
+       setEditTexts(accountEt);
+       setEditTexts(codeEt);
     }
 
     /**
      * 判断是否可进入下一步
      * @param editText
      */
-    private void setEditText(EditText editText) {
+    private void setEditTexts(EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
