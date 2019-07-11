@@ -321,13 +321,13 @@ public class MainActivity extends UserBaseActivity {
                         if (MySp.getMessage(mContext)) {
 //                            NotificationHelper.show(mContext,messageDto);
                         }
-                    }else if (messageDto.getEvent().equals("return")){
+                    } else if (messageDto.getEvent().equals("return")) {
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE,
                                 Action.KEY_OBJ, message);
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE_1,
                                 Action.KEY_OBJ, message);
 
-                    }else if (messageDto.getEvent().equals("Heartbeat")){
+                    } else if (messageDto.getEvent().equals("Heartbeat")) {
                         Heartbeat = 0;
                     }
                 }
@@ -338,10 +338,10 @@ public class MainActivity extends UserBaseActivity {
             public void onClose(int code, String reason, boolean remote) {
                 Log.e("lgh_Socket:", "------连接关闭!!!" + reason);
                 isFirst = true;
-                if (client.getReadyState() == READYSTATE.OPEN){
+                if (client.getReadyState() == READYSTATE.OPEN) {
                     client.close();
-                    L.e("lgh_Socket","Close the current client, ready to reconnect");
-                }else if (client.getReadyState() == READYSTATE.NOT_YET_CONNECTED || client.getReadyState() == READYSTATE.CLOSED || client.getReadyState() == READYSTATE.CLOSING){
+                    L.e("lgh_Socket", "Close the current client, ready to reconnect");
+                } else if (client.getReadyState() == READYSTATE.NOT_YET_CONNECTED || client.getReadyState() == READYSTATE.CLOSED || client.getReadyState() == READYSTATE.CLOSING) {
                     try {
                         Thread.currentThread().sleep(500);
                     } catch (InterruptedException e1) {
@@ -353,7 +353,7 @@ public class MainActivity extends UserBaseActivity {
                         e.printStackTrace();
                     }
                     client.connect();
-                    L.e("lgh_Socket","正在重连----------------------------");
+                    L.e("lgh_Socket", "正在重连----------------------------");
                 }
             }
 
@@ -363,6 +363,7 @@ public class MainActivity extends UserBaseActivity {
             }
         };
     }
+
     /**
      * 登录Socket
      */
@@ -403,7 +404,7 @@ public class MainActivity extends UserBaseActivity {
         } catch (KeyManagementException e) {
             e.printStackTrace();
             Log.e("lgh_Socket:", "------KeyManagementException!!!" + e.getMessage());
-        }catch (SSLException e){
+        } catch (SSLException e) {
             e.printStackTrace();
             Log.e("lgh_Socket:", "------SSLException!!!" + e.getMessage());
         } catch (IOException e) {
@@ -446,15 +447,15 @@ public class MainActivity extends UserBaseActivity {
         public void run() {
             // TODO Auto-generated method stub
             //要做的事情
-            if (Heartbeat == 3){
+            if (Heartbeat == 3) {
                 try {
                     client = initSocket(WebUrlUtil.SOCKET);
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
                 client.connect();
-                L.e("lgh_Socket","正在重连----------------------------");
-            }else {
+                L.e("lgh_Socket", "正在重连----------------------------");
+            } else {
                 sendHeartbeat();
                 handler.postDelayed(this, 30000);
             }
@@ -478,7 +479,7 @@ public class MainActivity extends UserBaseActivity {
         post.setUserid(MySp.getToken(context));
         post.setUserImg(sendMessageDto.getData().getUserIMG());
         L.e("lgh_Socket", post.toString());
-        if (client!=null&&client.isOpen()){
+        if (client != null && client.isOpen()) {
             client.send(post.toString());
         }
 
@@ -500,7 +501,7 @@ public class MainActivity extends UserBaseActivity {
      */
     public void sendHeartbeat() {
         SendMessagePost post = new SendMessagePost();
-        Heartbeat = Heartbeat+1;
+        Heartbeat = Heartbeat + 1;
         post.setEvent("Heartbeat");
         post.setUserid(MySp.getToken(mContext));
         L.e("lgh_Socket", post.toLogin());
@@ -518,12 +519,12 @@ public class MainActivity extends UserBaseActivity {
         super.onResume();
         if (isFirst && MySp.iSLoginLive(mContext)) {
             loginSocket();
-            loginRoogIM(MySp.getRoogUserId(mContext), MySp.getRoogUserName(mContext), MySp.getRoogUserImg(mContext));
+            loginRoogIM(MySp.getRoogUserId(mContext), MySp.getRoogUserName(mContext), WebUrlUtil.IMG_URL+MySp.getRoogUserImg(mContext));
         }
-        if (!MySp.iSLoginLive(mContext)){
-          if (client != null){
-              client.close();
-          }
+        if (!MySp.iSLoginLive(mContext)) {
+            if (client != null) {
+                client.close();
+            }
         }
 
     }
@@ -544,7 +545,6 @@ public class MainActivity extends UserBaseActivity {
         super.onDestroy();
         handler.removeCallbacks(runnable);
     }
-
 
 
     private void loginRoogIM(String userId, String name, String portraitUri) {
@@ -679,10 +679,10 @@ public class MainActivity extends UserBaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(okhttp3.Call call, Exception e, int id) {
-                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + e.toString());
-                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.toString());
-                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.request().url().toString());
-                        io.rong.imageloader.utils.L.d("lgh_userId", "请求错误.." + call.request().toString());
+                        L.d("lgh_userId", "请求错误.." + e.toString());
+                        L.d("lgh_userId", "请求错误.." + call.toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().url().toString());
+                        L.d("lgh_userId", "请求错误.." + call.request().toString());
                     }
 
                     @Override
@@ -691,12 +691,12 @@ public class MainActivity extends UserBaseActivity {
                         RongUserInfoDto userInfoDto = new Gson().fromJson(response, new TypeToken<RongUserInfoDto>() {
                         }.getType());
                         Uri uri = Uri.parse(userInfoDto.getUserPortrait());
-                        UserInfo userInfo= new UserInfo(callSession.getCallerUserId(),userInfoDto.getUserName(),uri);
+                        UserInfo userInfo = new UserInfo(callSession.getCallerUserId(), userInfoDto.getUserName(), uri);
                         Intent intent = new Intent(mContext, SingleCallActivity.class);
-                        intent.putExtra("checkPermissions",true);
+                        intent.putExtra("checkPermissions", true);
                         intent.putExtra("callAction", RongCallAction.ACTION_INCOMING_CALL.getName());
-                        intent.putExtra("callSession",(Parcelable) callSession);
-                        intent.putExtra("userInfoDto",userInfo);
+                        intent.putExtra("callSession", (Parcelable) callSession);
+                        intent.putExtra("userInfoDto", userInfo);
                         startActivity(intent);
                     }
                 });

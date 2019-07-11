@@ -1,17 +1,21 @@
 package com.example.doctorclient.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctorclient.R;
 import com.example.doctorclient.event.DrugListDto;
 import com.example.doctorclient.net.WebUrlUtil;
+import com.example.doctorclient.util.cusview.MyEditText;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.config.GlideUtil;
 
@@ -24,7 +28,6 @@ import com.lgh.huanglib.util.config.GlideUtil;
  */
 public class DrugListAdapter extends BaseRecyclerAdapter<DrugListDto.DataBean> {
     Context context;
-
     public DrugListAdapter(Context context) {
         super(R.layout.layout_item_drug_list);
         this.context = context;
@@ -68,7 +71,7 @@ public class DrugListAdapter extends BaseRecyclerAdapter<DrugListDto.DataBean> {
             }
         });
 
-        EditText editText = holder.itemView.findViewById(R.id.et_item_drug_usage);
+        MyEditText editText = holder.itemView.findViewById(R.id.et_item_drug_usage);
         editText.setText(model.getNum_note());
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,6 +91,7 @@ public class DrugListAdapter extends BaseRecyclerAdapter<DrugListDto.DataBean> {
 
             }
         });
+
 
     }
 }

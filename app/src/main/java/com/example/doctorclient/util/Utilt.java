@@ -11,6 +11,8 @@ import com.lgh.huanglib.retrofitlib.Api.BaseResultEntity;
 import com.lgh.huanglib.util.L;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -90,5 +92,22 @@ public class Utilt {
             des += tmp;
         }
         return des;
+    }
+
+    /**
+     * 转utf-8
+     * @param str
+     * @return
+     */
+    public static String toUtf8(String str){
+        String result = null;
+
+        try {
+            result = URLDecoder.decode(str,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            L.e("lgh_news",e.toString());
+        }
+        return result;
     }
 }

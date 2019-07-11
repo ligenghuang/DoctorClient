@@ -1,5 +1,6 @@
 package com.example.doctorclient.ui.impl;
 
+import com.example.doctorclient.event.DepartListDto;
 import com.example.doctorclient.event.DepartidDto;
 import com.example.doctorclient.event.DoctorInfoDto;
 import com.example.doctorclient.event.GeneralDto;
@@ -20,7 +21,7 @@ public interface UserInfoView extends BaseView {
 
     void getFindDepartid();
 
-    void getFindDepartidSuccessful(DepartidDto departidDto);
+    void getFindDepartidSuccessful(DepartListDto departidDto);
 
     void sevaDoctorsInfo();
 

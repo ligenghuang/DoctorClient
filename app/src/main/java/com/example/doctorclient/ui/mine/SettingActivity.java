@@ -25,6 +25,7 @@ import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.rong.imlib.RongIMClient;
 
 /**
  * description:设置页面
@@ -129,6 +130,8 @@ public class SettingActivity extends UserBaseActivity<SettingAction> implements 
                     @Override
                     public void confirm() {
                         logout();
+                        //todo 融云退出登录
+                        RongIMClient.getInstance().logout();
                     }
                 });
                logoutDialog.show();

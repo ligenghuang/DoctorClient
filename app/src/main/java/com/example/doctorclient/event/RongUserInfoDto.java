@@ -1,5 +1,7 @@
 package com.example.doctorclient.event;
 
+import com.example.doctorclient.util.Utilt;
+
 public class RongUserInfoDto {
 
     /**
@@ -23,7 +25,7 @@ public class RongUserInfoDto {
     }
 
     public String getUserName() {
-        return userName == null ? "" : userName;
+        return userName == null ? "" : Utilt.toUtf8(userName);
     }
 
     public void setUserName(String userName) {

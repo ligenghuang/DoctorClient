@@ -94,7 +94,7 @@
     </LinearLayout>
 
 
-    <EditText
+    <com.example.doctorclient.util.cusview.MyEditText
         android:id="@+id/et_item_drug_usage"
         android:layout_width="match_parent"
         android:layout_height="100dp"

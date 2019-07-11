@@ -3,6 +3,7 @@ package com.example.doctorclient.actions;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.example.doctorclient.event.DepartListDto;
 import com.example.doctorclient.event.DepartidDto;
 import com.example.doctorclient.event.DoctorInfoDto;
 import com.example.doctorclient.event.GeneralDto;
@@ -59,8 +60,8 @@ public class UserInfoAction extends BaseAction<UserInfoView> {
      * 获取科室
      */
     public void getFindDepartid(){
-        post(WebUrlUtil.POST_FIND_DEPARTID,false,service -> manager.runHttp(
-                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),WebUrlUtil.POST_FIND_DEPARTID)));
+        post(WebUrlUtil.POST_DMINE_DEPART,false,service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),WebUrlUtil.POST_DMINE_DEPART)));
     }
 
     /**
@@ -153,12 +154,12 @@ public class UserInfoAction extends BaseAction<UserInfoView> {
                         }
                         view.onError(msg,action.getErrorType());
                         break;
-                    case WebUrlUtil.POST_FIND_DEPARTID:
-                        //todo 科室
+                    case WebUrlUtil.POST_DMINE_DEPART:
+//                        //todo 科室
                         if (aBoolean) {
                             L.e("xx", "输出返回结果 " + action.getUserData().toString());
                             Gson gson = new Gson();
-                            DepartidDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<DepartidDto>() {
+                            DepartListDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<DepartListDto>() {
                             }.getType());
                             view.getFindDepartidSuccessful(generalDto);
                             return;

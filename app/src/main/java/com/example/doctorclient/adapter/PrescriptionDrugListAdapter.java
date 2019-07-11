@@ -13,6 +13,7 @@ import com.example.doctorclient.R;
 import com.example.doctorclient.event.DrugListDto;
 import com.example.doctorclient.event.PrescriptionDrugListDto;
 import com.example.doctorclient.net.WebUrlUtil;
+import com.example.doctorclient.util.cusview.MyEditText;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.config.GlideUtil;
 
@@ -69,7 +70,7 @@ public class PrescriptionDrugListAdapter extends BaseRecyclerAdapter<Prescriptio
             }
         });
 
-        EditText editText = holder.itemView.findViewById(R.id.et_item_drug_usage);
+        MyEditText editText = holder.itemView.findViewById(R.id.et_item_drug_usage);
         editText.setText(model.getUse_note());
         editText.addTextChangedListener(new TextWatcher() {
             @Override

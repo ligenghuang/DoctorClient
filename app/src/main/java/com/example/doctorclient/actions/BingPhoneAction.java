@@ -1,16 +1,17 @@
 package com.example.doctorclient.actions;
 
 import com.example.doctorclient.event.GeneralDto;
-import com.example.doctorclient.event.LoginDto;
 import com.example.doctorclient.event.WeiLoginDto;
+import com.example.doctorclient.event.post.WeiXinLoginPost;
 import com.example.doctorclient.net.WebUrlUtil;
-import com.example.doctorclient.ui.impl.LoginView;
+import com.example.doctorclient.ui.impl.BingPhoneView;
+import com.example.doctorclient.util.config.MyApp;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lgh.huanglib.actions.Action;
 import com.lgh.huanglib.net.CollectionsUtils;
 import com.lgh.huanglib.util.L;
+import com.lgh.huanglib.util.data.MySharedPreferencesUtil;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -21,34 +22,36 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 
 /**
- * 登录
- *
- * @author lgh
- * created at 2019/5/13 0013 15:05
- */
-public class LoginAction extends BaseAction<LoginView> {
-    public LoginAction(RxAppCompatActivity _rxAppCompatActivity, LoginView view) {
+* description ： 绑定手机号
+* author : lgh
+* email : 1045105946@qq.com
+* date : 2019/7/10
+*/
+public class BingPhoneAction extends BaseAction<BingPhoneView> {
+
+    public BingPhoneAction(RxAppCompatActivity _rxAppCompatActivity, BingPhoneView view) {
         super(_rxAppCompatActivity);
         attachView(view);
     }
 
-
     /**
-     * 登录
-     * @param username
-     * @param pwd
+     * 获取验证码
+     * @param phone
      */
-    public void login(final String username, String pwd) {
-        post(WebUrlUtil.POST_LOGIN, false, service -> manager.runHttp(service.PostData_1(CollectionsUtils.generateMap("userName",username,"password",pwd,"type","1"),WebUrlUtil.POST_LOGIN)));
+    public void weiXinChecks(String phone){
+        post(WebUrlUtil.POST_WEIXIN_CHECKS,false, service -> manager.runHttp(
+                service.PostData_1(CollectionsUtils.generateMap("userPhone",phone),WebUrlUtil.POST_WEIXIN_CHECKS)));
     }
 
     /**
-     * 微信授权登录
-     * @param code
+     * 绑定
+     * @param weiXinLoginPost
      */
-    public void authorizationLogin(String code){
-        post(WebUrlUtil.POST_WEIXIN_LOGIN,false,service -> manager.runHttp(
-                service.PostData_1(CollectionsUtils.generateMap("code",code,"H5ORDOC",1),WebUrlUtil.POST_WEIXIN_LOGIN)));
+    public void weiXinLogin(WeiXinLoginPost weiXinLoginPost){
+        post(WebUrlUtil.POST_WEIXIN_BINGPHONE,false,service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApp.getContext()), CollectionsUtils.generateMap("userName",weiXinLoginPost.getUserName(),
+                        "sms_code",weiXinLoginPost.getSms_code(),"invitName",weiXinLoginPost.getInvitName(),
+                        "unionid",weiXinLoginPost.getUnionid()),WebUrlUtil.POST_WEIXIN_BINGPHONE)));
     }
 
     /**
@@ -74,34 +77,29 @@ public class LoginAction extends BaseAction<LoginView> {
                 L.e("xx", "输出返回结果 " + aBoolean);
 
                 switch (action.getIdentifying()) {
-                    case WebUrlUtil.POST_LOGIN:
+                    case WebUrlUtil.POST_WEIXIN_CHECKS:
                         if (aBoolean) {
                             L.e("xx", "输出返回结果 " + action.getUserData().toString());
                             Gson gson = new Gson();
-                            try {
-                                LoginDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<LoginDto>() {
-                                }.getType());
-                                view.LoginSuccessful(generalDto);
-                            }catch (JsonSyntaxException e){
-                                GeneralDto generalDto = gson.fromJson(action.getUserData().toString(),new TypeToken<GeneralDto>() {
-                                }.getType());
-                                view.onError(generalDto.getMsg(),generalDto.getCode());
-                            }
+                            GeneralDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<GeneralDto>() {
+                            }.getType());
+                            view.weiXinChecksSuccessful(generalDto);
                             return;
                         }
                         view.onError(msg,action.getErrorType());
                         break;
-                    case WebUrlUtil.POST_WEIXIN_LOGIN:
+                    case WebUrlUtil.POST_WEIXIN_BINGPHONE:
                         if (aBoolean) {
                             L.e("xx", "输出返回结果 " + action.getUserData().toString());
                             Gson gson = new Gson();
                             WeiLoginDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<WeiLoginDto>() {
                             }.getType());
-                            view.authorizationSuccessful(generalDto);
+                            view.weiXinLoginSuccessful(generalDto);
                             return;
                         }
                         view.onError(msg,action.getErrorType());
                         break;
+
                 }
 
             }
@@ -119,4 +117,5 @@ public class LoginAction extends BaseAction<LoginView> {
 
         unregister(this);
     }
+
 }

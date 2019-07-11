@@ -74,6 +74,7 @@ public class SpecialtyActivity extends UserBaseActivity {
         titleTv.setText(ResUtil.getString(type == 0?R.string.user_info_tip_6:R.string.user_info_tip_29));
         specialtyEt.setHint(ResUtil.getString(type == 0?R.string.user_info_tip_26:R.string.user_info_tip_30));
         specialtyEt.setText(getIntent().getStringExtra("specialty"));
+        setEditText(specialtyEt);
     }
 
     @OnClick(R.id.tv_confirm)

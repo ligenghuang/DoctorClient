@@ -1,6 +1,7 @@
 package com.example.doctorclient.ui.mine.inquiry;
 
 import android.content.Intent;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctorclient.R;
@@ -24,6 +28,7 @@ import com.example.doctorclient.ui.impl.EditPrescriptionView;
 import com.example.doctorclient.ui.login.LoginActivity;
 import com.example.doctorclient.util.base.UserBaseActivity;
 import com.example.doctorclient.util.cusview.CustomLinearLayoutManager;
+import com.example.doctorclient.util.cusview.MyEditText;
 import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.ModifyDialog;
 import com.google.gson.Gson;
@@ -61,12 +66,19 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
     @BindView(R.id.tv_prescription_project)
     TextView prescriptionProjectTv;
     @BindView(R.id.et_item_drug_note)
-    TextView DrugNoteEt;
+    MyEditText DrugNoteEt;
     @BindView(R.id.tv_note_num)
     TextView noteNumTv;
 
     @BindView(R.id.rv_drug)
     RecyclerView drugRv;
+
+    @BindView(R.id.nestedscrollview)
+    NestedScrollView nestedScrollView;
+    @BindView(R.id.linearlayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.ll_note)
+    LinearLayout noteLl;
 
     List<DrugListDto.DataBean> list = new ArrayList<>();
 
@@ -128,20 +140,20 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
     @Override
     protected void initView() {
         super.initView();
-       if (!TextUtils.isEmpty(MySp.getData(mContext))){
-           EditPrescriptionDto editPrescriptionDto = new Gson().fromJson(MySp.getData(mContext),new TypeToken<EditPrescriptionDto>() {
-           }.getType());
-           depart = editPrescriptionDto.getDepart()+"";
-           prescriptionProjectTv.setText(editPrescriptionDto.getDepartName());
-           prescriptionName = editPrescriptionDto.getPrescriptionName();
-           prescriptionNameTv.setText(prescriptionName);
-           DrugNoteEt.setText(editPrescriptionDto.getNote());
-           if (TextUtils.isEmpty(DrugNoteEt.getText().toString())) {
-               noteNumTv.setText("0/200");
-           } else {
-               noteNumTv.setText(DrugNoteEt.getText().length() + "/200");
-           }
-       }
+        if (!TextUtils.isEmpty(MySp.getData(mContext))) {
+            EditPrescriptionDto editPrescriptionDto = new Gson().fromJson(MySp.getData(mContext), new TypeToken<EditPrescriptionDto>() {
+            }.getType());
+            depart = editPrescriptionDto.getDepart() + "";
+            prescriptionProjectTv.setText(editPrescriptionDto.getDepartName());
+            prescriptionName = editPrescriptionDto.getPrescriptionName();
+            prescriptionNameTv.setText(prescriptionName);
+            DrugNoteEt.setText(editPrescriptionDto.getNote());
+            if (TextUtils.isEmpty(DrugNoteEt.getText().toString())) {
+                noteNumTv.setText("0/200");
+            } else {
+                noteNumTv.setText(DrugNoteEt.getText().length() + "/200");
+            }
+        }
     }
 
     @Override
@@ -168,6 +180,8 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
 
             }
         });
+
+
     }
 
     @OnClick({R.id.tv_submit, R.id.tv_add_drug, R.id.tv_prescription_project, R.id.tv_prescription_name})
@@ -184,8 +198,8 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
                 editPrescriptionDto.setDepartName(prescriptionProjectTv.getText().toString());
                 editPrescriptionDto.setNote(DrugNoteEt.getText().toString());
                 editPrescriptionDto.setPrescriptionName(prescriptionName);
-                MySp.setData(mContext,editPrescriptionDto.toString());
-               finish();
+                MySp.setData(mContext, editPrescriptionDto.toString());
+                finish();
                 break;
             case R.id.tv_prescription_project:
                 //TODO 选择科室
@@ -194,7 +208,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
                 break;
             case R.id.tv_prescription_name:
                 //TODO 填写处方名称
-                ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10),prescriptionNameTv.getText().toString());
+                ModifyDialog modifyDialog = new ModifyDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.edit_prescription_tip_10), prescriptionNameTv.getText().toString());
                 modifyDialog.setOnClickListener(new ModifyDialog.OnClickListener() {
                     @Override
                     public void confirm(String txet) {
@@ -230,7 +244,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
         for (int i = 0; i < list.size(); i++) {
             DrugSavePost.DrugBean drugBean = new DrugSavePost.DrugBean();
             DrugListDto.DataBean dataBean = list.get(i);
-            if (dataBean.getDrug_num() < 0){
+            if (dataBean.getDrug_num() < 0) {
                 showNormalToast(ResUtil.getString(R.string.edit_prescription_tip_15));
                 return;
             }
@@ -246,6 +260,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
 
     /**
      * 保存处方
+     *
      * @param drugSavePost
      */
     @Override
@@ -258,12 +273,13 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
 
     /**
      * 保存处方成功
+     *
      * @param generalDto
      */
     @Override
     public void updateDrugSaveSuccessful(GeneralDto generalDto) {
         loadDiss();
-        MySp.setData(mContext,null);
+        MySp.setData(mContext, null);
         showNormalToast(generalDto.getMsg());
         ActivityStack.getInstance().exitClass(SelectDrugsActivity.class);
         finish();
@@ -271,6 +287,7 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
 
     /**
      * 失败
+     *
      * @param message
      * @param code
      */
@@ -308,8 +325,8 @@ public class EditPrescriptionActivity extends UserBaseActivity<EditPrescriptionA
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 201){
-            if (data != null){
+        if (resultCode == 201) {
+            if (data != null) {
                 depart = data.getStringExtra("iuid");
                 String name = data.getStringExtra("name");
                 prescriptionProjectTv.setText(name);

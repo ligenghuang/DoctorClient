@@ -2,6 +2,7 @@ package com.example.doctorclient.ui.impl;
 
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.LoginDto;
+import com.example.doctorclient.event.WeiLoginDto;
 import com.lgh.huanglib.util.base.BaseView;
 
 /**
@@ -20,4 +21,9 @@ public interface LoginView extends BaseView {
      * 登录成功
      */
     void LoginSuccessful(LoginDto generalDto);
+
+    /**
+     * 授权登录 成功
+     */
+    void authorizationSuccessful(WeiLoginDto generalDto);
 }

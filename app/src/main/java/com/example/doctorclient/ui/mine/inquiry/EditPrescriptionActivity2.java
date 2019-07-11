@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.EditPrescriptionAction;
 import com.example.doctorclient.actions.EditPrescriptionAction2;
-import com.example.doctorclient.adapter.DrugListAdapter;
 import com.example.doctorclient.adapter.PrescriptionDrugListAdapter;
 import com.example.doctorclient.event.DrugListDto;
 import com.example.doctorclient.event.GeneralDto;

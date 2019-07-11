@@ -262,6 +262,26 @@ public class WebUrlUtil {
     public static final String POST_HOSPITALNAME = "Mine/getHospitalName";
 
     /**
+     * 微信登录WeiXin/WeiXinLogin
+     */
+    public static final String POST_WEIXIN_LOGIN = "WeiXin/WeiXinLogin";
+
+    /**
+     * 微信登录 绑定手机号 获取验证码
+     */
+    public static final String POST_WEIXIN_CHECKS = "Mine/weiXinChecks";
+
+    /**
+     * 微信登录 绑定手机号
+     */
+    public static final String POST_WEIXIN_BINGPHONE = "Mine/weiXinLoginApp";
+
+    /**
+     * DMine/getDepart
+     */
+    public static final String POST_DMINE_DEPART = "DMine/getDepartApp";
+
+    /**
      * 接收到消息
      */
     public static final String GET_MESSAGE = "getMessageApp";

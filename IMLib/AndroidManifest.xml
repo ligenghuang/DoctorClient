@@ -16,14 +16,14 @@
 
         <!-- imlib config begin -->
         <!--融云appkey 开发-->
-        <meta-data
-            android:name="RONG_CLOUD_APP_KEY"
-            android:value="c9kqb3rdc4wxj" />
-
-        <!--&lt;!&ndash;融云appkey 生产&ndash;&gt;-->
         <!--<meta-data-->
-        <!--android:name="RONG_CLOUD_APP_KEY"-->
-        <!--android:value="6tnym1br6p7u7" />-->
+            <!--android:name="RONG_CLOUD_APP_KEY"-->
+            <!--android:value="c9kqb3rdc4wxj" />-->
+
+        <!--融云appkey 生产-->
+        <meta-data
+        android:name="RONG_CLOUD_APP_KEY"
+        android:value="6tnym1br6p7u7" />
 
         <service
             android:name="io.rong.imlib.ipc.RongService"

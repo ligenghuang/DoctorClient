@@ -1,6 +1,7 @@
 package com.example.doctorclient.ui.mine;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +13,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.doctorclient.BuildConfig;
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.BaseAction;
 import com.example.doctorclient.actions.LoginAction;
 import com.example.doctorclient.actions.UserInfoAction;
+import com.example.doctorclient.event.DepartListDto;
 import com.example.doctorclient.event.DepartidDto;
 import com.example.doctorclient.event.DoctorInfoDto;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.HospitalListDto;
+import com.example.doctorclient.event.JsonBean;
 import com.example.doctorclient.event.UserInfoDto;
 import com.example.doctorclient.event.post.DoctorsInfoPost;
 import com.example.doctorclient.net.WebUrlUtil;
@@ -161,6 +168,9 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
     private String the_note = "";
 
     List<String> sexLists = new ArrayList<>();
+
+    private ArrayList<JsonBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
 
     @Override
     public int intiLayout() {
@@ -429,21 +439,54 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
      * @param departidDto
      */
     @Override
-    public void getFindDepartidSuccessful(DepartidDto departidDto) {
+    public void getFindDepartidSuccessful(DepartListDto departidDto) {
         loadDiss();
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < departidDto.getData().size(); i++) {
-//            if(!departidDto.getData().get(i).getParentid().isEmpty()){
-            list.add(departidDto.getData().get(i).getName());
-//            }
-        }
-        new TimePickerBuilder(mContext).setSexPicker(list, "选择科室", new TimePickerBuilder.SexPickerCustomListener() {
-            @Override
-            public void sexSelect(String sexStr) {
-                department = sexStr;
-                userDepartmentTv.setText(department);
+        if (departidDto.getData().size() != 0) {
+            options1Items = departidDto.getData();
+
+            for (int i = 0; i < departidDto.getData().size(); i++) {//遍历一级
+                ArrayList<String> CityList = new ArrayList<>();//该省的二级列表（第二级）
+
+                for (int c = 0; c < departidDto.getData().get(i).getCityList().size(); c++) {//遍历该一级的所有二级
+                    String CityName = departidDto.getData().get(i).getCityList().get(c).getName();
+                    CityList.add(CityName);//添加城市
+
+                }
+
+                /**
+                 * 添加第二级数据
+                 */
+                options2Items.add(CityList);
             }
-        }).show();
+            OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                    //返回的分别是三个级别的选中位置
+                    department = options2Items.get(options1).get(options2);
+                    userDepartmentTv.setText(department);
+                }
+            }).setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
+                @Override
+                public void onOptionsSelectChanged(int options1, int options2, int options3) {
+                    department = options2Items.get(options1).get(options2);
+                    userDepartmentTv.setText(department);
+                }
+            })
+                    .setTitleText("选择科室")
+                    .setTitleSize(15)
+                    .setSubCalSize(15)
+                    .setCancelColor(getResources().getColor(R.color.textcolor_2))// TODO: 2018/11/5 取消的颜色
+                    .setSubmitColor(Color.BLACK)// TODO: 2018/11/5 确认的颜色
+                    .setDividerColor(Color.BLACK)
+                    .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                    .setContentTextSize(15)
+                    .build();
+
+            pvOptions.setPicker(options1Items, options2Items);//二级选择器
+            pvOptions.show();
+        } else {
+            showNormalToast("暂无科室");
+        }
     }
 
     /**
@@ -706,17 +749,17 @@ public class UserInfoActivity extends UserBaseActivity<UserInfoAction> implement
             }
         } else if (resultCode == 200) {
             if (data != null) {
-               int type = data.getIntExtra("type",0);
-               switch (type){
-                   case 0:
-                       specialty = data.getStringExtra("specialty");
-                       userSpecialtyTv.setText(specialty);
-                       break;
-                   case 1:
-                       the_note = data.getStringExtra("specialty");
-                       userNoteTv.setText(the_note);
-                       break;
-               }
+                int type = data.getIntExtra("type", 0);
+                switch (type) {
+                    case 0:
+                        specialty = data.getStringExtra("specialty");
+                        userSpecialtyTv.setText(specialty);
+                        break;
+                    case 1:
+                        the_note = data.getStringExtra("specialty");
+                        userNoteTv.setText(the_note);
+                        break;
+                }
             }
         }
 

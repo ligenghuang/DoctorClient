@@ -111,7 +111,6 @@
                 android:layout_below="@id/ll_account_login"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/item_height50"
-                android:visibility="gone"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 

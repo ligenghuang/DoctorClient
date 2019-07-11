@@ -1,5 +1,6 @@
 package com.example.doctorclient.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -12,12 +13,17 @@ import com.example.doctorclient.R;
 import com.example.doctorclient.actions.LoginAction;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.LoginDto;
+import com.example.doctorclient.event.WeiLoginDto;
 import com.example.doctorclient.ui.impl.LoginView;
 import com.example.doctorclient.util.base.UserBaseActivity;
+import com.example.doctorclient.util.config.MyApp;
 import com.example.doctorclient.util.data.MySp;
+import com.example.doctorclient.util.wechat.ShareUtil;
 import com.lgh.huanglib.util.CheckNetwork;
+import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.base.ActivityStack;
 import com.lgh.huanglib.util.data.ResUtil;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.lang.ref.WeakReference;
 
@@ -43,6 +49,8 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
     EditText loginAccountEt;
     @BindView(R.id.et_login_pwd)
     EditText loginPwdEt;
+
+    ShareUtil shareUtil;
 
 
     @Override
@@ -81,10 +89,44 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
         super.init();
         mActicity = this;
         mContext = this;
+        shareUtil = new ShareUtil(this);
+        shareUtil.register();
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+        shareUtil.setLoginListener(new ShareUtil.OnLoginResponseListener() {
+
+            @Override
+            public void onSuccess(ShareUtil.Response response) {
+                //todo 微信登录
+                L.e("ShareUtil",  "打印 ..onSuccess.."+response.toString());
+//                wxResponse = dto.getUsername();
+                if (CheckNetwork.checkNetwork2(mContext)){
+                    baseAction.authorizationLogin(response.code);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                L.e("ShareUtil", "打印 ..onCancel..");
+                showToast( ResUtil.getString(R.string.app_login_user_tip_9));
+                loadDiss();
+            }
+
+            @Override
+            public void onFail(String message) {
+                L.e("ShareUtil",  "打印 ..onFail.." + message);
+                showToast( ResUtil.getString(R.string.app_login_user_tip_10));
+                loadDiss();
+            }
+        });
+
 
     }
 
-    @OnClick({R.id.tv_login_btn_login,R.id.tv_login_registered,R.id.tv_login_find_pwd})
+    @OnClick({R.id.tv_login_btn_login,R.id.tv_login_registered,R.id.tv_login_find_pwd,R.id.iv_login_WeChat})
     void OnClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_btn_login:
@@ -98,6 +140,19 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
             case R.id.tv_login_find_pwd:
                 //todo 找回密码
                 jumpActivityNotFinish(mContext, FindPwdCheckActivity.class);
+                break;
+            case R.id.iv_login_WeChat:
+                //todo 微信登录
+                if (!MyApp.getWxApi().isWXAppInstalled()) {
+                    showToast( ResUtil.getString(R.string.wechat_login));
+                    return;
+                }
+                loadDialog(ResUtil.getString(R.string.main_process));
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+//                req.scope = "snsapi_login";//提示 scope参数错误，或者没有scope权
+//                req.state = "yizhitong_userclient_login";
+                MyApp.getWxApi().sendReq(req);
                 break;
         }
     }
@@ -155,6 +210,32 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
         finish();
     }
 
+    @Override
+    public void authorizationSuccessful(WeiLoginDto generalDto) {
+
+        if (generalDto.getCode() != 1) {
+            loadDiss();
+            showNormalToast(generalDto.getMsg());
+            return;
+        }
+        if (generalDto.getData().getPhome().isEmpty()){
+            //TODO 未绑定手机号
+            loadDiss();
+            Intent intent = new Intent(mContext,BingPhoneActivity.class);
+            intent.putExtra("unionid",generalDto.getData().getUnionid());
+            startActivity(intent);
+        }else {
+            //TODO 已绑定手机号
+            MySp.setToken(mContext, generalDto.getData().getIuid());
+            MySp.setRoogUserId(mContext, generalDto.getData().getIuid());
+            MySp.setRoogUserImg(mContext,generalDto.getData().getNiceImg());
+            MySp.setRoogUserName(mContext,generalDto.getData().getNicename());
+            loadDiss();
+            finish();
+
+        }
+    }
+
     /**
      * 登录失败
      *
@@ -164,6 +245,7 @@ public class LoginActivity extends UserBaseActivity<LoginAction> implements Logi
     @Override
     public void onError(String message, int code) {
         loadDiss();
+        showNormalToast(message);
     }
 
     @Override
