@@ -46,11 +46,29 @@ public class SelectDrugsAction extends BaseAction<SelectDrugsView> {
     }
 
     /**
+     * 获取药品分类
+     */
+    public void getDrugClass(String name){
+        post(WebUrlUtil.POST_DROUGCLASS,false,service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), CollectionsUtils.generateMap("name",name),WebUrlUtil.POST_DROUGCLASS)
+        ));
+    }
+
+    /**
      * 获取药品列表
      */
     public void getDrugByClass(String drugClass){
         post(WebUrlUtil.POST_DRUGBYCLASS,false,service -> manager.runHttp(
                 service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),CollectionsUtils.generateMap("drug_class",drugClass),WebUrlUtil.POST_DRUGBYCLASS)
+        ));
+    }
+
+    /**
+     * 获取药品列表
+     */
+    public void getDrugByClass(String drugClass,String name){
+        post(WebUrlUtil.POST_DRUGBYCLASS,false,service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),CollectionsUtils.generateMap("drug_class",drugClass,"name",name),WebUrlUtil.POST_DRUGBYCLASS)
         ));
     }
 

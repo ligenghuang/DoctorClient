@@ -514,7 +514,7 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                             if (checkOnlineDto.getStatus().equals("1")) {
                                 setCallVideo(type);
                             } else {
-                                showNormalToast("用户不在线！");
+                                showNormalToast("对方不在线！");
                             }
                         }
                     }

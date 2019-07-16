@@ -209,6 +209,7 @@ public class InvitationActivity extends UserBaseActivity<InvitationAction> imple
         ClipboardManager cmb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         if (!TextUtils.isEmpty(textView.getText().toString())) {
             cmb.setText(textView.getText().toString());
+            showNormalToast(ResUtil.getString(R.string.invitatiom_tip_6));
         }
     }
 

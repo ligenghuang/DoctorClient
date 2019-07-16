@@ -170,5 +170,6 @@
     <string name="invitatiom_tip_3">邀请链接：</string>
     <string name="invitatiom_tip_4">复制邀请码</string>
     <string name="invitatiom_tip_5">复制邀请链接</string>
+    <string name="invitatiom_tip_6">已复制</string>
 
 </resources>

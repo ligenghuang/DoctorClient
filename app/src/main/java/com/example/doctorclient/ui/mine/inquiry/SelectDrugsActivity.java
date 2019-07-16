@@ -1,12 +1,17 @@
 package com.example.doctorclient.ui.mine.inquiry;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -74,6 +79,7 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
     int Num = 0;
     boolean isSelect = false;
 
+    String name = "";
 
     @Override
     protected SelectDrugsAction initAction() {
@@ -172,9 +178,9 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
 
                 }
                 int num = 0;
-                for (int i = 0; i <list.size() ; i++) {
-                    if (list.get(i).getDrug_num() >0){
-                        num = num+1;
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getDrug_num() > 0) {
+                        num = num + 1;
                     }
                 }
 
@@ -190,6 +196,27 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
             }
         });
 
+        searchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    hideInput();
+                    if (!TextUtils.isEmpty(searchEt.getText().toString())) {
+                        name = searchEt.getText().toString();
+                        if (CheckNetwork.checkNetwork2(mContext)) {
+                            loadDialog();
+                            baseAction.getDrugClass(searchEt.getText().toString());
+                        }
+                    } else {
+                        name = "";
+                        showNormalToast(ResUtil.getString(R.string.select_drugs_tip_1));
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -199,8 +226,8 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
             case R.id.tv_next:
                 //TODO  携带药品列表跳转页面
                 List<DrugListDto.DataBean> lists = new ArrayList<>();
-                for (int i = 0; i <list.size() ; i++) {
-                    if (list.get(i).getDrug_num() != 0){
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getDrug_num() != 0) {
                         lists.add(list.get(i));
                     }
                 }
@@ -208,10 +235,10 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
                 if (isSelect) {
                     intent = new Intent();
                     intent.putExtra("list", (Serializable) lists);
-                    setResult(200,intent);
+                    setResult(200, intent);
                     finish();
                 } else {
-                    if (lists.size() == 0){
+                    if (lists.size() == 0) {
                         showNormalToast(ResUtil.getString(R.string.edit_prescription_tip_16));
                         return;
                     }
@@ -237,37 +264,47 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
 
     /**
      * 获取药品分类列表成功
+     *
      * @param drugClassListDto
      */
     @Override
     public void getDrugClassSuccessful(DrugClassListDto drugClassListDto) {
+        type = 0;
         loadDiss();
-        List<DrugClassDto> list = new ArrayList<>();
-        List<String> drugList = drugClassListDto.getData();
-        for (int i = 0; i < drugClassListDto.getData().size(); i++) {
-            DrugClassDto drugClassDto = new DrugClassDto();
-            drugClassDto.setName(drugList.get(i));
-            drugClassDto.setClick(i == 0);
-            list.add(drugClassDto);
-        }
-        drugClassAdapter.refresh(list);
-        getDrugByClass(drugList.get(0));
+       if (drugClassListDto.getData().size() != 0){
+           List<DrugClassDto> list = new ArrayList<>();
+           List<String> drugList = drugClassListDto.getData();
+           for (int i = 0; i < drugClassListDto.getData().size(); i++) {
+               DrugClassDto drugClassDto = new DrugClassDto();
+               drugClassDto.setName(drugList.get(i));
+               drugClassDto.setClick(i == 0);
+               list.add(drugClassDto);
+           }
+           drugClassAdapter.refresh(list);
+           getDrugByClass(drugList.get(0));
+       }
     }
 
     /**
      * 获取药品列表
+     *
      * @param drugClass
      */
     @Override
     public void getDrugByClass(String drugClass) {
         if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
-            baseAction.getDrugByClass(drugClass);
+            if (TextUtils.isEmpty(name)) {
+                baseAction.getDrugByClass(drugClass);
+            }else {
+                baseAction.getDrugByClass(drugClass,name);
+            }
         }
     }
 
     /**
      * 获取药品列表成功
+     *
      * @param drugListDto
      */
     @Override
@@ -281,6 +318,7 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
 
     /**
      * 获取药品详情
+     *
      * @param iuid
      */
     @Override
@@ -293,6 +331,7 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
 
     /**
      * 获取药品详情成功
+     *
      * @param drugDetailsDto
      */
     @Override
@@ -340,6 +379,7 @@ public class SelectDrugsActivity extends UserBaseActivity<SelectDrugsAction> imp
 
     /**
      * 失败
+     *
      * @param message
      * @param code
      */
