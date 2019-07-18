@@ -241,6 +241,10 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
         }
     }
 
+    /**
+     * 获取药品备注 成功
+     * @param prescriptionDrugInfoDto
+     */
     @Override
     public void getDrugSaveHeadByIuidSuccessful(PrescriptionDrugInfoDto prescriptionDrugInfoDto) {
         loadDiss();
@@ -258,6 +262,10 @@ public class SelectPrescriptionDetailsActivity extends UserBaseActivity<SelectPr
         }
     }
 
+    /**
+     * 获取药品清单  成功
+     * @param prescriptionDrugListDto
+     */
     @Override
     public void getDrugSaveDetailByIuidSuccessful(PrescriptionDrugListDto prescriptionDrugListDto) {
         loadDiss();

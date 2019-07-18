@@ -23,6 +23,7 @@ import com.example.doctorclient.ui.mine.inquiry.MyInquiryActivity;
 import com.example.doctorclient.ui.mine.inquiry.SelectPrescriptionActivity;
 import com.example.doctorclient.ui.mine.prescription.MyPrescriptionActivity;
 import com.example.doctorclient.ui.mine.prescription.MyPrescriptionFragment;
+import com.example.doctorclient.util.Utilt;
 import com.example.doctorclient.util.base.UserBaseFragment;
 import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.ModifyDialog;
@@ -195,7 +196,13 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                             showToast(ResUtil.getString(R.string.mine_tip_10));
                             return;
                         } else {
-                            updateFactPrice(txet);
+                            //todo 判断小数点是否在第一位
+                            if (Utilt.isNumber(txet)){
+                                updateFactPrice("0"+txet);
+                            }else {
+                                updateFactPrice(txet);
+                            }
+
                             modifyDialog.dismiss();
                         }
                     }

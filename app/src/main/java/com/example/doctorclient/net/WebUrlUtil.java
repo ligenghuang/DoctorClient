@@ -7,15 +7,15 @@ public class WebUrlUtil {
     static {
         //配合retrofit，需要以/结尾
         if (BuildConfig.DEBUG) {
-//            BASE_URL = "http://192.168.3.2:8014/";
-//            IMG_URL = "http://192.168.3.2:8014";
-            BASE_URL = "http://www.yizhitong100.com/";
-            IMG_URL = "http://www.yizhitong100.com";
+            BASE_URL = "http://192.168.3.2:8014/";
+            IMG_URL = "http://192.168.3.2:8014";
+//            BASE_URL = "http://www.yizhitong100.com/";
+//            IMG_URL = "http://www.yizhitong100.com";
         } else {
-//            BASE_URL = "http://192.168.3.2:8014/";
-//            IMG_URL = "http://192.168.3.2:8014";
-            BASE_URL = "http://www.yizhitong100.com/";
-            IMG_URL = "http://www.yizhitong100.com";
+            BASE_URL = "http://192.168.3.2:8014/";
+            IMG_URL = "http://192.168.3.2:8014";
+//            BASE_URL = "http://www.yizhitong100.com/";
+//            IMG_URL = "http://www.yizhitong100.com";
         }
     }
 
@@ -280,6 +280,21 @@ public class WebUrlUtil {
      * DMine/getDepart
      */
     public static final String POST_DMINE_DEPART = "DMine/getDepartApp";
+
+    /**
+     * 绑定银行卡 DMine/BindingBank
+     */
+    public static final String POST_BINDBANK= "DMine/BindingBank";
+
+    /**
+     * 判断是否绑定银行卡 isBindingBankCard
+     */
+    public static final String POST_IS_NINDBANKCARD = "DMine/isBindingBankCard";
+
+    /**
+     * 提现 addMoenyOut
+     */
+    public static final String POST_ADD_MOENYOUT = "DMine/addMoenyOut";
 
     /**
      * 接收到消息

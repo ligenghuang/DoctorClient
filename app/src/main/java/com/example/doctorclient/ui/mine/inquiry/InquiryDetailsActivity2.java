@@ -161,8 +161,10 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
             case R.id.tv_submit:
                 //TODO 查看聊天记录
                 if (isSelect) {
+                    //返回
                     finish();
                 } else {
+                    //跳转
                     Intent intent = new Intent(mContext, MessageDetailActivity.class);
                     intent.putExtra("touserId", touserId);
                     intent.putExtra("askId", askId);

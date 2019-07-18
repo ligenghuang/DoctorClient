@@ -132,8 +132,6 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         illessImgAdapter = new IllessImgAdapter(mContext);
         imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
         imgIllnessRv.setAdapter(illessImgAdapter);
-
-
     }
 
     @OnClick(R.id.tv_view_chat_history)
@@ -141,18 +139,21 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         switch (view.getId()) {
             case R.id.tv_view_chat_history:
                 if (isAccepts) {
+                    //TODO 确认接诊
                     Confirmation(askId);
                 } else {
+                    //TODO  查看聊天记录
                     if (isSelect) {
+                        //返回
                         finish();
                     } else {
+                        //跳转
                         Intent intent = new Intent(mContext, MessageDetailActivity.class);
                         intent.putExtra("touserId", touserId);
                         intent.putExtra("askId", askId);
                         startActivity(intent);
                     }
                 }
-
                 break;
         }
     }
@@ -220,7 +221,6 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
             intent.putExtra("askId", askId);
             intent.putExtra("isFirst", true);
             startActivity(intent);
-
         } else {
             showToast(generalDto.getMsg());
         }

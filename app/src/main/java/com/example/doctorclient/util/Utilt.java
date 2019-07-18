@@ -110,4 +110,60 @@ public class Utilt {
         }
         return result;
     }
+
+    /**
+     * 判断小数点开头
+     * @param str
+     * @return
+     */
+    public static boolean isNumber(String str) {
+        return str.matches("\\.\\d+$");
+    }
+
+    //验证银行卡号
+    public static boolean checkBankCard(String cardId) {
+        char bit = getBankCardCheckCode(cardId.substring(0, cardId.length() - 1));
+        if (bit == 'N') {
+            return false;
+        }
+        return cardId.charAt(cardId.length() - 1) == bit;
+    }
+    //从不含校验位的银行卡卡号采用 Luhm 校验算法获得校验位
+    public static char getBankCardCheckCode(String nonCheckCodeCardId) {
+        if (nonCheckCodeCardId == null || nonCheckCodeCardId.trim().length() == 0
+                || !nonCheckCodeCardId.matches("\\d+")) {
+            //如果传的不是数据返回N
+            return 'N';
+        }
+        char[] chs = nonCheckCodeCardId.trim().toCharArray();
+        int luhmSum = 0;
+        for (int i = chs.length - 1, j = 0; i >= 0; i--, j++) {
+            int k = chs[i] - '0';
+            if (j % 2 == 0) {
+                k *= 2;
+                k = k / 10 + k % 10;
+            }
+            luhmSum += k;
+        }
+        return (luhmSum % 10 == 0) ? '0' : (char) ((10 - luhmSum % 10) + '0');
+    }
+
+    /**
+     * 将银行卡中间八个字符隐藏为*
+     */
+    public static String getHideBankCardNum(String bankCardNum) {
+        try {
+            if (bankCardNum == null) return "未绑定";
+
+            int length = bankCardNum.length();
+
+            if (length > 4) {
+                String endNum = bankCardNum.substring(15, length);
+                bankCardNum = "**** **** **** " + endNum;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bankCardNum;
+    }
 }

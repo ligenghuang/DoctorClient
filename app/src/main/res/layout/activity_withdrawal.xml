@@ -57,6 +57,7 @@
                 android:paddingRight="@dimen/dp_10"/>
 
             <LinearLayout
+                android:id="@+id/ll_withdrawal_amount"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height50"
                 android:background="@color/white"
@@ -90,145 +91,77 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/item_height50"
-                android:text="@string/withdrawal_tip_3"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/dp_10"
-                android:padding="@dimen/dp_10"
-                android:textSize="@dimen/text_size17"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
 
-            <View
-                style="@style/user_line_2"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"/>
 
-            <LinearLayout
-                android:id="@+id/ll_wechat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:padding="@dimen/dp_10">
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/item_height50"
+                   android:text="@string/withdrawal_tip_3"
+                   android:gravity="center_vertical"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:padding="@dimen/dp_10"
+                   android:textSize="@dimen/text_size17"
+                   android:textColor="@color/black"
+                   android:background="@color/white"/>
 
-                <ImageView
-                    android:id="@+id/iv_wechat"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/cash_withdrawal1"/>
+               <View
+                   style="@style/user_line_2"
+                   android:paddingLeft="@dimen/dp_10"
+                   android:paddingRight="@dimen/dp_10"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/withdrawal_tip_4"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size16"/>
 
-                <RadioButton
-                    android:id="@+id/rb_wechat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+               <LinearLayout
+                   android:id="@+id/ll_bank"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/item_height50"
+                   android:orientation="horizontal"
+                   android:background="@color/white"
+                   android:gravity="center_vertical"
+                   android:padding="@dimen/dp_10">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_bank_number"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/withdrawal_tip_14"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/color_9"/>
 
-            <View
-                style="@style/user_line_2"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"/>
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/icon_more_right"
+                       />
 
-            <LinearLayout
-                android:id="@+id/ll_ali"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:padding="@dimen/dp_10">
+               </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/iv_ali"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/cash_withdrawal2"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/withdrawal_tip_5"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size16"/>
-
-                <RadioButton
-                    android:id="@+id/rb_ali"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-            </LinearLayout>
+           </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_withdrawal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height50"
-                android:text="@string/withdrawal_tip_6"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/dp_10"
-                android:padding="@dimen/dp_10"
+                android:background="@drawable/shape_login_btn_bg"
+                android:layout_marginTop="@dimen/item_height40"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_size17"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-
-            <View
-                style="@style/user_line_2"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="@dimen/dp_10"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size15"
-                    android:textColor="@color/black"
-                    android:text="@string/withdrawal_tip_7"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size15"
-                    android:textColor="@color/black"
-                    android:text="@string/withdrawal_tip_8"
-                    android:layout_marginTop="@dimen/dp_4"/>
-
-
-            </LinearLayout>
+                android:gravity="center"
+                android:text="@string/withdrawal_tip_9"/>
             
         </LinearLayout>
         
         
     </android.support.v4.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/tv_withdrawal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height50"
-        android:background="@color/color_38a234"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size17"
-        android:gravity="center"
-        android:text="@string/withdrawal_tip_9"/>
+
 
 </LinearLayout>
