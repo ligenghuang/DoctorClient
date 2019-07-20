@@ -27,7 +27,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 提现（未实现）
+ * 提现
+ 3、（bug）修改收入明细列表显示
  *
  * @author lgh
  * created at 2019/5/17 0017 14:23

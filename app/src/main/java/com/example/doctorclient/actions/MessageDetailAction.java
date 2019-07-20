@@ -13,6 +13,7 @@ import com.example.doctorclient.event.SendMessageDto;
 import com.example.doctorclient.net.WebUrlUtil;
 import com.example.doctorclient.ui.impl.MessageDetailView;
 import com.example.doctorclient.util.config.MyApp;
+import com.example.doctorclient.util.data.DynamicTimeFormat;
 import com.example.doctorclient.util.data.MySp;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -99,17 +100,20 @@ public class MessageDetailAction extends BaseAction<MessageDetailView> {
      *
      * @param avatar
      */
-    public void sendPicturesa(String avatar, String touserid, String askId) {
+    public void sendPicturesa(String avatar, String touserid, String askId,int width,int height) {
 //2.获取图片，创建请求体
         File file = new File(avatar);
+        String name = DynamicTimeFormat.getTimestamp()+".jpg";
         //构建body
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("name", file.getName())
+                .addFormDataPart("name", name)
                 .addFormDataPart("type", "image/jpeg")
                 .addFormDataPart("H5ORDOC", "1")
                 .addFormDataPart("touserid", touserid)
                 .addFormDataPart("askId", askId)
-                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file))
+                .addFormDataPart("width",width+"")
+                .addFormDataPart("heigh",height+"")
+                .addFormDataPart("file", name, RequestBody.create(MediaType.parse("image/jpeg"), file))
                 .build();
         post(WebUrlUtil.POST_SEND_PICTURESA, false, service -> manager.runHttp(service.PostData_1(
                 MySharedPreferencesUtil.getSessionId(MyApp.getContext()), requestBody, WebUrlUtil.POST_SEND_PICTURESA)));

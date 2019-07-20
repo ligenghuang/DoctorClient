@@ -2,14 +2,20 @@ package com.example.doctorclient.adapter;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.doctorclient.R;
 import com.example.doctorclient.event.MessageDetailListDto;
 import com.example.doctorclient.net.WebUrlUtil;
+import com.example.doctorclient.ui.message.ImageDetailActivity;
 import com.example.doctorclient.util.data.DynamicTimeFormat;
 import com.example.doctorclient.util.popup.CusviewXPopup;
 import com.lgh.huanglib.util.L;
@@ -18,6 +24,9 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.enums.PopupType;
 import com.lxj.xpopup.impl.AttachListPopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
+import com.lxj.xpopup.interfaces.XPopupImageLoader;
+
+import java.io.File;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
@@ -117,7 +126,38 @@ public class MessageDetailListAdapter extends BaseRecyclerAdapter<MessageDetailL
                 //todo 图片
                 rightIv.setVisibility(View.VISIBLE);
                 GlideUtil.setImage(context, WebUrlUtil.IMG_URL + chat_note, rightIv, 0);
+                jumpImageDetail(WebUrlUtil.IMG_URL + chat_note, rightIv);
                 break;
+        }
+    }
+
+    private void jumpImageDetail(String url, ImageView imageView) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CusviewXPopup.Builder(context)
+                        .offsetY(v.getHeight())
+                        .asImageViewer(imageView, url, false,-1,-1,-1,false,new ImageLoader())
+                        .show();
+            }
+        });
+    }
+
+    public static class ImageLoader implements XPopupImageLoader {
+        @Override
+        public void loadImage(int position, @NonNull Object url, @NonNull ImageView imageView) {
+            //必须指定Target.SIZE_ORIGINAL，否则无法拿到原图，就无法享用天衣无缝的动画
+            Glide.with(imageView).load(url).apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round).override(Target.SIZE_ORIGINAL)).into(imageView);
+        }
+
+        @Override
+        public File getImageFile(@NonNull Context context, @NonNull Object uri) {
+            try {
+                return Glide.with(context).downloadOnly().load(uri).submit().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
