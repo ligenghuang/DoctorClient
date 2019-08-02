@@ -20,7 +20,7 @@ public interface SelectPrescriptionDetailsView extends BaseView {
     void getDrugSaveDetailByIuid();
     void getDrugSaveDetailByIuidSuccessful(PrescriptionDrugListDto prescriptionDrugListDto);
 
-    void updataFileName(String str);
+    void updataFileName(String str, int width, int height);
     void updataFileNameSuccessful(String str);
 
     void AddPrescribe(AddPrescribePost prescribePost);

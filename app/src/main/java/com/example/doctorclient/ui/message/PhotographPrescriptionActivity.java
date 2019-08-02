@@ -157,8 +157,8 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
 
         iuid = getIntent().getStringExtra("iuid");
 
-        illessImgAdapter = new IllessImgAdapter(mContext);
-        imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
+        illessImgAdapter = new IllessImgAdapter(mContext,imgIllnessRv);
+        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext,3));
         imgIllnessRv.setAdapter(illessImgAdapter);
 
         photographPrescriptionAdapter = new PhotographPrescriptionAdapter(mContext);
@@ -328,10 +328,10 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
      * @param str
      */
     @Override
-    public void updataFileName(String str) {
+    public void updataFileName(String str, int width, int height) {
         if (CheckNetwork.checkNetwork2(mContext)){
             loadDialog();
-            baseAction.updatafileName(str);
+            baseAction.updatafileName(str,width,height);
         }
     }
 
@@ -448,7 +448,7 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
         imagePicker.setShowCamera(true);                      //显示拍照按钮
-        imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
+        imagePicker.setCrop(false);                           //允许裁剪（单选才有效）
         imagePicker.setMultiMode(false);
         imagePicker.setSaveRectangle(true);
         imagePicker.setSelectLimit(1);              //选中数量限制
@@ -480,16 +480,9 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
                                         (this, BuildConfig.APPLICATION_ID + ".android7.fileprovider", imgUri);
                                 int zoomSacle = 3;
                                 try {
-                                    // 当图片大小大于512kb至少缩小两倍
-                                    if (imgUri.length() / 1024 > 512) {
-                                        zoomSacle = zoomSacle * 10;
-                                    }
-//                                    PicUtils.showCutPhoto(data, zoomSacle, imgUri.getPath());
-////                                    PicUtils.getCompressedImgPath(images.get(0).path, photoOption);
 //                                    //todo  请求接口 修改头像
-//                                    uploadAvatar(images.get(0).path);
                                     L.e("lgh","images.get(0).path  = "+images.get(0).path);
-                                    updataFileName(images.get(0).path);
+                                    updataFileName(images.get(0).path,images.get(0).width,images.get(0).height);
                                 } catch (Exception e) {
                                     loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
                                 }
@@ -502,24 +495,13 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
                         File imgUri = new File(images.get(0).path);
                         Uri dataUri = FileProvider.getUriForFile
                                 (this, BuildConfig.APPLICATION_ID + ".android7.fileprovider", imgUri);
-                        int zoomSacle = 3;
-                        try {
-                            // 当图片大小大于512kb至少缩小两倍
-                            if (imgUri.length() / 1024 > 512) {
-                                zoomSacle = zoomSacle * 10;
-                            }
-                            PicUtils.showCutPhoto(data, zoomSacle, imgUri.getPath());
-//                                    PicUtils.getCompressedImgPath(images.get(0).path, photoOption);
-//                                    baseAction.uploadImage(images.get(0).path);
-                        } catch (Exception e) {
-                            loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
-                        }
+
 
                         try {
                             //todo  请求接口 修改头像
 //                            uploadAvatar(images.get(0).path);
                             L.e("lgh","images.get(0).path  = "+images.get(0).path);
-                            updataFileName(images.get(0).path);
+                            updataFileName(images.get(0).path,images.get(0).width,images.get(0).height);
 
                         } catch (Exception e) {
                             loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);

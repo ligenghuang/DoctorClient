@@ -138,6 +138,11 @@ public class DynamicTimeFormat extends SimpleDateFormat {
         return format2.format(new Date(time));
     }
 
+    public static String LongToString6(long time) {
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy/MM/dd");
+        return format2.format(new Date(time));
+    }
+
     /**
      * 获取今天日期
      *

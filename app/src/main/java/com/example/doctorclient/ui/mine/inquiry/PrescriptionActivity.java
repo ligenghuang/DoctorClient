@@ -2,6 +2,7 @@ package com.example.doctorclient.ui.mine.inquiry;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -111,8 +112,8 @@ public class PrescriptionActivity extends UserBaseActivity<PrescriptionAction> i
         mContext = this;
         iuid = getIntent().getStringExtra("iuid");
 
-        illessImgAdapter = new IllessImgAdapter(mContext);
-        imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
+        illessImgAdapter = new IllessImgAdapter(mContext,imgIllnessRv);
+        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext,3));
         imgIllnessRv.setAdapter(illessImgAdapter);
 
         getAskHeadById();

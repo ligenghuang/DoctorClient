@@ -25,7 +25,7 @@ public interface PhotographPrescriptionView extends BaseView {
 
     void getPrescriptionListSuccessful(PrescriptionListDto prescriptionListDto);
 
-    void updataFileName(String str);
+    void updataFileName(String str, int width, int height);
     void updataFileNameSuccessful(String str);
 
     void savePhotographPrescription(String iuid,String diagonsis,String theImg);

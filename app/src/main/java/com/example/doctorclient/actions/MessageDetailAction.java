@@ -1,5 +1,6 @@
 package com.example.doctorclient.actions;
 
+import android.graphics.Bitmap;
 import android.util.Base64;
 import android.view.View;
 
@@ -18,6 +19,7 @@ import com.example.doctorclient.util.data.MySp;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.jkt.tcompress.TCompress;
 import com.lgh.huanglib.actions.Action;
 import com.lgh.huanglib.net.CollectionsUtils;
 import com.lgh.huanglib.util.L;
@@ -104,6 +106,14 @@ public class MessageDetailAction extends BaseAction<MessageDetailView> {
 //2.获取图片，创建请求体
         File file = new File(avatar);
         String name = DynamicTimeFormat.getTimestamp()+".jpg";
+        TCompress tCompress = new TCompress.Builder()
+                .setMaxWidth(width)
+                .setMaxHeight(height)
+                .setQuality(70)
+                .setFormat(Bitmap.CompressFormat.JPEG)
+                .setConfig(Bitmap.Config.RGB_565)
+                .build();
+        File compressedFile= tCompress.compressedToFile(file);
         //构建body
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("name", name)
@@ -113,7 +123,7 @@ public class MessageDetailAction extends BaseAction<MessageDetailView> {
                 .addFormDataPart("askId", askId)
                 .addFormDataPart("width",width+"")
                 .addFormDataPart("heigh",height+"")
-                .addFormDataPart("file", name, RequestBody.create(MediaType.parse("image/jpeg"), file))
+                .addFormDataPart("file", name, RequestBody.create(MediaType.parse("image/jpeg"), compressedFile))
                 .build();
         post(WebUrlUtil.POST_SEND_PICTURESA, false, service -> manager.runHttp(service.PostData_1(
                 MySharedPreferencesUtil.getSessionId(MyApp.getContext()), requestBody, WebUrlUtil.POST_SEND_PICTURESA)));

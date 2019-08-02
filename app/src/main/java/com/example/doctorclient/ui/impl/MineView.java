@@ -1,5 +1,6 @@
 package com.example.doctorclient.ui.impl;
 
+import com.example.doctorclient.event.ConsultationFeeDto;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.UserInfoDto;
 import com.lgh.huanglib.util.base.BaseView;
@@ -23,4 +24,8 @@ public interface MineView extends BaseView {
     void updateFactPrice(String num);
 
     void updateFactPriceSuccessful(GeneralDto generalDto);
+
+    void getConsultationFee();
+
+    void getConsultationFeeSuccessful(ConsultationFeeDto consultationFeeDto);
 }

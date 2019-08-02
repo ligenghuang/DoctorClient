@@ -84,4 +84,5 @@ dependencies {
     })
     implementation project(':IMLib')
     implementation project(':CallKit')
+    compile 'com.jkt:tcompress:1.2.3'
 }

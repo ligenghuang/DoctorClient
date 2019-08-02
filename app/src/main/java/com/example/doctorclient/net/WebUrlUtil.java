@@ -7,15 +7,15 @@ public class WebUrlUtil {
     static {
         //配合retrofit，需要以/结尾
         if (BuildConfig.DEBUG) {
-//            BASE_URL = "http://192.168.3.2:8014/";
-//            IMG_URL = "http://192.168.3.2:8014";
-            BASE_URL = "http://api.yizhitong100.com/";
-            IMG_URL = "http://api.yizhitong100.com";
+            BASE_URL = "http://192.168.1.62:8014/";
+            IMG_URL = "http://192.168.1.62:8014";
+//            BASE_URL = "http://api.yizhitong100.com/";
+//            IMG_URL = "http://api.yizhitong100.com";
         } else {
-//            BASE_URL = "http://192.168.3.2:8014/";
-//            IMG_URL = "http://192.168.3.2:8014";
-            BASE_URL = "http://api.yizhitong100.com/";
-            IMG_URL = "http://api.yizhitong100.com";
+            BASE_URL = "http://192.168.1.62:8014/";
+            IMG_URL = "http://192.168.1.62:8014";
+//            BASE_URL = "http://api.yizhitong100.com/";
+//            IMG_URL = "http://api.yizhitong100.com";
         }
     }
 
@@ -295,6 +295,11 @@ public class WebUrlUtil {
      * 提现 addMoenyOut
      */
     public static final String POST_ADD_MOENYOUT = "DMine/addMoenyOut";
+
+    /**
+     * 获取问诊费  DMine/getConsultationFee
+     */
+    public static final String POST_GETCONSULTATIONFEE = "DMine/getConsultationFee";
 
     /**
      * 接收到消息

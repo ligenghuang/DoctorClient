@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.MineAction;
+import com.example.doctorclient.event.ConsultationFeeDto;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.UserInfoDto;
 import com.example.doctorclient.net.WebUrlUtil;
@@ -28,12 +29,16 @@ import com.example.doctorclient.util.base.UserBaseFragment;
 import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.ModifyDialog;
 import com.example.doctorclient.util.dialog.UpdateFactPriceDialog;
+import com.example.doctorclient.util.picker.TimePickerBuilder;
 import com.lgh.huanglib.util.CheckNetwork;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.config.GlideUtil;
 import com.lgh.huanglib.util.data.PriceUtils;
 import com.lgh.huanglib.util.data.ResUtil;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -188,26 +193,27 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
                     jumpActivityNotFinish(mContext, LoginActivity.class);
                     return;
                 }
-                UpdateFactPriceDialog modifyDialog = new UpdateFactPriceDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.mine_tip_10));
-                modifyDialog.setOnClickListener(new UpdateFactPriceDialog.OnClickListener() {
-                    @Override
-                    public void confirm(String txet) {
-                        if (TextUtils.isEmpty(txet)) {
-                            showToast(ResUtil.getString(R.string.mine_tip_10));
-                            return;
-                        } else {
-                            //todo 判断小数点是否在第一位
-                            if (Utilt.isNumber(txet)){
-                                updateFactPrice("0"+txet);
-                            }else {
-                                updateFactPrice(txet);
-                            }
-
-                            modifyDialog.dismiss();
-                        }
-                    }
-                });
-                modifyDialog.show();
+                getConsultationFee();
+//                UpdateFactPriceDialog modifyDialog = new UpdateFactPriceDialog(mContext, R.style.MY_AlertDialog, ResUtil.getString(R.string.mine_tip_10));
+//                modifyDialog.setOnClickListener(new UpdateFactPriceDialog.OnClickListener() {
+//                    @Override
+//                    public void confirm(String txet) {
+//                        if (TextUtils.isEmpty(txet)) {
+//                            showToast(ResUtil.getString(R.string.mine_tip_10));
+//                            return;
+//                        } else {
+//                            //todo 判断小数点是否在第一位
+//                            if (Utilt.isNumber(txet)){
+//                                updateFactPrice("0"+txet);
+//                            }else {
+//                                updateFactPrice(txet);
+//                            }
+//
+//                            modifyDialog.dismiss();
+//                        }
+//                    }
+//                });
+//                modifyDialog.show();
                 break;
             case R.id.ll_evaluation:
                 //todo 我的评价
@@ -256,7 +262,6 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
 
     /**
      * 获取用户信息成功
-     *
      * @param userInfoDto
      */
     @Override
@@ -302,6 +307,35 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
         if (generalDto.getCode() == 1) {
             loadDialog();
             getUserInfo();
+        }
+    }
+
+    /**
+     * 获取问诊费
+     */
+    @Override
+    public void getConsultationFee() {
+        if (CheckNetwork.checkNetwork2(mContext)){
+            loadDialog();
+            baseAction.getConsultationFee();
+        }
+    }
+
+    @Override
+    public void getConsultationFeeSuccessful(ConsultationFeeDto consultationFeeDto) {
+        loadDiss();
+        List<String> feeList = new ArrayList<>();
+        if (consultationFeeDto.getData().size() != 0){
+            for (int i = 0; i <consultationFeeDto.getData().size() ; i++) {
+                feeList.add(consultationFeeDto.getData().get(i).getValue());
+            }
+            //todo 问诊费设置
+            new TimePickerBuilder(mContext).setSexPicker(feeList, "问诊费设置", new TimePickerBuilder.SexPickerCustomListener() {
+                @Override
+                public void sexSelect(String sexStr) {
+                    updateFactPrice(sexStr);
+                }
+            }).show();
         }
     }
 

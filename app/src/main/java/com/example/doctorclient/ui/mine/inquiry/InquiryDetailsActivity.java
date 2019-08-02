@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -129,8 +130,8 @@ public class InquiryDetailsActivity extends UserBaseActivity<InquiryDetailsActio
         isAccepts = getIntent().getBooleanExtra("isAccepts",false);
         L.e("lgh_accepts","isAccepts  = "+isAccepts);
         viewChatHistoryTv.setText(ResUtil.getString(isAccepts?R.string.inquity_tip_6:R.string.inquity_tip_27));
-        illessImgAdapter = new IllessImgAdapter(mContext);
-        imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
+        illessImgAdapter = new IllessImgAdapter(mContext,imgIllnessRv);
+        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext,3));
         imgIllnessRv.setAdapter(illessImgAdapter);
     }
 

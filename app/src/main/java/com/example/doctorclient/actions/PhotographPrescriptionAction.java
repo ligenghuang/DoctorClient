@@ -1,15 +1,19 @@
 package com.example.doctorclient.actions;
 
+import android.graphics.Bitmap;
+
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.InquiryDetailDto;
 import com.example.doctorclient.event.PrescriptionListDto;
 import com.example.doctorclient.net.WebUrlUtil;
 import com.example.doctorclient.ui.impl.PhotographPrescriptionView;
 import com.example.doctorclient.util.config.MyApp;
+import com.example.doctorclient.util.data.DynamicTimeFormat;
 import com.example.doctorclient.util.data.MySp;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.jkt.tcompress.TCompress;
 import com.lgh.huanglib.actions.Action;
 import com.lgh.huanglib.net.CollectionsUtils;
 import com.lgh.huanglib.util.CheckNetwork;
@@ -76,14 +80,26 @@ public class PhotographPrescriptionAction extends BaseAction<PhotographPrescript
      * 上传图片
      * @param path
      */
-    public void updatafileName(String path) {
+    public void updatafileName(String path, int width, int height){
         File file = new File(path);
-        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file))
+        String name = DynamicTimeFormat.getTimestamp() + ".jpg";
+        TCompress tCompress = new TCompress.Builder()
+                .setMaxWidth(width)
+                .setMaxHeight(height)
+                .setQuality(70)
+                .setFormat(Bitmap.CompressFormat.JPEG)
+                .setConfig(Bitmap.Config.RGB_565)
                 .build();
+        File compressedFile= tCompress.compressedToFile(file);
+
+        //构建body
+        MultipartBody.Builder build = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("width", width + "")
+                .addFormDataPart("heigh", height + "")
+                .addFormDataPart("file", name, RequestBody.create(MediaType.parse("image/jpg"), compressedFile));
+        RequestBody requestBody = build.build();
         post(WebUrlUtil.POST_ASK_FILENAME, false, service -> manager.runHttp(
-                service.PostData_String(MySharedPreferencesUtil.getSessionId(MyApp.getContext()), requestBody, WebUrlUtil.POST_ASK_FILENAME)
-        ));
+                service.PostData_String(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),requestBody, WebUrlUtil.POST_ASK_FILENAME)));
     }
 
     /**

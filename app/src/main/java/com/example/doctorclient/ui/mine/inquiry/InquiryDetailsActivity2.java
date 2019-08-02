@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -142,8 +143,8 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
         isSelect = getIntent().getBooleanExtra("isSelect", false);
         isAccepts = getIntent().getBooleanExtra("isAccepts", false);
         mTvSubmit.setText(ResUtil.getString(isAccepts ? R.string.inquity_tip_6 : R.string.inquity_tip_27));
-        illessImgAdapter = new IllessImgAdapter(mContext);
-        imgIllnessRv.setLayoutManager(new LinearLayoutManager(mContext));
+        illessImgAdapter = new IllessImgAdapter(mContext,imgIllnessRv);
+        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext,3));
         imgIllnessRv.setAdapter(illessImgAdapter);
 
         photographPrescriptionAdapter = new PhotographPrescriptionAdapter(mContext);
@@ -254,10 +255,10 @@ public class InquiryDetailsActivity2 extends UserBaseActivity<PhotographPrescrip
      * @param str
      */
     @Override
-    public void updataFileName(String str) {
+    public void updataFileName(String str, int width, int height) {
         if (CheckNetwork.checkNetwork2(mContext)) {
             loadDialog();
-            baseAction.updatafileName(str);
+            baseAction.updatafileName(str,width,height);
         }
     }
 

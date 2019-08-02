@@ -21,12 +21,17 @@ import com.example.doctorclient.util.popup.CusviewXPopup;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.config.GlideUtil;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.ImageViewerPopupView;
+import com.lxj.xpopup.enums.PopupPosition;
 import com.lxj.xpopup.enums.PopupType;
 import com.lxj.xpopup.impl.AttachListPopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
+import com.lxj.xpopup.interfaces.OnSrcViewUpdateListener;
 import com.lxj.xpopup.interfaces.XPopupImageLoader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
@@ -41,6 +46,11 @@ public class MessageDetailListAdapter extends BaseRecyclerAdapter<MessageDetailL
 
     Context context;
     String touserid;
+    OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public MessageDetailListAdapter(Context context, String touserid) {
         super(R.layout.layout_item_message_detail);
@@ -126,40 +136,11 @@ public class MessageDetailListAdapter extends BaseRecyclerAdapter<MessageDetailL
                 //todo 图片
                 rightIv.setVisibility(View.VISIBLE);
                 GlideUtil.setImage(context, WebUrlUtil.IMG_URL + chat_note, rightIv, 0);
-                jumpImageDetail(WebUrlUtil.IMG_URL + chat_note, rightIv);
+                onClickListener.OnClick(WebUrlUtil.IMG_URL + chat_note, rightIv);
                 break;
         }
     }
 
-    private void jumpImageDetail(String url, ImageView imageView) {
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new CusviewXPopup.Builder(context)
-                        .offsetY(v.getHeight())
-                        .asImageViewer(imageView, url, false,-1,-1,-1,false,new ImageLoader())
-                        .show();
-            }
-        });
-    }
-
-    public static class ImageLoader implements XPopupImageLoader {
-        @Override
-        public void loadImage(int position, @NonNull Object url, @NonNull ImageView imageView) {
-            //必须指定Target.SIZE_ORIGINAL，否则无法拿到原图，就无法享用天衣无缝的动画
-            Glide.with(imageView).load(url).apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round).override(Target.SIZE_ORIGINAL)).into(imageView);
-        }
-
-        @Override
-        public File getImageFile(@NonNull Context context, @NonNull Object uri) {
-            try {
-                return Glide.with(context).downloadOnly().load(uri).submit().get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 
     /**
      * 设置头像
@@ -175,5 +156,9 @@ public class MessageDetailListAdapter extends BaseRecyclerAdapter<MessageDetailL
             GlideUtil.setImageCircle(context, WebUrlUtil.IMG_URL + "DOC/my" + img, imageView, R.drawable.icon_placeholder);
             L.e("lgh", WebUrlUtil.IMG_URL + "DOC/my" + img);
         }
+    }
+
+    public interface OnClickListener{
+        void OnClick(String url,ImageView imageView);
     }
 }

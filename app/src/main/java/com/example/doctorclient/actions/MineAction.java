@@ -2,6 +2,7 @@ package com.example.doctorclient.actions;
 
 import android.telecom.CallAudioState;
 
+import com.example.doctorclient.event.ConsultationFeeDto;
 import com.example.doctorclient.event.GeneralDto;
 import com.example.doctorclient.event.UserInfoDto;
 import com.example.doctorclient.net.WebUrlUtil;
@@ -55,6 +56,14 @@ public class MineAction extends BaseAction<MineView> {
     public void updateFactPrice(String text){
         post(WebUrlUtil.POST_UPDATEFACT_PRICE, false, service -> manager.runHttp(
                 service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),CollectionsUtils.generateMap("fact_price",text), WebUrlUtil.POST_UPDATEFACT_PRICE)));
+    }
+
+    /**
+     * 获取问诊费
+     */
+    public void getConsultationFee(){
+        post(WebUrlUtil.POST_GETCONSULTATIONFEE, false, service -> manager.runHttp(
+                service.PostData_1(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()), WebUrlUtil.POST_GETCONSULTATIONFEE)));
     }
 
     /**
@@ -114,6 +123,17 @@ public class MineAction extends BaseAction<MineView> {
                             GeneralDto generalDto = gson.fromJson(action.getUserData().toString(), new TypeToken<GeneralDto>() {
                             }.getType());
                             view.updateFactPriceSuccessful(generalDto);
+                            return;
+                        }
+                        view.onError(msg, action.getErrorType());
+                        break;
+                    case WebUrlUtil.POST_GETCONSULTATIONFEE:
+                        if (aBoolean) {
+                            L.e("xx", "输出返回结果 " + action.getUserData().toString());
+                            Gson gson = new Gson();
+                            ConsultationFeeDto consultationFeeDto = gson.fromJson(action.getUserData().toString(), new TypeToken<ConsultationFeeDto>() {
+                            }.getType());
+                            view.getConsultationFeeSuccessful(consultationFeeDto);
                             return;
                         }
                         view.onError(msg, action.getErrorType());

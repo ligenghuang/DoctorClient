@@ -1,5 +1,6 @@
 package com.example.doctorclient.ui.message;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
@@ -16,9 +17,13 @@ import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.doctorclient.BuildConfig;
 import com.example.doctorclient.R;
 import com.example.doctorclient.actions.MessageDetailAction;
@@ -50,12 +55,14 @@ import com.example.doctorclient.util.data.MySp;
 import com.example.doctorclient.util.dialog.PicturesDialog;
 import com.example.doctorclient.util.imageloader.GlideImageLoader;
 import com.example.doctorclient.util.photo.PicUtils;
+import com.example.doctorclient.util.popup.CusviewXPopup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lgh.huanglib.util.CheckNetwork;
 import com.lgh.huanglib.util.L;
 import com.lgh.huanglib.util.base.ActivityStack;
 import com.lgh.huanglib.util.data.ResUtil;
+import com.lxj.xpopup.interfaces.XPopupImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -366,6 +373,12 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
             @Override
             public void onClose(CommonLanguageListDto.DataBean model) {
                 deleteCommonLanguage(model.getIuid());
+            }
+        });
+        messageDetailListAdapter.setOnClickListener(new MessageDetailListAdapter.OnClickListener() {
+            @Override
+            public void OnClick(String url, ImageView imageView) {
+                jumpImageDetail(url,imageView);
             }
         });
     }
@@ -1004,11 +1017,6 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                                         (this, BuildConfig.APPLICATION_ID + ".android7.fileprovider", imgUri);
                                 int zoomSacle = 3;
                                 try {
-                                    // 当图片大小大于512kb至少缩小两倍
-//                                    if (imgUri.length() / 1024 > 512) {
-//                                        zoomSacle = zoomSacle * 10;
-//                                    }
-//
 //                                    //todo  请求接口 发送图片消息
                                     L.e("lgh", "images.get(0).path  = " + images.get(0).path);
 //                                    GlideUtil.setImageCircle(mContext,images.get(0).path,isPortrait?userPortaitIv:userCertificateIv,0);
@@ -1025,36 +1033,28 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                         }
                         break;
                     case REQUEST_CODE_TAKE:
-//                        PicUtils.compressBmpToFile(images.get(0).path, photoOption);
-                        File imgUri = new File(images.get(0).path);
-                        Uri dataUri = FileProvider.getUriForFile
-                                (this, BuildConfig.APPLICATION_ID + ".android7.fileprovider", imgUri);
-                        int zoomSacle = 3;
-                        try {
-                            // 当图片大小大于512kb至少缩小两倍
-//                            if (imgUri.length() / 1024 > 512) {
-//                                zoomSacle = zoomSacle * 10;
-//                            }
-                            PicUtils.showCutPhoto(data, zoomSacle, imgUri.getPath());
-//                                    PicUtils.getCompressedImgPath(images.get(0).path, photoOption);
-//                                    baseAction.uploadImage(images.get(0).path);
-                        } catch (Exception e) {
-                            loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
-                        }
+                         if (images != null) {
+                            selImageList.addAll(images);
 
-                        try {
-                            //todo  请求接口 发送图片消息
-//                            uploadAvatar(images.get(0).path);
-                            L.e("lgh", "images.get(0).path  = " + images.get(0).path);
-//                            GlideUtil.setImageCircle(mContext,images.get(0).path,isPortrait?userPortaitIv:userCertificateIv,0);
                             if (CheckNetwork.checkNetwork2(mContext)) {
-                                loadDialog();
-                                addllGone(false);
-                                baseAction.sendPicturesa(images.get(0).path, touserId, askId,images.get(0).width,images.get(0).height);
-                            }
-                        } catch (Exception e) {
-                            loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
+                                File imgUri = new File(images.get(0).path);
+                                Uri dataUri = FileProvider.getUriForFile
+                                        (this, BuildConfig.APPLICATION_ID + ".android7.fileprovider", imgUri);
+                                int zoomSacle = 3;
+                                try {
+                                    //todo  请求接口 发送图片消息
+                                    L.e("lgh", "images.get(0).path  = " + images.get(0).path);
+//                                  GlideUtil.setImageCircle(mContext,images.get(0).path,isPortrait?userPortaitIv:userCertificateIv,0);
+                                    if (CheckNetwork.checkNetwork2(mContext)) {
+                                        loadDialog();
+                                        addllGone(false);
+                                        baseAction.sendPicturesa(images.get(0).path, touserId, askId,1080,1080);
+                                    }
+                                } catch (Exception e) {
+                                    loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);
+                                }
 
+                            }
                         }
                         break;
                 }
@@ -1070,5 +1070,35 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
     }
 
     /**********************************修改头像 end*********************************************/
+
+    private void jumpImageDetail(String url, ImageView imageView) {
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CusviewXPopup.Builder(mContext)
+                        .asImageViewer(imageView, url, false,-1,-1,-1,false,new ImageLoader())
+                        .show();
+            }
+        });
+    }
+
+    public static class ImageLoader implements XPopupImageLoader {
+        @Override
+        public void loadImage(int position, @NonNull Object url, @NonNull ImageView imageView) {
+            //必须指定Target.SIZE_ORIGINAL，否则无法拿到原图，就无法享用天衣无缝的动画
+            Glide.with(imageView).load(url).apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round).override(Target.SIZE_ORIGINAL)).into(imageView);
+        }
+
+        @Override
+        public File getImageFile(@NonNull Context context, @NonNull Object uri) {
+            try {
+                return Glide.with(context).downloadOnly().load(uri).submit().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 }
