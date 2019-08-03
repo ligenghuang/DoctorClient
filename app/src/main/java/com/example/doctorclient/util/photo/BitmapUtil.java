@@ -55,8 +55,8 @@ import java.net.URLConnection;
  */
 public class BitmapUtil {
     /* 拍照的照片存储位置 */
-    public final static String AVATAR_PATH = "feijin/studyeasily/user/";
-    public final static String PHOTO_PATH = "feijin/studyeasily/photo/";
+    public final static String AVATAR_PATH = "yizhitong/doctorclient/user/";
+    public final static String PHOTO_PATH = "yizhitong/doctorclient/photo/";
     public static final File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/"
             + AVATAR_PATH);
 

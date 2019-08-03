@@ -37,19 +37,12 @@ public class MyPrescriptionAdapter extends BaseRecyclerAdapter<MyPrescriptionDto
         int type = 0;
         if (model.getReback_flag() == 1){
             type = 3;
-            L.e("lgh_type","3");
         }else if (model.getFinish_flag() == 1){
             type = 2;
-            L.e("lgh_type","2");
-        }else if (model.getAgree_flag() == 1){
+        }else if (model.getPay_flag() == 1 && model.getFinish_flag() != 1 && model.getReback_flag() != 1){
             type = 1;
-            L.e("lgh_type","1");
-        }else if (model.getPay_flag() == 0){
+        }else if (model.getPay_flag() == 0) {
             type = 0;
-            L.e("lgh_type","0");
-        }else if (model.getPay_flag() == 1){
-            type = 1;
-            L.e("lgh_type","1");
         }
         setType(holder,type);
 

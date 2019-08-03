@@ -33,6 +33,7 @@ public class DataInterceptor implements Interceptor {
 
 
 //        L.e("lgh","Set-Cookie   =  "+response.headers("set-cookie").get(0));
+        //todo 保存Cookie
         try {
             if (MySharedPreferencesUtil.getSessionId(MyApplication.getContext()) == null){
                 String firstCookie = response.headers("set-cookie").get(0).toString().split(";")[0];
