@@ -112,6 +112,9 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
         loadDiss();
         if (isVisible) {
             ((MainActivity) getActivity()).changeStatusBar(false, R.color.color_38a234);
+            if (MySp.iSLoginLive(mContext)){
+                isReadFlag();
+            }
         }
     }
 
@@ -248,7 +251,21 @@ public class MineFragment extends UserBaseFragment<MineAction> implements MineVi
     public void isLoginSuccessful() {
         loadDiss();
         getUserInfo();
+        isReadFlag();
     }
+
+    @Override
+    public void isReadFlag() {
+        if (CheckNetwork.checkNetwork2(mContext)){
+            baseAction.isReadFlag();
+        }
+    }
+
+    @Override
+    public void isReadFlagSuccessful(String b) {
+        ((MainActivity) getActivity()).setIv2(b.equals("true"));
+    }
+
 
     /**
      * 获取用户信息

@@ -204,12 +204,19 @@ public class PrescriptionActivity extends UserBaseActivity<PrescriptionAction> i
         if (!TextUtils.isEmpty(patientMVBean.getWeight())) {
             weighrTv.setText(patientMVBean.getWeight() + "KG");
         }
-        allergyTv.setText(patientMVBean.getAllergy_note());
-        familyTv.setText(patientMVBean.getMed_family());
-        medicalHistoryTv.setText(patientMVBean.getMed_history());
+        allergyTv.setText(setText(patientMVBean.getAllergy_note()));
+        familyTv.setText(setText(patientMVBean.getMed_family()));
+        medicalHistoryTv.setText(setText(patientMVBean.getMed_history()));
 
         illnessTv.setText(dataBean.getIll_note());
         illessImgAdapter.refresh(dataBean.getIll_img());
+    }
+
+    private String setText(String s){
+        if (s.equals("null")){
+            s = "";
+        }
+        return s;
     }
 
     @Override

@@ -28,4 +28,8 @@ public interface MineView extends BaseView {
     void getConsultationFee();
 
     void getConsultationFeeSuccessful(ConsultationFeeDto consultationFeeDto);
+
+    void isReadFlag();
+
+    void isReadFlagSuccessful(String b);
 }

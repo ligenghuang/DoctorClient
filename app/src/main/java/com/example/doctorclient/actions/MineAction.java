@@ -67,6 +67,15 @@ public class MineAction extends BaseAction<MineView> {
     }
 
     /**
+     * 判断是否有未读消息
+     */
+    public void isReadFlag(){
+        post(WebUrlUtil.POST_ISREADFLAG, false, service -> manager.runHttp(
+                service.PostData_String(MySharedPreferencesUtil.getSessionId(MyApplication.getContext()),  CollectionsUtils.generateMap("H5ORDOC","1"),WebUrlUtil.POST_ISREADFLAG)
+        ));
+    }
+
+    /**
      * sticky:表明优先接收最高级  threadMode = ThreadMode.MAIN：表明在主线程
      *
      * @param action
@@ -137,6 +146,13 @@ public class MineAction extends BaseAction<MineView> {
                             return;
                         }
                         view.onError(msg, action.getErrorType());
+                        break;
+                    case WebUrlUtil.POST_ISREADFLAG:
+                        if (aBoolean) {
+                            String s = new Gson().fromJson(action.getUserData().toString(), new TypeToken<String>() {
+                            }.getType());
+                            view.isReadFlagSuccessful(s);
+                        }
                         break;
                 }
 

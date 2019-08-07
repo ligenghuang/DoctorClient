@@ -192,6 +192,8 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
     private RecyclerView.SmoothScroller smoothScroller;
     CustomLinearLayoutManager linearLayoutManager;
 
+    boolean isPrescription = false;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_message_detail;
@@ -427,11 +429,13 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
                 break;
             case R.id.tv_prescription:
                 //TODO 开方
+                isPrescription = true;
                 Intent i = new Intent(mContext, SelectPrescriptionActivity.class);
                 startActivity(i);
                 break;
             case R.id.tv_photograph:
                 //todo 拍照开方
+                isPrescription = true;
                 Intent intent1 = new Intent(mContext, PhotographPrescriptionActivity.class);
                 intent1.putExtra("iuid", askId);
                 startActivity(intent1);
@@ -650,7 +654,11 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
         ask_flag = dataBean.getDrugFlag();
         endSessionTimeTv.setText(ResUtil.getFormatString(R.string.message_tip_3, dataBean.getLastTime()));
         nameInfoTv.setText(dataBean.getName());
-        ageInfoTv.setText(dataBean.getSex() + "   " + dataBean.getAge() + "岁");
+        String DrugFlag = "";
+        if (dataBean.getDrugFlag() == 1){
+            DrugFlag = "(已开处方)";
+        }
+        ageInfoTv.setText(dataBean.getSex() + "   " + dataBean.getAge() + "岁   "+DrugFlag);
         illnessTv.setText(dataBean.getNote());
         prescriptionLl.setVisibility(dataBean.getAskFlag() == 2 ? View.GONE : View.VISIBLE);
         int flag = inquiryDetailDto.getData().getAskFlag();
@@ -927,6 +935,10 @@ public class MessageDetailActivity extends UserBaseActivity<MessageDetailAction>
         super.onResume();
         if (baseAction != null) {
             baseAction.toRegister();
+        }
+        if (isPrescription){
+            getAskHeadByUserId();
+            isPrescription = false;
         }
     }
 

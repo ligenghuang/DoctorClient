@@ -501,7 +501,7 @@ public class PhotographPrescriptionActivity extends UserBaseActivity<PhotographP
                             //todo  请求接口 修改头像
 //                            uploadAvatar(images.get(0).path);
                             L.e("lgh","images.get(0).path  = "+images.get(0).path);
-                            updataFileName(images.get(0).path,images.get(0).width,images.get(0).height);
+                            updataFileName(images.get(0).path,1080,1080);
 
                         } catch (Exception e) {
                             loadError(ResUtil.getString(R.string.main_select_phone_error), mContext);

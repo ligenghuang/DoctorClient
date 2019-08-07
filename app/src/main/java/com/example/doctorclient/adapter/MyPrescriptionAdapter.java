@@ -36,12 +36,16 @@ public class MyPrescriptionAdapter extends BaseRecyclerAdapter<MyPrescriptionDto
         holder.text(R.id.tv_item_subtotal,ResUtil.getFormatString(R.string.prescription_tip_2,PriceUtils.formatPrice(model.getDrug_money())));
         int type = 0;
         if (model.getReback_flag() == 1){
+            //todo 已取消
             type = 3;
         }else if (model.getFinish_flag() == 1){
+            //TODO 已完成
             type = 2;
         }else if (model.getPay_flag() == 1 && model.getFinish_flag() != 1 && model.getReback_flag() != 1){
+            //TODO  待发货
             type = 1;
         }else if (model.getPay_flag() == 0) {
+            //TODO  待付款
             type = 0;
         }
         setType(holder,type);

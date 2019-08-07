@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
@@ -66,6 +67,7 @@ import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
 
 import android.os.Process;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.java_websocket.client.WebSocketClient;
@@ -99,11 +101,13 @@ public class MainActivity extends UserBaseActivity {
     @BindView(R.id.my_pager)
     CustomViewPager myPager;
     @BindView(R.id.lin_1)
-    LinearLayout lin1;
+    RelativeLayout lin1;
     @BindView(R.id.lin_2)
     LinearLayout lin2;
     @BindView(R.id.lin_3)
     LinearLayout lin3;
+    @BindView(R.id.iv_2)
+    ImageView iv_2;
 
     private ArrayList<Fragment> fragments;
     private MyFragmentPagerAdapter fragmentPagerAdapter;
@@ -238,6 +242,15 @@ public class MainActivity extends UserBaseActivity {
         mImmersionBar.statusBarDarkFont(isBlack).statusBarColor(bgColor).init();
     }
 
+
+    /**
+     * 显示是否有未读消息
+     * @param b
+     */
+    public void setIv2(boolean b){
+        L.e("lgh_l","b = "+b);
+        iv_2.setVisibility(b?View.VISIBLE:View.GONE);
+    }
     /**
      * 选择
      *
