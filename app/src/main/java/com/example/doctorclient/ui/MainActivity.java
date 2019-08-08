@@ -327,6 +327,7 @@ public class MainActivity extends UserBaseActivity {
                     MessageDto messageDto = new Gson().fromJson(message, new TypeToken<MessageDto>() {
                     }.getType());
                     if (messageDto.getEvent().equals("chat")) {
+                        mineFragment.isReadFlag();
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE,
                                 Action.KEY_OBJ, message);
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE_1,
@@ -530,9 +531,12 @@ public class MainActivity extends UserBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (isFirst && MySp.iSLoginLive(mContext)) {
+        if (MySp.iSLoginLive(mContext)) {
+            //TODO  登录聊天服务器
             loginSocket();
             loginRoogIM(MySp.getRoogUserId(mContext), MySp.getRoogUserName(mContext), WebUrlUtil.IMG_URL+MySp.getRoogUserImg(mContext));
+            //todo 判断是否有未读消息
+            mineFragment.isReadFlag();
         }
         if (!MySp.iSLoginLive(mContext)) {
             if (client != null) {
@@ -577,9 +581,6 @@ public class MainActivity extends UserBaseActivity {
                     @Override
                     public void onError(okhttp3.Call call, Exception e, int id) {
                         L.d("lgh_userId", "请求错误.." + e.toString());
-                        L.d("lgh_userId", "请求错误.." + call.toString());
-                        L.d("lgh_userId", "请求错误.." + call.request().url().toString());
-                        L.d("lgh_userId", "请求错误.." + call.request().toString());
                     }
 
                     @Override
