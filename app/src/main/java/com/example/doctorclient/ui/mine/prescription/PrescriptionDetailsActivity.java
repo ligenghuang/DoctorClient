@@ -87,6 +87,8 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
     TextView priceTv;
     @BindView(R.id.tv_diagnosis)
     TextView diagnosisTv;
+    @BindView(R.id.tv_edit)
+    TextView tv_edit;
 
     String iuid;
     String drugIuid;
@@ -133,8 +135,8 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         mActicity = this;
         mContext = this;
 
-        illessImgAdapter = new IllessImgAdapter(mContext,imgIllnessRv);
-        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext,3));
+        illessImgAdapter = new IllessImgAdapter(mContext, imgIllnessRv);
+        imgIllnessRv.setLayoutManager(new GridLayoutManager(mContext, 3));
         imgIllnessRv.setAdapter(illessImgAdapter);
 
         prescriptionDetailDrugAdapter = new PrescriptionDetailDrugAdapter(mContext);
@@ -156,18 +158,18 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         }
     }
 
-    @OnClick({R.id.tv_unwind,R.id.tv_edit})
-    void OnClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.tv_unwind, R.id.tv_edit})
+    void OnClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_unwind:
                 isUnwind = !isUnwind;
                 userInfoLl.setVisibility(isUnwind ? View.VISIBLE : View.GONE);
                 unwindTv.setSelected(isUnwind);
-                unwindTv.setText(ResUtil.getString(isUnwind ? R.string.prescription_tip_8: R.string.prescription_tip_7));
+                unwindTv.setText(ResUtil.getString(isUnwind ? R.string.prescription_tip_8 : R.string.prescription_tip_7));
                 break;
             case R.id.tv_edit:
-                Intent intent = new Intent(mContext,  SelectPrescriptionDetailsActivity2.class);
-                intent.putExtra("iuid",iuid);
+                Intent intent = new Intent(mContext, SelectPrescriptionDetailsActivity2.class);
+                intent.putExtra("iuid", iuid);
                 startActivity(intent);
                 break;
         }
@@ -179,15 +181,15 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         PrescriptionDetailDto.DataBean dataBean = prescriptionDetailDto.getData();
         PrescriptionDetailDto.DataBean.PatientMVBean patientMVBean = dataBean.getPatientMV();
         nameTv.setText(patientMVBean.getName());
-        ageTv.setText("("+patientMVBean.getSex()+"   "+patientMVBean.getAge()+"岁）");
+        ageTv.setText("(" + patientMVBean.getSex() + "   " + patientMVBean.getAge() + "岁）");
         allergyTv.setText(patientMVBean.getAllergy_note());
         familyTv.setText(patientMVBean.getMed_family());
         medicalHistoryTv.setText(patientMVBean.getMed_history());
         illnessTv.setText(dataBean.getIll_note());
         illessImgAdapter.refresh(dataBean.getIll_img());
 
-        prescriptionNoTv.setText(ResUtil.getFormatString(R.string.prescription_tip_17,dataBean.getAskdrug_no()));
-        priceTv.setText(ResUtil.getFormatString(R.string.prescription_tip_16,PriceUtils.formatPrice(dataBean.getBrokerage())));
+        prescriptionNoTv.setText(ResUtil.getFormatString(R.string.prescription_tip_17, dataBean.getAskdrug_no()));
+        priceTv.setText(ResUtil.getFormatString(R.string.prescription_tip_16, PriceUtils.formatPrice(dataBean.getBrokerage())));
         prescriptionTimeTv.setText(DynamicTimeFormat.LongToString5(dataBean.getCreate_time_stamp()));
         orderTimeTv.setText(DynamicTimeFormat.LongToString5(dataBean.getPay_time_stamp()));
         orderTotalTv.setText(PriceUtils.formatPrice(dataBean.getDrug_money()));
@@ -195,6 +197,21 @@ public class PrescriptionDetailsActivity extends UserBaseActivity<PrescriptionDe
         payTypeTv.setText(dataBean.getPay_class());
         prescriptionDetailDrugAdapter.refresh(dataBean.getDrugMV());
         diagnosisTv.setText(dataBean.getDiagnosis());
+        boolean isEdit = true;
+        if (dataBean.getReback_flag() == 1) {
+            //todo 已取消
+            isEdit = false;
+        } else if (dataBean.getFinish_flag() == 1) {
+            //TODO 已完成
+            isEdit = false;
+        } else if (dataBean.getPay_flag() == 1 && dataBean.getFinish_flag() != 1 && dataBean.getReback_flag() != 1) {
+            //TODO  待发货
+            isEdit = false;
+        } else if (dataBean.getPay_flag() == 0) {
+            //TODO  待付款
+            isEdit = true;
+        }
+        tv_edit.setVisibility(isEdit ? View.VISIBLE : View.GONE);
     }
 
     @Override

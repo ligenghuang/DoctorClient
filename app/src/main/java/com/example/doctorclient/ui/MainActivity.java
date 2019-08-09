@@ -327,6 +327,7 @@ public class MainActivity extends UserBaseActivity {
                     MessageDto messageDto = new Gson().fromJson(message, new TypeToken<MessageDto>() {
                     }.getType());
                     if (messageDto.getEvent().equals("chat")) {
+                        //todo 判断是否有未读消息
                         mineFragment.isReadFlag();
                         sendEvent(StoreEvent.ACTION_KEY_SUCCESS, 200, WebUrlUtil.GET_MESSAGE,
                                 Action.KEY_OBJ, message);
